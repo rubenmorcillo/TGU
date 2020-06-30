@@ -10,9 +10,9 @@ public class SceneBaseLoader : MonoBehaviour
         Debug.Log("SL_Base: START...");
         TecladoController teclado = GameManager.instance.gameObject.AddComponent<TecladoController>();
        
-        menuEsc = GameObject.Find("menuEsc");
-        teclado.menuEsc = menuEsc;
-        menuEsc.SetActive(false);
+       // menuEsc = GameObject.Find("menuEsc");
+       // teclado.menuEsc = menuEsc;
+        //menuEsc.SetActive(false);
         
     }
 

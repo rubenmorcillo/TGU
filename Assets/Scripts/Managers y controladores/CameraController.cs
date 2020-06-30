@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class CameraController : MonoBehaviour
 
     public Vector3 newPosition;
 
-
     public Vector2 panLimit = new Vector2(10,10);
+    public float rotateLimit;
     public GameObject target;
 
     public void SetTarget(GameObject target)
@@ -17,20 +18,18 @@ public class CameraController : MonoBehaviour
         this.target = target;
     }
 
-    void Update()
+	void Update()
     {
-        
-        if (EstadosJuego.Iniciado())
+		if (EstadosJuego.Iniciado())
         {
             if (EstadosJuego.EstadoActual() != EstadosJuego.Estado.MENU)
 			{
+                margen = 10f;
                 HandleMovementInput();
             }
-              
         }
-        
-
     }
+   
 
     void HandleMovementInput()
     {
