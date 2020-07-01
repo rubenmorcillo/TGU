@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Login : MonoBehaviour
 {
-    string serverUri = "https://resealable-compress.000webhostapp.com/test.php";
+    string serverUri = "https://resealable-compress.000webhostapp.com/personaje.php";
 
     [SerializeField]
     TMP_InputField inputLogin, inputPass;
@@ -46,8 +46,8 @@ public class Login : MonoBehaviour
 
 
             //falseando las unidades q tiene
-            DatosUnidad du = new DatosUnidad(1, "rasek", 5, 100);
-            DatosUnidad du2 = new DatosUnidad(2, "rusuk", 5, 100);
+            DatosUnidad du = new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100);
+            DatosUnidad du2 = new DatosUnidad(2, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rusuk", 5, 100);
             datosPlayerTest.addUnidadEquipo(du);
             datosPlayerTest.addUnidadEquipo(du2);
 

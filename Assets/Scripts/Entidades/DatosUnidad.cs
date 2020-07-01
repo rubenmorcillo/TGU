@@ -12,9 +12,10 @@ public class DatosUnidad
     {
 
     }
-    public DatosUnidad(int id, string name,int rangoMovimiento, int hp)
+    public DatosUnidad(int id, TipoUnidad tipo, string name,int rangoMovimiento, int hp)
     {
         this.id = id;
+        tipoUnidad = tipo;
         unitName = name;
         estoyVivo = true;
         hpMax = hp;
@@ -27,11 +28,13 @@ public class DatosUnidad
     
     public string unitName { set; get; }
 
+    public TipoUnidad tipoUnidad { get; set; }
+
     public int hpMax { get; set; }
 
     public int hpActual { get; set; }
 
-    public bool estoyVivo { get; set; }
+   
 
     public string modelPrefabName { get; set; }
 
@@ -43,9 +46,11 @@ public class DatosUnidad
 
     public int rangoMovimiento { get; set; }
     public bool isPlaced { get; set; }
-   
 
-    
+    public bool estoyVivo { get; set; }
+
+
+
     //creo que estas cosas las debo controlar en el combateManager
 
     //void Update()

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     GameObject mazmorra;
     GameObject playerModel;
     DatosPlayer datosPlayer;
+    MenuDataLoader menuDataLoader;
 
     CombateManager combateManager;
 
@@ -25,13 +26,12 @@ public class GameManager : MonoBehaviour
        // datosPlayer = gameObject.GetComponent<DatosPlayer>();
         if (datosPlayer == null)
 		{
+            //FALSEANDO DATOS DEL JUGADOR
             DatosPlayer datosPlayerTest = new DatosPlayer();
             datosPlayerTest.dinero = 150;
             datosPlayerTest.reputacion = 99;
             datosPlayerTest.nickname = "nicknameTest";
-            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1, "rasek", 5, 100));
-
-
+            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1,new TipoUnidad(1, "rasek", 50, 3,6,23,46,0,12), "rasek", 5, 100));
             datosPlayer = datosPlayerTest;
             //datosPlayer = gameObject.AddComponent<DatosPlayer>();
 		}
@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
         {
             combateManager = gameObject.AddComponent<CombateManager>();
         }
-       
     }
 
     public DatosPlayer DatosPlayer
@@ -54,7 +53,6 @@ public class GameManager : MonoBehaviour
         {
             datosPlayer = value;
         }
-       
     }
 
     //toDo: void CargarDatosPlayer(){}
@@ -62,7 +60,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         Debug.Log("GameManager: start...");
-
+        EstadosJuego.activarEstado(EstadosJuego.Estado.MENU);
 
         //inico los otros managers
         combateManager.enabled = false;
@@ -72,10 +70,9 @@ public class GameManager : MonoBehaviour
         LevelManager.Init();
 
         //iniciarMazmorra();
-
     }
 
-    public void iniciarMazmorra()
+	public void iniciarMazmorra()
     {
         Debug.Log("GM: iniciando mazmorra");
         mazmorra = LevelManager.CrearMazmorra();
@@ -98,7 +95,5 @@ public class GameManager : MonoBehaviour
         playerModel.SetActive(false); //desactivo a mi avatar
         combateManager.enabled = true;
         combateManager.Combate(LevelManager.salaActiva.GetComponent<Sala>());
-        
     }
-   
 }

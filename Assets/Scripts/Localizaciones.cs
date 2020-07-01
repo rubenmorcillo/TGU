@@ -6,7 +6,6 @@ using UnityEngine.SocialPlatforms;
 
 public class Localizaciones : MonoBehaviour
 {
-    // Start is called before the first frame update
     private enum Localizacion  {SHOP, CORP, LAB}
 
     private string localizacion;
@@ -28,7 +27,6 @@ public class Localizaciones : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -36,13 +34,13 @@ public class Localizaciones : MonoBehaviour
 
 	private void OnMouseOver()
 	{
+        //CHAPUZAAA -> lo suyo es que se dibuje todo el contorno del modelo/prefab
         GetComponent<MeshRenderer>().material.color = Color.green;
-        // Debug.Log("ir a " +gameObject.name);
 
         switch (thisLocalizacion)
 		{
             case Localizacion.CORP:
-                Debug.Log("nos vamos a las CORPOS");
+               // Debug.Log("nos vamos a las CORPOS");
 				if (Input.GetMouseButton(0))
 				{
                     SceneManager.LoadScene("mazmorra_01");
@@ -50,10 +48,10 @@ public class Localizaciones : MonoBehaviour
 				}
                 return;
             case Localizacion.SHOP:
-                Debug.Log("nos vamos a la SHOP");
+               // Debug.Log("nos vamos a la SHOP");
                 return;
             case Localizacion.LAB:
-                Debug.Log("nos vamos al LAB");
+               // Debug.Log("nos vamos al LAB");
                 return;
 		}
     }

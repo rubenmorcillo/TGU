@@ -40,26 +40,42 @@ public class MenuDataLoader : MonoBehaviour
         datosPlayer = GameManager.instance.DatosPlayer;
         if (datosPlayer != null)
 		{
-            RefrescarDatosPlayer();
-        }
+            if (EstadosJuego.EstadoActual() == EstadosJuego.Estado.COMBATE)
+            {
+
+            }
+            else {
+                
+                RefrescarDatosPlayer();
+            }
+
+		}
+		
     }
 
     void RefrescarDatosPlayer()
 	{
+        //reputacion
         textRep.text = "Reputación: ";
         textRep.text = string.Concat(textRep.text, datosPlayer.reputacion);
 
+        //dinero
         textDinero.text = "Dinero: ";
         textDinero.text = string.Concat(textDinero.text, datosPlayer.dinero);
-
+        //nombre
         textNickname.text = datosPlayer.nickname;
     
+        //unidades
         for (int i=0; i< datosPlayer.equipoUnidades.Count; i++)
 		{
             
             string nombre = datosPlayer.equipoUnidades[i].unitName;
             Sprite img = Resources.Load<Sprite>("Kaos/" + nombre);
             imgUnidades[i].sprite = img;
+			if (datosPlayer.equipoUnidades[i].isPlaced)
+			{
+
+			}
 
 
         }

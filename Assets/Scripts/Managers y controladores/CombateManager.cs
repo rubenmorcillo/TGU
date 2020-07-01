@@ -47,13 +47,8 @@ public class CombateManager : MonoBehaviour
 
     private void Update()
     {
-
         if(fase == FaseCombate.COLOCANDO)
         {
-            mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
-            mostrarUnidadesDisponibles();
-            checkMouse();
-         
             if ((gameManager.DatosPlayer.equipoUnidades.Where(unidad => unidad.isPlaced).Count()) > 0)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
@@ -65,6 +60,8 @@ public class CombateManager : MonoBehaviour
             }
             else
             {
+                mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
+                checkMouse();
                 playerReady = false;
             }
             if (playerReady)
@@ -100,11 +97,13 @@ public class CombateManager : MonoBehaviour
             Debug.Log("creando " + numeroEnemigos + " enemigos ");
             foreach (GameObject enemigo in sala.dameEnemigos(numeroEnemigos))
             {
-
+               
                 Tile disponible = posicionesDisponibles[0];
                 posicionesDisponibles.Remove(disponible);
-                GameObject nuevoEnemigo  = crearUnidad(enemigo, disponible);
-                nuevoEnemigo.GetComponent<NPCMove>().setDatos(new DatosUnidad(0, "enemigo1", 5,20));
+                GameObject nuevoEnemigo = crearUnidad(enemigo, disponible);
+                //CHAPUZAAA
+                //FALSEANDO DATOS ENEMIGOS
+                nuevoEnemigo.GetComponent<NPCMove>().setDatos(new DatosUnidad(0, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "enemigo1", 5,20));
                 Debug.Log(enemigo.GetComponent<NPCMove>());
 
             }
@@ -127,20 +126,6 @@ public class CombateManager : MonoBehaviour
 
     }
 
-    private void mostrarUnidadesDisponibles()
-    {
-        //Debug.Log("tengo ->" + gameManager.DatosPlayer.equipoUnidades.Count + "unidades");
-        foreach(DatosUnidad du in gameManager.DatosPlayer.equipoUnidades)
-        {
-            if (!du.isPlaced)
-            {
-               // Debug.Log(du.unitName + " está sin colocar");
-            }
-        }
-    }
-
-
-
     //ESTA FUNCION DEBERÍA ESTAR EN EL CHEQUEADOR DE MOUSE
     private void checkMouse()
     {
@@ -148,44 +133,36 @@ public class CombateManager : MonoBehaviour
         RaycastHit hit;
 
         //LayerMask layerMaskUI = LayerMask.GetMask("UI");
-        IEnumerable<DatosUnidad> unidadesDisponibles = gameManager.DatosPlayer.equipoUnidades.Where(datos => !datos.isPlaced);
-        if (unidadesDisponibles.Count() > 0)
-		{
-            if (unidadSeleccionada == null)
+        DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.equipoUnidades.Where(datos => datos.estoyVivo).First();
+        if (unidadSeleccionada == null)
+        {
+            GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadesDisponibles.modelPrefabName);
+            unidadSeleccionada = modelo;
+        }
+        else
+        {
+            if (Physics.Raycast(ray, out hit))
             {
-                //CHAPUZAAA -> Deberíamos esperar a que el user haga click y seleccione en UI que unidad va a colocar
-                GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadesDisponibles.First().modelPrefabName);
-                unidadSeleccionada = modelo;
-            }
-            else
-            {
-                if (Physics.Raycast(ray, out hit))
+                if (hit.collider.tag == "Tile")
                 {
-                    if (hit.collider.tag == "Tile")
+                    Tile c = hit.collider.GetComponent<Tile>();
+                    if (c.selectable)
                     {
-                        Tile c = hit.collider.GetComponent<Tile>();
-                        if (c.selectable)
+                        c.target = true;
+                        if (Input.GetMouseButton(0))
                         {
-                            c.target = true;
-                            if (Input.GetMouseButton(0))
-                            {
-                                //cargar la unidad seleccionada
-                                GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
-                                //CHAPUZAAA testeo
-                                nuevaUnidad.GetComponent<PlayerMove>().setDatos(gameManager.DatosPlayer.equipoUnidades[0]); //TEMPORAL
-                                Debug.Log("Colocando " + unidadSeleccionada + " en " + c);
-                                gameManager.DatosPlayer.equipoUnidades[0].isPlaced = true;
-                                unidadSeleccionada = null;
-                            }
+                            //cargar la unidad seleccionada
+                            GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
+                            //CHAPUZAAA testeo
+                            nuevaUnidad.GetComponent<PlayerMove>().setDatos(gameManager.DatosPlayer.equipoUnidades[0]); //TEMPORAL
+                            Debug.Log("Colocando " + unidadSeleccionada + " en " + c);
+                            gameManager.DatosPlayer.equipoUnidades[0].isPlaced = true;
+                            unidadSeleccionada = null;
                         }
                     }
                 }
             }
-		}
-		else
-		{
-            //Debug.Log("Todas las unidades están colocadas");
-		}
+        }
        
 
        
