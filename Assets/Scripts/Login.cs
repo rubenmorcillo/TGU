@@ -40,8 +40,8 @@ public class Login : MonoBehaviour
                 //Debug.Log("SERVIDOR RESPONDE: \n" + request.downloadHandler.text + " \n FIN RESPUESTA SERVIDOR");
 
                 DatosPlayer datosPlayerJson = JsonUtility.FromJson<DatosPlayer>(request.downloadHandler.text);
-                //Debug.Log("SERIALIZADO: un player que se llama -> " + datosPlayerJson.nickname);
-                GameManager.instance.DatosPlayer = datosPlayerJson;
+				Debug.Log("SERIALIZADO: un player -> " + JsonUtility.ToJson(datosPlayerJson));
+				GameManager.instance.DatosPlayer = datosPlayerJson;
 
                 //mockup de datosPlayer
                 DatosPlayer datosPlayerTest = new DatosPlayer();

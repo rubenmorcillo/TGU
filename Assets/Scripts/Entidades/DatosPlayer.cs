@@ -5,14 +5,6 @@ using UnityEngine;
 [Serializable]
 public class DatosPlayer
 {
-    //public string Nickname { get; set; }
-    //public int Dinero { get; set; }
-    //public int Reputacion { get; set; }
-
-
-   
-    
-
     public string nickname;
     public int reputacion;
     public int dinero;
@@ -22,13 +14,8 @@ public class DatosPlayer
     [SerializeField]
     List<DatosUnidad> equipoUnidades = new List<DatosUnidad>();
 
-    // public string nickname
-
     //tb debería tener un modelo
     //private GameObject _avatarModelPrefab;
-
-
-
 
     public List<DatosUnidad> EquipoUnidades
     {

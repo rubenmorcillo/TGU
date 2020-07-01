@@ -136,8 +136,16 @@ public class CombateManager : MonoBehaviour
         DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).First();
         if (unidadSeleccionada == null)
         {
-            GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadesDisponibles.modelPrefabName);
-            unidadSeleccionada = modelo;
+            if (unidadesDisponibles != null)
+			{
+                GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadesDisponibles.tipo.nombre);
+                unidadSeleccionada = modelo;
+			}
+			else
+			{
+                Debug.Log("nfdssl");
+			}
+           
         }
         else
         {
@@ -151,7 +159,6 @@ public class CombateManager : MonoBehaviour
                         c.target = true;
                         if (Input.GetMouseButton(0))
                         {
-                            //cargar la unidad seleccionada
                             GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
                             //CHAPUZAAA testeo
                             nuevaUnidad.GetComponent<PlayerMove>().setDatos(gameManager.DatosPlayer.EquipoUnidades[0]); //TEMPORAL

@@ -13,20 +13,20 @@ public class DatosUnidad
     {
         
     }
-    public DatosUnidad(int id, TipoUnidad tipo, string name,int rangoMovimiento, int hp)
-    {
-        this.id = id;
-        this.tipo = tipo;
-        alias = name;
-        estoyVivo = true;
-        hpMax = hp;
-        hpActual = hpMax;
-        this.rangoMovimiento = rangoMovimiento;
+	public DatosUnidad(int id, TipoUnidad tipo, string name, int rangoMovimiento, int hp)
+	{
+		this.id = id;
+		this.tipo = tipo;
+		alias = name;
+		hpMax = hp;
+		hpActual = hpMax;
+		this.rangoMovimiento = rangoMovimiento;
 		modelPrefabName = tipo.nombre;
-        exp = 0;
-        nivel = 1;
+		exp = 0;
+		nivel = 1;
 	}
-    public int id;
+
+	public int id;
 
     public string alias;
 
@@ -51,18 +51,6 @@ public class DatosUnidad
     public int rangoMovimiento;
     public bool isPlaced { get; set; }
 
-    public bool estoyVivo { get; set; }
+    public bool estoyVivo = true;
 
-
-
-    //creo que estas cosas las debo controlar en el combateManager
-
-    //void Update()
-    //{
-    //    if (this.hpActual <= 0)
-    //    {
-    //        //he morido
-    //        this.estoyVivo = false;
-    //    }
-    //}
 }
