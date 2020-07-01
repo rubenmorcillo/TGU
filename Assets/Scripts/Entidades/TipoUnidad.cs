@@ -22,15 +22,19 @@ public class TipoUnidad {
         this.agilidad = agilidad;
         this.movimiento_base = movimiento_base;
 	}
-    public int id { get; set; }
-    public string nombre { get; set; }
-    public int hp_base { get; set; }
-    public int movimiento_base { get; set; }
-    public int salto_base { get; set; }
-    public int atq_fisico { get; set; }
-    public int atq_especial { get; set; }
-    public int def_fisico { get; set; }
-    public int def_especial { get; set; }
-    public int agilidad { get; set; }
+    public int id;
+    public string nombre;
+    public int hp_base, atq_fisico, atq_especial, def_fisico, def_especial, salto_base, movimiento_base, agilidad;
+
+    //public int id { get; set; }
+    //public string nombre { get; set; }
+    //public int hp_base { get; set; }
+    //public int movimiento_base { get; set; }
+    //public int salto_base { get; set; }
+    //public int atq_fisico { get; set; }
+    //public int atq_especial { get; set; }
+    //public int def_fisico { get; set; }
+    //public int def_especial { get; set; }
+    //public int agilidad { get; set; }
 
 }

@@ -16,36 +16,39 @@ public class DatosUnidad
     public DatosUnidad(int id, TipoUnidad tipo, string name,int rangoMovimiento, int hp)
     {
         this.id = id;
-        tipoUnidad = tipo;
-        unitName = name;
+        this.tipo = tipo;
+        alias = name;
         estoyVivo = true;
         hpMax = hp;
         hpActual = hpMax;
         this.rangoMovimiento = rangoMovimiento;
-        modelPrefabName = unitName;
-    }
+		modelPrefabName = tipo.nombre;
+        exp = 0;
+        nivel = 1;
+	}
+    public int id;
 
-    public int id { get; set; }
-    
-    public string unitName { set; get; }
+    public string alias;
 
-    public TipoUnidad tipoUnidad { get; set; }
+    public TipoUnidad tipo;
 
-    public int hpMax { get; set; }
+    public int nivel;
 
-    public int hpActual { get; set; }
+    public int exp;
 
-   
+    public int hpMax;
 
-    public string modelPrefabName { get; set; }
+    public int hpActual;
 
-    public int iniciativa { get; set; }
+    public string modelPrefabName;
 
-    public int defensaCerca { get; set; }
+    public int iniciativa;
 
-    public int defensaLejos { get; set; }
+    public int defensaCerca;
 
-    public int rangoMovimiento { get; set; }
+    public int defensaLejos;
+
+    public int rangoMovimiento;
     public bool isPlaced { get; set; }
 
     public bool estoyVivo { get; set; }

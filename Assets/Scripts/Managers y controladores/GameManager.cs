@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
 		{
             //FALSEANDO DATOS DEL JUGADOR
             DatosPlayer datosPlayerTest = new DatosPlayer();
-            datosPlayerTest.Dinero = 150;
-            datosPlayerTest.Reputacion = 99;
-            datosPlayerTest.Nickname = "nicknameTest";
+            datosPlayerTest.dinero = 150;
+            datosPlayerTest.reputacion = 99;
+            datosPlayerTest.nickname = "nicknameTest";
             datosPlayerTest.addUnidadEquipo(new DatosUnidad(1,new TipoUnidad(1, "rasek", 50, 3,6,23,46,0,12), "rasek", 5, 100));
             datosPlayer = datosPlayerTest;
             //datosPlayer = gameObject.AddComponent<DatosPlayer>();

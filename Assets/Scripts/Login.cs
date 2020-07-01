@@ -31,40 +31,42 @@ public class Login : MonoBehaviour
 
         if (request.isNetworkError || request.isHttpError)
         {
-            Debug.Log("malamente");
+            Debug.Log("No he podido llamar al servidor");
         }
         else
         {
-            Debug.Log("SERVIDOR RESPONDE: \n"+request.downloadHandler.text +" \n FIN RESPUESTA SERVIDOR");
+			try
+			{
+                //Debug.Log("SERVIDOR RESPONDE: \n" + request.downloadHandler.text + " \n FIN RESPUESTA SERVIDOR");
 
-            DatosPlayer dpt = new DatosPlayer();
-            dpt.nickname = "HARDCODEnickname";
-            dpt.reputacion = 444;
-            dpt.dinero = 444;
+                DatosPlayer datosPlayerJson = JsonUtility.FromJson<DatosPlayer>(request.downloadHandler.text);
+                //Debug.Log("SERIALIZADO: un player que se llama -> " + datosPlayerJson.nickname);
+                GameManager.instance.DatosPlayer = datosPlayerJson;
 
-            string mijson = JsonUtility.ToJson(dpt);
-          //  DatosPlayer datosPlayerJson = JsonUtility.FromJson<DatosPlayer>(request.downloadHandler.text);
-            DatosPlayer datosPlayerJson = JsonUtility.FromJson<DatosPlayer>(mijson);
-            Debug.Log("he conseguido un player que se llama -> " + datosPlayerJson.nickname);
-            //CHAPUZAAAA
+                //mockup de datosPlayer
+                DatosPlayer datosPlayerTest = new DatosPlayer();
+                datosPlayerTest.nickname = "nicknameLoginTest";
+                datosPlayerTest.dinero = 1;
+                datosPlayerTest.reputacion = 1;
 
-            //cojo los datos y relleno datosPlayer
-            //falseando los datos
-            DatosPlayer datosPlayerTest = new DatosPlayer();
-            datosPlayerTest.Nickname = "nicknameLoginTest";
-            datosPlayerTest.Dinero = 1;
-            datosPlayerTest.Reputacion = 1;
-        
-            //falseando las unidades q tiene
-            DatosUnidad du = new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100);
-            DatosUnidad du2 = new DatosUnidad(2, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rusuk", 5, 100);
-            datosPlayerTest.addUnidadEquipo(du);
-            datosPlayerTest.addUnidadEquipo(du2);
+                //mockup de las unidades q tiene en su escuadron
+                //DatosUnidad du = new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100);
+                //DatosUnidad du2 = new DatosUnidad(2, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rusuk", 5, 100);
+                //datosPlayerTest.addUnidadEquipo(du);
+                //datosPlayerTest.addUnidadEquipo(du2);
+                //Debug.Log("el ejemplo sería: \n" + JsonUtility.ToJson(datosPlayerTest));
 
+              
+                
+                //cuando esté todo cargado, lo llevo a la siguiente escena
+                SceneManager.LoadScene("base");
 
-            GameManager.instance.DatosPlayer = datosPlayerJson;
-            //cuando esté todo cargado, lo llevo a la siguiente escena
-           // SceneManager.LoadScene("base");
+            }
+			catch (System.Exception e)
+			{
+                Debug.Log("ERROR CARGANDO DATOS DE USUARIO");
+			}
+
 
         }
     }

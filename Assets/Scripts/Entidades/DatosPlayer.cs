@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class DatosPlayer
 {
-    public string Nickname { get; set; }
-    public int Dinero { get; set; }
-    public int Reputacion { get; set; }
+    //public string Nickname { get; set; }
+    //public int Dinero { get; set; }
+    //public int Reputacion { get; set; }
 
 
    
