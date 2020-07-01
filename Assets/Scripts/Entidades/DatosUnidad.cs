@@ -1,16 +1,17 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[SerializeField]
+[Serializable]
 public class DatosUnidad
 {
 
-
+    
     public DatosUnidad()
     {
-
+        
     }
     public DatosUnidad(int id, TipoUnidad tipo, string name,int rangoMovimiento, int hp)
     {

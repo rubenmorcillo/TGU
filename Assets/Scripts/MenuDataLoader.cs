@@ -57,22 +57,22 @@ public class MenuDataLoader : MonoBehaviour
 	{
         //reputacion
         textRep.text = "Reputación: ";
-        textRep.text = string.Concat(textRep.text, datosPlayer.reputacion);
+        textRep.text = string.Concat(textRep.text, datosPlayer.Reputacion);
 
         //dinero
         textDinero.text = "Dinero: ";
-        textDinero.text = string.Concat(textDinero.text, datosPlayer.dinero);
+        textDinero.text = string.Concat(textDinero.text, datosPlayer.Dinero);
         //nombre
-        textNickname.text = datosPlayer.nickname;
+        textNickname.text = datosPlayer.Nickname;
     
         //unidades
-        for (int i=0; i< datosPlayer.equipoUnidades.Count; i++)
+        for (int i=0; i< datosPlayer.EquipoUnidades.Count; i++)
 		{
             
-            string nombre = datosPlayer.equipoUnidades[i].unitName;
+            string nombre = datosPlayer.EquipoUnidades[i].unitName;
             Sprite img = Resources.Load<Sprite>("Kaos/" + nombre);
             imgUnidades[i].sprite = img;
-			if (datosPlayer.equipoUnidades[i].isPlaced)
+			if (datosPlayer.EquipoUnidades[i].isPlaced)
 			{
 
 			}

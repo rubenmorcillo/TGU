@@ -49,7 +49,7 @@ public class CombateManager : MonoBehaviour
     {
         if(fase == FaseCombate.COLOCANDO)
         {
-            if ((gameManager.DatosPlayer.equipoUnidades.Where(unidad => unidad.isPlaced).Count()) > 0)
+            if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() > 0)
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
@@ -133,7 +133,7 @@ public class CombateManager : MonoBehaviour
         RaycastHit hit;
 
         //LayerMask layerMaskUI = LayerMask.GetMask("UI");
-        DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.equipoUnidades.Where(datos => datos.estoyVivo).First();
+        DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).First();
         if (unidadSeleccionada == null)
         {
             GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadesDisponibles.modelPrefabName);
@@ -154,9 +154,9 @@ public class CombateManager : MonoBehaviour
                             //cargar la unidad seleccionada
                             GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
                             //CHAPUZAAA testeo
-                            nuevaUnidad.GetComponent<PlayerMove>().setDatos(gameManager.DatosPlayer.equipoUnidades[0]); //TEMPORAL
+                            nuevaUnidad.GetComponent<PlayerMove>().setDatos(gameManager.DatosPlayer.EquipoUnidades[0]); //TEMPORAL
                             Debug.Log("Colocando " + unidadSeleccionada + " en " + c);
-                            gameManager.DatosPlayer.equipoUnidades[0].isPlaced = true;
+                            gameManager.DatosPlayer.EquipoUnidades[0].isPlaced = true;
                             unidadSeleccionada = null;
                         }
                     }

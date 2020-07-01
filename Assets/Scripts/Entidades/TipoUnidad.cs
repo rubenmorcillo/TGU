@@ -1,6 +1,8 @@
 ﻿
+using System;
 using System.Data;
 
+[Serializable]
 public class TipoUnidad {
 
     public TipoUnidad()
