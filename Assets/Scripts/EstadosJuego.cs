@@ -7,7 +7,6 @@
     
 
     private static Estado estadoActual;
-
     
 
     public static void activarEstado(Estado e)
