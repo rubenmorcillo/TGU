@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuDataLoader : MonoBehaviour
+
+public class InterfazController : MonoBehaviour
 {
 
-    public float dinero,rep;
-    public string nickname;
     public Image[] imgUnidades = new Image[5];
 
     public Text textRep, textDinero, textNickname;
     DatosPlayer datosPlayer;
 
-    public static MenuDataLoader instance;
+    public static InterfazController instance;
 
     private void Awake()
     {
@@ -39,22 +38,23 @@ public class MenuDataLoader : MonoBehaviour
     {
         datosPlayer = GameManager.instance.DatosPlayer;
         if (datosPlayer != null)
-		{
+        {
             if (EstadosJuego.EstadoActual() == EstadosJuego.Estado.COMBATE)
             {
 
             }
-            else {
-                
+            else
+            {
+
                 RefrescarDatosPlayer();
             }
 
-		}
-		
+        }
+
     }
 
     void RefrescarDatosPlayer()
-	{
+    {
         //reputacion
         textRep.text = "Reputación: ";
         textRep.text = string.Concat(textRep.text, datosPlayer.reputacion);
@@ -64,11 +64,11 @@ public class MenuDataLoader : MonoBehaviour
         textDinero.text = string.Concat(textDinero.text, datosPlayer.dinero);
         //nombre
         textNickname.text = datosPlayer.nickname;
-    
+
         //unidades
-        for (int i=0; i< datosPlayer.EquipoUnidades.Count; i++)
-		{
-            
+        for (int i = 0; i < datosPlayer.EquipoUnidades.Count; i++)
+        {
+
             string nombre = datosPlayer.EquipoUnidades[i].tipo.nombre;
             Sprite img = Resources.Load<Sprite>("Kaos/" + nombre);
 

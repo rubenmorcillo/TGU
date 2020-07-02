@@ -37,4 +37,5 @@ public class DatosPlayer
     {
         equipoUnidades.Remove(unidad);
     }
+
 }

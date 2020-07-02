@@ -1,8 +1,5 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
 
 [Serializable]
 public class DatosUnidad
@@ -48,7 +45,7 @@ public class DatosUnidad
 
     public int defensaLejos;
 
-    public int rangoMovimiento;
+    public int rangoMovimiento = 3;
 
     public int hab1, hab2, hab3, hab4;
 
@@ -56,4 +53,11 @@ public class DatosUnidad
 
     public bool estoyVivo = true;
 
+	public override string ToString()
+	{
+
+		return "Soy un "+tipo.nombre + "// level " + nivel + "\n "+
+            "hp: "+hpActual+"/" + hpMax + "\n"+
+            "hab1: "+hab1 + " // hab2: "+hab2 + " // hab3: "+hab3+" // hab4: " +hab4;
+	}
 }

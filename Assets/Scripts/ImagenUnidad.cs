@@ -21,17 +21,12 @@ public class ImagenUnidad : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
 	public bool isOver = false;
 
-	private void Update()
-	{
-		
-	}
-
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		//Debug.Log("Ratón sobre " + unidad.tipo.nombre);
 		if (unidad != null)
 		{
-			Debug.Log("Ratón sobre " + unidad.tipo.nombre);
+			Debug.Log("Ratón sobre " + unidad.ToString());
 			isOver = true;
 		}
 
@@ -43,4 +38,5 @@ public class ImagenUnidad : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		Debug.Log("Mouse fuera");
 		isOver = false;
 	}
+
 }

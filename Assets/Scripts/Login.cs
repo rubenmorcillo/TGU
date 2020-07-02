@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 
 
@@ -41,6 +42,11 @@ public class Login : MonoBehaviour
 
                 DatosPlayer datosPlayerJson = JsonUtility.FromJson<DatosPlayer>(request.downloadHandler.text);
 				Debug.Log("SERIALIZADO: un player -> " + JsonUtility.ToJson(datosPlayerJson));
+
+				//datosPlayerJson.EquipoUnidades = new List<DatosUnidad>();
+				//DatosUnidad du = new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100);
+				//datosPlayerJson.addUnidadEquipo(du);
+
 				GameManager.instance.DatosPlayer = datosPlayerJson;
 
                 //mockup de datosPlayer
@@ -49,22 +55,22 @@ public class Login : MonoBehaviour
                 datosPlayerTest.dinero = 1;
                 datosPlayerTest.reputacion = 1;
 
-                //mockup de las unidades q tiene en su escuadron
-                //DatosUnidad du = new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100);
-                //DatosUnidad du2 = new DatosUnidad(2, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rusuk", 5, 100);
-                //datosPlayerTest.addUnidadEquipo(du);
-                //datosPlayerTest.addUnidadEquipo(du2);
-                //Debug.Log("el ejemplo sería: \n" + JsonUtility.ToJson(datosPlayerTest));
+				//mockup de las unidades q tiene en su escuadron
+				//DatosUnidad du = new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100);
+				//DatosUnidad du2 = new DatosUnidad(2, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rusuk", 5, 100);
+				//datosPlayerTest.addUnidadEquipo(du);
+				//datosPlayerTest.addUnidadEquipo(du2);
+				//Debug.Log("el ejemplo sería: \n" + JsonUtility.ToJson(datosPlayerTest));
 
-              
-                
-                //cuando esté todo cargado, lo llevo a la siguiente escena
-                SceneManager.LoadScene("base");
+
+
+				//cuando esté todo cargado, lo llevo a la siguiente escena
+				SceneManager.LoadScene("base");
 
             }
 			catch (System.Exception e)
 			{
-                Debug.Log("ERROR CARGANDO DATOS DE USUARIO");
+                Debug.Log("ERROR CARGANDO DATOS DE USUARIO: "+e);
 			}
 
 

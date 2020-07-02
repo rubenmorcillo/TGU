@@ -8,6 +8,8 @@ public class CombateManager : MonoBehaviour
     public TextMeshProUGUI tmp; //esto hay que quitarlo
     public static CombateManager instance;
 
+    string modeloUnidadDefault = "UnidadSRC";
+
     private void Awake()
     {
         if (instance == null)
@@ -133,17 +135,22 @@ public class CombateManager : MonoBehaviour
         RaycastHit hit;
 
         //LayerMask layerMaskUI = LayerMask.GetMask("UI");
-        DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).First();
+        DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).ElementAt(3);
         if (unidadSeleccionada == null)
         {
             if (unidadesDisponibles != null)
 			{
                 GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadesDisponibles.tipo.nombre);
+                if(modelo == null)
+				{
+                    Debug.Log("no hay modelo para " + unidadesDisponibles.tipo.nombre + " ... cargando modelo por defecto");
+                    modelo = (GameObject)Resources.Load("Unidades/" + modeloUnidadDefault);
+                }
                 unidadSeleccionada = modelo;
 			}
 			else
 			{
-                Debug.Log("nfdssl");
+                Debug.Log("No hay unidades disponibles");
 			}
            
         }
@@ -162,7 +169,7 @@ public class CombateManager : MonoBehaviour
                             GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
                             //CHAPUZAAA testeo
                             nuevaUnidad.GetComponent<PlayerMove>().setDatos(gameManager.DatosPlayer.EquipoUnidades[0]); //TEMPORAL
-                            Debug.Log("Colocando " + unidadSeleccionada + " en " + c);
+                            Debug.Log("Colocando el modelo " + unidadSeleccionada + " en " + c);
                             gameManager.DatosPlayer.EquipoUnidades[0].isPlaced = true;
                             unidadSeleccionada = null;
                         }
