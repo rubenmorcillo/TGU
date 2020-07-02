@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 151654185}
   - component: {fileID: 151654187}
   - component: {fileID: 151654186}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: marcoSup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225822476}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: jugadorUnidades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 382705392}
   - component: {fileID: 382705394}
   - component: {fileID: 382705393}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: menuEsc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,8 @@ GameObject:
   - component: {fileID: 448364340}
   - component: {fileID: 448364342}
   - component: {fileID: 448364341}
-  m_Layer: 5
+  - component: {fileID: 448364343}
+  m_Layer: 0
   m_Name: imgUnidad1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,6 +479,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448364339}
   m_CullTransparentMesh: 0
+--- !u!114 &448364343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 448364339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2160ff647f34ef14bb8601b8577f3615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOver: 0
 --- !u!1 &476366180
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,7 +503,7 @@ GameObject:
   - component: {fileID: 476366181}
   - component: {fileID: 476366183}
   - component: {fileID: 476366182}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: marcoSup 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 600620915}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: marco
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +768,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 620102803}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: datosPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,7 +937,7 @@ GameObject:
   - component: {fileID: 683402395}
   - component: {fileID: 683402397}
   - component: {fileID: 683402396}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: marcoIzq
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1185,7 +1199,7 @@ GameObject:
   - component: {fileID: 722907986}
   - component: {fileID: 722907988}
   - component: {fileID: 722907987}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: marcoDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1259,7 +1273,7 @@ GameObject:
   - component: {fileID: 729580103}
   - component: {fileID: 729580105}
   - component: {fileID: 729580104}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: fondo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1376,7 +1390,8 @@ GameObject:
   - component: {fileID: 959968020}
   - component: {fileID: 959968022}
   - component: {fileID: 959968021}
-  m_Layer: 5
+  - component: {fileID: 959968023}
+  m_Layer: 0
   m_Name: imgUnidad3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1439,6 +1454,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 959968019}
   m_CullTransparentMesh: 0
+--- !u!114 &959968023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959968019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2160ff647f34ef14bb8601b8577f3615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOver: 0
 --- !u!1 &981838810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,7 +1478,8 @@ GameObject:
   - component: {fileID: 981838811}
   - component: {fileID: 981838813}
   - component: {fileID: 981838812}
-  m_Layer: 5
+  - component: {fileID: 981838814}
+  m_Layer: 0
   m_Name: imgUnidad6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1513,6 +1542,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981838810}
   m_CullTransparentMesh: 0
+--- !u!114 &981838814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981838810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2160ff647f34ef14bb8601b8577f3615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOver: 0
 --- !u!1 &1022404833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,7 +1700,7 @@ GameObject:
   - component: {fileID: 1138248279}
   - component: {fileID: 1138248278}
   - component: {fileID: 1138248282}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2051,7 +2093,7 @@ GameObject:
   - component: {fileID: 1244879576}
   - component: {fileID: 1244879578}
   - component: {fileID: 1244879577}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: jugadorRep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2129,7 +2171,7 @@ GameObject:
   - component: {fileID: 1271564515}
   - component: {fileID: 1271564517}
   - component: {fileID: 1271564516}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: marcoDcha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2203,7 +2245,8 @@ GameObject:
   - component: {fileID: 1274243465}
   - component: {fileID: 1274243467}
   - component: {fileID: 1274243466}
-  m_Layer: 5
+  - component: {fileID: 1274243468}
+  m_Layer: 0
   m_Name: imgUnidad2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2266,6 +2309,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274243464}
   m_CullTransparentMesh: 0
+--- !u!114 &1274243468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274243464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2160ff647f34ef14bb8601b8577f3615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOver: 0
 --- !u!1 &1324324190
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,7 +2719,8 @@ GameObject:
   - component: {fileID: 1535396626}
   - component: {fileID: 1535396628}
   - component: {fileID: 1535396627}
-  m_Layer: 5
+  - component: {fileID: 1535396629}
+  m_Layer: 0
   m_Name: imgUnidad5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2726,6 +2783,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1535396625}
   m_CullTransparentMesh: 0
+--- !u!114 &1535396629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535396625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2160ff647f34ef14bb8601b8577f3615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOver: 0
 --- !u!1 &1704413274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2817,7 +2887,8 @@ GameObject:
   - component: {fileID: 1750645102}
   - component: {fileID: 1750645104}
   - component: {fileID: 1750645103}
-  m_Layer: 5
+  - component: {fileID: 1750645105}
+  m_Layer: 0
   m_Name: imgUnidad4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2880,6 +2951,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750645101}
   m_CullTransparentMesh: 0
+--- !u!114 &1750645105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750645101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2160ff647f34ef14bb8601b8577f3615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOver: 0
 --- !u!1 &1950953342
 GameObject:
   m_ObjectHideFlags: 0
@@ -3111,7 +3195,7 @@ GameObject:
   - component: {fileID: 2125579332}
   - component: {fileID: 2125579334}
   - component: {fileID: 2125579333}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: jugadorDinero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3189,7 +3273,7 @@ GameObject:
   - component: {fileID: 2128832461}
   - component: {fileID: 2128832463}
   - component: {fileID: 2128832462}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: jugadorName
   m_TagString: Untagged
   m_Icon: {fileID: 0}

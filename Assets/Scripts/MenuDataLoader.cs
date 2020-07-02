@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Boo.Lang;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MenuDataLoader : MonoBehaviour
@@ -71,7 +73,9 @@ public class MenuDataLoader : MonoBehaviour
             
             string nombre = datosPlayer.EquipoUnidades[i].tipo.nombre;
             Sprite img = Resources.Load<Sprite>("Kaos/" + nombre);
+
             imgUnidades[i].sprite = img;
+            imgUnidades[i].gameObject.GetComponent<ImagenUnidad>().Unidad = datosPlayer.EquipoUnidades[i];
 			if (datosPlayer.EquipoUnidades[i].isPlaced)
 			{
 

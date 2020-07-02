@@ -49,6 +49,9 @@ public class DatosUnidad
     public int defensaLejos;
 
     public int rangoMovimiento;
+
+    public int hab1, hab2, hab3, hab4;
+
     public bool isPlaced { get; set; }
 
     public bool estoyVivo = true;
