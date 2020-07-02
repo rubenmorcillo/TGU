@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     GameObject mazmorra;
     GameObject playerModel;
     DatosPlayer datosPlayer;
-    MenuDataLoader menuDataLoader;
+    InterfazController interfaz;
 
     CombateManager combateManager;
 
