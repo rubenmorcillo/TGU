@@ -44,6 +44,8 @@ public class Localizaciones : MonoBehaviour
 				if (Input.GetMouseButton(0))
 				{
                     SceneManager.LoadScene("mazmorra_01");
+                    //CHAPUZAAA llamar a funcion(hay q crearla) del GameManager pasándole "thisLozalicacion" debería saber qué escena cargar y todo lo q tiene q hacer
+                    // thisLocalizacion -> GameManager -> SceneLoader 
 					GameManager.instance.iniciarMazmorra();
 				}
                 return;

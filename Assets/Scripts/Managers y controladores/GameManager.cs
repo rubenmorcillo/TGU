@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     GameObject playerModel;
     DatosPlayer datosPlayer;
     InterfazController interfaz;
+    BDLocal BDlocal;
 
     CombateManager combateManager;
 
@@ -41,7 +42,15 @@ public class GameManager : MonoBehaviour
         {
             combateManager = gameObject.AddComponent<CombateManager>();
         }
+        
+        if (BDlocal == null)
+		{
+            BDlocal = new BDLocal();
+		}
     }
+    
+    
+
 
     public DatosPlayer DatosPlayer
     {
@@ -64,6 +73,7 @@ public class GameManager : MonoBehaviour
 
         //inico los otros managers
         combateManager.enabled = false;
+        BDlocal.Init();
 
 
         //EL LEVEL MANAGER SOLO LO NECESITO CUANDO VOY A LA MAZMORRA
@@ -72,6 +82,7 @@ public class GameManager : MonoBehaviour
         //iniciarMazmorra();
     }
 
+    //esta función está un poco mezclada...no puede hacerla directamente en LevelCreator y GameManager ocuparse de activar estado?
 	public void iniciarMazmorra()
     {
         Debug.Log("GM: iniciando mazmorra");

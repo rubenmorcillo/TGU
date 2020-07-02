@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class LogicaJugadorMouse : MonoBehaviour
 {
+    GameManager gameManager;
     //public LayerMask mascMov;
-
-
     //TextMeshProUGUI tmp;
     Camera cam;
 	//public GameObject camPos;
     MotorJugador motor;
-    GameManager gameManager;
+   
     void Start()
     {
         //GameObject objeto =  GameObject.Find("Texto");
@@ -27,8 +26,6 @@ public class LogicaJugadorMouse : MonoBehaviour
         {
             motor = GetComponent<MotorJugador>();
         }
-
-       
     }
 
 
