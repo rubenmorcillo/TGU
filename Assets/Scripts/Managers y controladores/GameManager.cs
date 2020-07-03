@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     GameObject playerModel;
     DatosPlayer datosPlayer;
     InterfazController interfaz;
+    public ServerManager serverManager;
+    public BDLocal BDlocal;
 
     CombateManager combateManager;
 
@@ -23,25 +25,38 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
-       // datosPlayer = gameObject.GetComponent<DatosPlayer>();
-        if (datosPlayer == null)
-		{
-            //FALSEANDO DATOS DEL JUGADOR
-            DatosPlayer datosPlayerTest = new DatosPlayer();
-            datosPlayerTest.dinero = 150;
-            datosPlayerTest.reputacion = 99;
-            datosPlayerTest.nickname = "nicknameTest";
-            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1,new TipoUnidad(1, "rasek", 50, 3,6,23,46,0,12), "rasek", 5, 100));
-            datosPlayer = datosPlayerTest;
-            //datosPlayer = gameObject.AddComponent<DatosPlayer>();
-		}
-
         combateManager = gameObject.GetComponent<CombateManager>();
         if (combateManager == null)
         {
             combateManager = gameObject.AddComponent<CombateManager>();
         }
+
+        serverManager = gameObject.GetComponent<ServerManager>();
+        if(serverManager == null)
+		{
+            serverManager = gameObject.AddComponent<ServerManager>();
+		}
+        
+        if (BDlocal == null)
+		{
+            BDlocal = new BDLocal();
+		}
+
+        if (datosPlayer == null)
+        {
+            //FALSEANDO DATOS DEL JUGADOR
+            DatosPlayer datosPlayerTest = new DatosPlayer();
+            datosPlayerTest.dinero = 150;
+            datosPlayerTest.reputacion = 99;
+            datosPlayerTest.nickname = "nicknameTest";
+            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100));
+            datosPlayer = datosPlayerTest;
+            //datosPlayer = gameObject.AddComponent<DatosPlayer>();
+        }
     }
+    
+    
+
 
     public DatosPlayer DatosPlayer
     {
@@ -55,6 +70,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     //toDo: void CargarDatosPlayer(){}
 
     public void Start()
@@ -64,6 +80,7 @@ public class GameManager : MonoBehaviour
 
         //inico los otros managers
         combateManager.enabled = false;
+        BDlocal.Init();
 
 
         //EL LEVEL MANAGER SOLO LO NECESITO CUANDO VOY A LA MAZMORRA
@@ -72,6 +89,7 @@ public class GameManager : MonoBehaviour
         //iniciarMazmorra();
     }
 
+    //esta función está un poco mezclada...no puede hacerla directamente en LevelCreator y GameManager ocuparse de activar estado?
 	public void iniciarMazmorra()
     {
         Debug.Log("GM: iniciando mazmorra");
@@ -80,6 +98,10 @@ public class GameManager : MonoBehaviour
         playerModel = LevelManager.posicionarJugador();
         EstadosJuego.activarEstado(EstadosJuego.Estado.EXPLORAR);
     }
+    //SERVIDOR
+
+
+    //COMBATE
 
     public void abrirPuerta(Puerta puerta)
     {
