@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 
 [Serializable]
@@ -47,17 +48,48 @@ public class DatosUnidad
 
     public int rangoMovimiento = 3;
 
-    public int hab1, hab2, hab3, hab4;
+    public int hab1 = 1, hab2, hab3, hab4;
 
     public bool isPlaced { get; set; }
 
     public bool estoyVivo = true;
+
+    public Habilidad Hab1
+	{
+		get
+		{
+			return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+		}
+	}
+	public Habilidad Hab2
+	{
+		get
+		{
+			return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+		}
+	}
+	public Habilidad Hab3
+	{
+		get
+		{
+			return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+		}
+	}
+	public Habilidad Hab4
+	{
+		get
+		{
+			return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+		}
+	}
+
+
 
 	public override string ToString()
 	{
 
 		return "Soy un "+tipo.nombre + "// level " + nivel + "\n "+
             "hp: "+hpActual+"/" + hpMax + "\n"+
-            "hab1: "+hab1 + " // hab2: "+hab2 + " // hab3: "+hab3+" // hab4: " +hab4;
+            "hab1: "+Hab1.nombre + " // hab2: "+hab2 + " // hab3: "+hab3+" // hab4: " +hab4;
 	}
 }

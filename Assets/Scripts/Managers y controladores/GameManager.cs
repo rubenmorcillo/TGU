@@ -54,9 +54,6 @@ public class GameManager : MonoBehaviour
             //datosPlayer = gameObject.AddComponent<DatosPlayer>();
         }
     }
-    
-    
-
 
     public DatosPlayer DatosPlayer
     {
