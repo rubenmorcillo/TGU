@@ -26,7 +26,7 @@ public class Tile : MonoBehaviour
     public float g = 0;
     public float h = 0;
 
-    CombateManager combateManager = CombateManager.instance;
+   // CombateManager combateManager = CombateManager.instance;
 
 	// Use this for initialization
 	void Start () 

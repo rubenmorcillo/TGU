@@ -101,7 +101,7 @@ public class Sala : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CombateManager.instance.fase == CombateManager.FaseCombate.COLOCANDO)
+        if (GameManager.instance.combateManager.fase == CombateManager.FaseCombate.COLOCANDO)
         {
             encontrarCasillasDisponibles();
 

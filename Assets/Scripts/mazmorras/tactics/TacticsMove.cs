@@ -403,7 +403,7 @@ public class TacticsMove : MonoBehaviour
 
     public void BeginTurn()
     {
-        Debug.Log("empieza mi turno, soy" + gameObject);
+        Debug.Log("empieza mi turno:" + datosUnidad.ToString());
         turn = true;
     }
 

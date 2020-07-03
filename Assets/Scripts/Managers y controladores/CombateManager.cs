@@ -6,22 +6,8 @@ using TMPro;
 public class CombateManager : MonoBehaviour
 {
     public TextMeshProUGUI tmp; //esto hay que quitarlo
-    public static CombateManager instance;
 
     string modeloUnidadDefault = "UnidadSRC";
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-
-    }
 
     GameManager gameManager;
     //List<NPCMove> enemigos;
@@ -135,7 +121,8 @@ public class CombateManager : MonoBehaviour
         RaycastHit hit;
 
         //LayerMask layerMaskUI = LayerMask.GetMask("UI");
-        DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).ElementAt(3);
+        //DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).ElementAt(3);
+        DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).First();
         if (unidadSeleccionada == null)
         {
             if (unidadesDisponibles != null)

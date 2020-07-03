@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public ServerManager serverManager;
     public BDLocal BDlocal;
 
-    CombateManager combateManager;
+    public CombateManager combateManager;
 
     private void Awake()
     {

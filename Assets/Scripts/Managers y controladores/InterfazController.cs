@@ -10,23 +10,22 @@ public class InterfazController : MonoBehaviour
     public Text textRep, textDinero, textNickname;
     DatosPlayer datosPlayer;
 
-    public static InterfazController instance;
+	public static InterfazController instance;
+	private void Awake()
+	{
+		if (instance == null)
+		{
+			instance = this;
+		}
+		else if (instance != this)
+		{
+			Destroy(gameObject);
+		}
+		DontDestroyOnLoad(this);
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(this);
+	}
 
-    }
-
-    void Start()
+	void Start()
     {
         textDinero = GameObject.Find("jugadorDinero").GetComponent<Text>();
         textRep = GameObject.Find("jugadorRep").GetComponent<Text>();

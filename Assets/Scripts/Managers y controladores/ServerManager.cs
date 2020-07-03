@@ -5,20 +5,20 @@ using System.Linq;
 
 public class ServerManager : MonoBehaviour
 {
-    public static ServerManager instance;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(this);
+    //public static ServerManager instance;
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //    }
+    //    else if (instance != this)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //    DontDestroyOnLoad(this);
 
-    }
+    //}
     string serverUri = "https://resealable-compress.000webhostapp.com/";
 
     // Start is called before the first frame update

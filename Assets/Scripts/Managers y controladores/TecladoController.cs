@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Linq;
 using UnityEngine;
 
 public class TecladoController : MonoBehaviour
@@ -10,6 +9,7 @@ public class TecladoController : MonoBehaviour
     void Update()
     {
         CheckMenuEsc();
+        TeclaComodin();
     }
 
     void CheckMenuEsc()
@@ -28,4 +28,13 @@ public class TecladoController : MonoBehaviour
             }
         }
     }
+
+    void TeclaComodin()
+	{
+        if (Input.GetKeyDown(KeyCode.D))
+		{
+            Debug.Log("restando");
+            GameManager.instance.DatosPlayer.EquipoUnidades.First().hpActual -= 10;
+		}
+	}
 }
