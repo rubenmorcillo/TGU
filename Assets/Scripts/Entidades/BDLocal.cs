@@ -20,6 +20,18 @@ public class BDLocal
 		}
 	}
 
+	public List<Habilidad> Habilidades
+	{
+		get
+		{
+			return habilidades;
+		}
+		set
+		{
+			habilidades = value;
+		}
+	}
+
 	public void Init()
 	{
 		Debug.Log("BDLocal: iniciando...");
@@ -40,6 +52,6 @@ public class BDLocal
 	void CargarHabilidades()
 	{
 		//llamar a la BD para consultar todas las habilidades
-		GameManager.instance.serverManager.PeticionGet("https://resealable-compress.000webhostapp.com/habilidades.php");
+		GameManager.instance.serverManager.ObtenerHabilidades();
 	}
 }

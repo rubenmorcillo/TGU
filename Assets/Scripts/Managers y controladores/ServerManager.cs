@@ -32,9 +32,9 @@ public class ServerManager : MonoBehaviour
         
     }
 
-    public void PeticionGet(string uri)
+    public void ObtenerHabilidades()
 	{
-        StartCoroutine(GetRequest(uri));
+        StartCoroutine(peticionHabilidades());
 	}
 
     public void ObtenerUnidades()
@@ -58,20 +58,53 @@ public class ServerManager : MonoBehaviour
         else
         {
             //List<TipoUnidad> unidades = JsonUtility.FromJson<List<TipoUnidad>>(request.downloadHandler.text);
-            string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"},{\"id\":\"1\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"}]}";
+            string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"}]}";
 
             try
             {
                 //Debug.Log("SM Éxito recuperando unidades: " + request.downloadHandler.text);
-                TipoUnidad[] unidades = JsonHelper.FromJson<TipoUnidad>(jsonColeccion);
-                GameManager.instance.BDlocal.TiposUnidad = unidades.ToList();
-                Debug.Log("SM Unidades recuperadas: " + JsonHelper.ToJson(unidades));
+                TipoUnidad[] lista = JsonHelper.FromJson<TipoUnidad>(jsonColeccion);
+                GameManager.instance.BDlocal.TiposUnidad = lista.ToList();
+                Debug.Log("SM Unidades recuperadas: " + JsonHelper.ToJson(GameManager.instance.BDlocal.TiposUnidad.ToArray()));
             }
             catch(System.Exception e)
 			{
-                Debug.Log("SM: ERROR -> " + e);
+                Debug.Log("SM: ERROR recuperando unidades -> " + e);
 			}
           
+        }
+    }
+    IEnumerator peticionHabilidades()
+    {
+        Debug.Log("SM: llamando a las habilidades");
+        string finalUri = "habilidades.php";
+        // UnityWebRequest request = UnityWebRequest.Get("http://www.google.es");
+        UnityWebRequest request = UnityWebRequest.Get(serverUri + finalUri);
+        yield return request.SendWebRequest();
+
+        if (request.isNetworkError)
+        {
+            Debug.Log("SM Error: " + request.error);
+            peticionHabilidades();
+        }
+        else
+        {
+            //List<TipoUnidad> unidades = JsonUtility.FromJson<List<TipoUnidad>>(request.downloadHandler.text);
+            string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"habHardf_1\",\"potencia\":\"10\", \"tipo\":\"0\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"habHardE_2\",\"potencia\":\"20\", \"tipo\":\"1\", \"agilidad\":\"5\"}]}";
+
+            try
+            {
+                //Debug.Log("SM Éxito recuperando unidades: " + request.downloadHandler.text);
+                Habilidad[] lista = JsonHelper.FromJson<Habilidad>(jsonColeccion);
+                GameManager.instance.BDlocal.Habilidades = lista.ToList();
+                Debug.Log("SM Habilidades recuperadas: " + JsonHelper.ToJson(GameManager.instance.BDlocal.Habilidades.ToArray()));
+
+            }
+            catch (System.Exception e)
+            {
+                Debug.Log("SM: ERROR recuperando habilidades -> " + e);
+            }
+
         }
     }
 
