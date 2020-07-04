@@ -63,7 +63,8 @@ public class ServerManager : MonoBehaviour
             try
             {
                 //Debug.Log("SM Éxito recuperando unidades: " + request.downloadHandler.text);
-                TipoUnidad[] lista = JsonHelper.FromJson<TipoUnidad>(jsonColeccion);
+               // TipoUnidad[] lista = JsonHelper.FromJson<TipoUnidad>(jsonColeccion);
+                TipoUnidad[] lista = JsonHelper.FromJson<TipoUnidad>(JsonHelper.fixJson(request.downloadHandler.text));
                 GameManager.instance.BDlocal.TiposUnidad = lista.ToList();
                 Debug.Log("SM Unidades recuperadas: " + JsonHelper.ToJson(GameManager.instance.BDlocal.TiposUnidad.ToArray()));
             }
@@ -95,7 +96,8 @@ public class ServerManager : MonoBehaviour
             try
             {
                 //Debug.Log("SM Éxito recuperando unidades: " + request.downloadHandler.text);
-                Habilidad[] lista = JsonHelper.FromJson<Habilidad>(jsonColeccion);
+               // Habilidad[] lista = JsonHelper.FromJson<Habilidad>(jsonColeccion);
+                Habilidad[] lista = JsonHelper.FromJson<Habilidad>(JsonHelper.fixJson(request.downloadHandler.text));
                 GameManager.instance.BDlocal.Habilidades = lista.ToList();
                 Debug.Log("SM Habilidades recuperadas: " + JsonHelper.ToJson(GameManager.instance.BDlocal.Habilidades.ToArray()));
 
