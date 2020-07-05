@@ -58,28 +58,58 @@ public class DatosUnidad
 	{
 		get
 		{
-			return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+			if (hab1 > 0)
+			{
+				return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+			}
+			else
+			{
+				return null;
+			}
+			
 		}
 	}
 	public Habilidad Hab2
 	{
 		get
 		{
-			return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+			if(hab2 > 0)
+			{
+				return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab2).First();
+			}
+			else
+			{
+				return null;
+			}
+			
 		}
 	}
 	public Habilidad Hab3
 	{
 		get
 		{
-			return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+			if (hab3 > 0)
+			{
+				return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab3).First();
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 	public Habilidad Hab4
 	{
 		get
 		{
-			return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+			if (hab4 > 0)
+			{
+				return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab4).First();
+			}
+			else
+			{
+				return null;
+			}
 		}
 	}
 
