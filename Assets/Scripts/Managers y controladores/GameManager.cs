@@ -108,9 +108,10 @@ public class GameManager : MonoBehaviour
     public void activarCombate()
     {
         EstadosJuego.activarEstado(EstadosJuego.Estado.COMBATE);
-     
+
         //ToDo:hago la animación que tenga que hacer
         //pongo la musica
+        InterfazController.instance.detalleAnimator.SetBool("mostrar", true);
         playerModel.SetActive(false); //desactivo a mi avatar
         combateManager.enabled = true;
         combateManager.Combate(LevelManager.salaActiva.GetComponent<Sala>());
