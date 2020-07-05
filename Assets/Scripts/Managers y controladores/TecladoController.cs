@@ -36,5 +36,9 @@ public class TecladoController : MonoBehaviour
             Debug.Log("restando");
             GameManager.instance.DatosPlayer.EquipoUnidades.First().hpActual -= 10;
 		}
-	}
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            InterfazController.instance.detalleAnimator.SetBool("mostrar", !InterfazController.instance.detalleAnimator.GetBool("mostrar"));
+        }
+    }
 }

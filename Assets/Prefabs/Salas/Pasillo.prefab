@@ -93,6 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puntoUnion: {fileID: 1163863778553305327}
+  posiblesEnemigos: []
   anchoInicio: 0
 --- !u!1 &6459583527202135746
 GameObject:
@@ -264,11 +265,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (18)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -323,6 +319,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (18)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -499,11 +500,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (13)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -559,6 +555,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (13)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &4192971732398852278 stripped
@@ -574,11 +575,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (23)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -633,6 +629,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (23)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -724,11 +725,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -783,6 +779,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -1109,11 +1110,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (20)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1168,6 +1164,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (20)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -1344,11 +1345,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1403,6 +1399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -1589,11 +1590,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (15)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1649,6 +1645,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (15)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &1316202713457298914 stripped
@@ -1664,11 +1665,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (12)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1723,6 +1719,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (12)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -1824,11 +1825,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1883,6 +1879,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -2059,11 +2060,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (9)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2119,6 +2115,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (9)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &990601990966631988 stripped
@@ -2134,11 +2135,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2194,6 +2190,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (7)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &913062840019821259 stripped
@@ -2209,11 +2210,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2268,6 +2264,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -2359,11 +2360,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (16)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2418,6 +2414,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (16)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -2604,11 +2605,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (14)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2664,6 +2660,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (14)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &9078140444644186848 stripped
@@ -2679,11 +2680,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (21)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2738,6 +2734,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (21)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -2924,11 +2925,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (25)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2984,6 +2980,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (25)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &8469764594715280487 stripped
@@ -2999,11 +3000,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (8)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3058,6 +3054,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -3224,11 +3225,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (19)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3283,6 +3279,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (19)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -3459,11 +3460,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (28)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3519,6 +3515,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (28)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &7017126351093614623 stripped
@@ -3534,11 +3535,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (26)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3594,6 +3590,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (26)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &7068746977180540354 stripped
@@ -3609,11 +3610,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (10)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3669,6 +3665,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (10)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &7296726540255941653 stripped
@@ -3684,11 +3685,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (27)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3744,6 +3740,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (27)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &7409081149990007372 stripped
@@ -3759,11 +3760,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (31)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3818,6 +3814,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (31)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -3919,11 +3920,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (29)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3979,6 +3975,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (29)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &6570697284406485478 stripped
@@ -3994,11 +3995,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (11)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4053,6 +4049,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (11)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -4304,11 +4305,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4364,6 +4360,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (3)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &6863350866942921614 stripped
@@ -4379,11 +4380,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (22)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4438,6 +4434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (22)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -4529,11 +4530,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (30)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4589,6 +4585,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (30)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &6315709659918971682 stripped
@@ -4604,11 +4605,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (17)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4663,6 +4659,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (17)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
@@ -4754,11 +4755,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4814,6 +4810,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &5567791407938415475 stripped
@@ -4829,11 +4830,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4889,6 +4885,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (6)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}
 --- !u!4 &5764312517928779264 stripped
@@ -4904,11 +4905,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2464032826384028034}
     m_Modifications:
-    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
-        type: 3}
-      propertyPath: m_Name
-      value: Baldosa (24)
-      objectReference: {fileID: 0}
     - target: {fileID: 4113918932511910486, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4963,6 +4959,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113918932511910487, guid: 6fa002e1c72f19f4fa566fdfde26ff8f,
+        type: 3}
+      propertyPath: m_Name
+      value: Baldosa (24)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa002e1c72f19f4fa566fdfde26ff8f, type: 3}

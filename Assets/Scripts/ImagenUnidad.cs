@@ -26,7 +26,8 @@ public class ImagenUnidad : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 		//Debug.Log("Ratón sobre " + unidad.tipo.nombre);
 		if (unidad != null)
 		{
-			Debug.Log("Ratón sobre " + unidad.ToString());
+			//Debug.Log("Ratón sobre " + unidad.ToString());
+			//InterfazController.instance.UnidadActiva = unidad;
 			isOver = true;
 		}
 

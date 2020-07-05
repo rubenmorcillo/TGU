@@ -8,10 +8,11 @@ public class CombateManager : MonoBehaviour
     public TextMeshProUGUI tmp; //esto hay que quitarlo
 
     string modeloUnidadDefault = "UnidadSRC";
-
+    
     GameManager gameManager;
     //List<NPCMove> enemigos;
     //List<PlayerMove> unidades;
+    public DatosUnidad unidadActiva;
 
     [SerializeField]
     GameObject unidadSeleccionada;
@@ -21,10 +22,15 @@ public class CombateManager : MonoBehaviour
     public FaseCombate fase;
     bool playerReady;
     bool ready;
+
+
+
     void Start()
     {
         gameManager = GameManager.instance;
         Debug.Log("CM: start....");
+        unidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
+        InterfazController.instance.UnidadActiva = unidadActiva;
     }
     public void Combate(Sala sala)
     {
@@ -39,6 +45,7 @@ public class CombateManager : MonoBehaviour
         {
             if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() > 0)
             {
+               
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     Debug.Log("iniciando combate");
