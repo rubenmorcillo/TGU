@@ -38,8 +38,7 @@ public class TecladoController : MonoBehaviour
 		}
         if (Input.GetKeyDown(KeyCode.M))
         {
-            InterfazController.instance.Ocultar();
-            GameManager.instance.DatosPlayer.EquipoUnidades.First().hpActual -= 10;
+            InterfazController.instance.detalleAnimator.SetBool("mostrar", !InterfazController.instance.detalleAnimator.GetBool("mostrar"));
         }
     }
 }

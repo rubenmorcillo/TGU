@@ -11,6 +11,8 @@ public class InterfazController : MonoBehaviour
     public Text textRep, textDinero, textNickname;
     public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp;
     public Image imgUnidadDetalle;
+
+    public Animator detalleAnimator;
    // public bool detalleUnidadActivo = false;
     DatosPlayer datosPlayer;
     DatosUnidad unidadActiva;
@@ -56,6 +58,9 @@ public class InterfazController : MonoBehaviour
         txtHab2 = GameObject.Find("txtHab2").GetComponent<Text>();
         txtHab3 = GameObject.Find("txtHab3").GetComponent<Text>();
         txtHab4 = GameObject.Find("txtHab4").GetComponent<Text>();
+
+        //anims
+        detalleAnimator = GameObject.Find("MenuDetalle").GetComponent<Animator>();
 
     }
 
@@ -115,10 +120,12 @@ public class InterfazController : MonoBehaviour
     }
     public void Mostrar()
 	{
+        detalleAnimator.SetBool("mostrar", true);
 	}
 
     public void Ocultar()
 	{
+        detalleAnimator.SetBool("mostrar", false);
     }
 
     private void MostrarDetallesUnidad()
