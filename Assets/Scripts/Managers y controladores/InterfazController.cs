@@ -10,6 +10,7 @@ public class InterfazController : MonoBehaviour
 
     public Text textRep, textDinero, textNickname;
     public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp;
+
     public Image imgUnidadDetalle;
 
     public Animator detalleAnimator;
@@ -75,7 +76,6 @@ public class InterfazController : MonoBehaviour
             {
                 if (unidadActiva != null)
                 {
-                    Debug.Log(unidadActiva.ToString());
                     MostrarDetallesUnidad();
                 }
                 else
