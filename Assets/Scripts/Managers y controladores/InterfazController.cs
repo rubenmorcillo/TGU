@@ -13,6 +13,8 @@ public class InterfazController : MonoBehaviour
 
     public Image imgUnidadDetalle;
 
+    public GameObject panelInfo;
+
     public Animator detalleAnimator;
    // public bool detalleUnidadActivo = false;
     DatosPlayer datosPlayer;
@@ -52,13 +54,16 @@ public class InterfazController : MonoBehaviour
         textNickname = GameObject.Find("jugadorName").GetComponent<Text>();
         imgUnidades = GameObject.Find("jugadorUnidades").GetComponentsInChildren<Image>();
         
-        //info
+        //unidad
         imgUnidadDetalle = GameObject.Find("imgUnidadDetalle").GetComponent<Image>();
         txtUnidadHp = GameObject.Find("txtUnidadHp").GetComponent<Text>();
         txtHab1 = GameObject.Find("txtHab1").GetComponent<Text>();
         txtHab2 = GameObject.Find("txtHab2").GetComponent<Text>();
         txtHab3 = GameObject.Find("txtHab3").GetComponent<Text>();
         txtHab4 = GameObject.Find("txtHab4").GetComponent<Text>();
+
+        //info
+        panelInfo = GameObject.Find("panelInfo");
 
         //anims
         detalleAnimator = GameObject.Find("MenuDetalle").GetComponent<Animator>();
@@ -118,6 +123,10 @@ public class InterfazController : MonoBehaviour
 
         }
     }
+    public void MostrarTexto(string texto)
+	{
+        panelInfo.GetComponentInChildren<Text>().text = texto;
+	}
     public void Mostrar()
 	{
         detalleAnimator.SetBool("mostrar", true);

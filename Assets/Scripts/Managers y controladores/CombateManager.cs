@@ -45,9 +45,10 @@ public class CombateManager : MonoBehaviour
         {
             if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() > 0)
             {
-               
+                InterfazController.instance.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
+                    InterfazController.instance.MostrarTexto("");
                     Debug.Log("iniciando combate");
                     playerReady = true;
                 }
@@ -150,6 +151,7 @@ public class CombateManager : MonoBehaviour
         }
         else
         {
+            InterfazController.instance.MostrarTexto("Posiciona a tu unidad en una casilla libre");
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.tag == "Tile")

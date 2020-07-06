@@ -125,10 +125,12 @@ public class LogicaJugadorMouse : MonoBehaviour
             if (hit.collider.tag == "Puerta")
             {
                 //tmp.SetText("pulsa espacio para abrir");
+                InterfazController.instance.MostrarTexto("pulsa espacio para abrir puerta");
                // Debug.Log("pulsa espacio para continuar");
                 if (Input.GetKey(KeyCode.Space))
                 {
                     //Debug.Log("Estoy abriendo la puerta " + hit.collider.GetComponentInParent<Puerta>());
+                    InterfazController.instance.MostrarTexto("");
                     Puerta puerta = hit.collider.GetComponentInParent<Puerta>();
                     puerta.GetComponentInChildren<Animator>().SetBool("open", true);
                     gameManager.abrirPuerta(puerta);
