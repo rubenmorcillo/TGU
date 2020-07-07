@@ -31,17 +31,17 @@ public class InterfazController : MonoBehaviour
         }
     }
 
-    public static InterfazController instance;
+    //public static InterfazController instance;
 	private void Awake()
 	{
-		if (instance == null)
-		{
-			instance = this;
-		}
-		else if (instance != this)
-		{
-			Destroy(gameObject);
-		}
+		//	if (instance == null)
+		//	{
+		//		instance = this;
+		//	}
+		//	else if (instance != this)
+		//	{
+		//		Destroy(gameObject);
+		//	}
 		DontDestroyOnLoad(this);
 
 	}
@@ -67,7 +67,7 @@ public class InterfazController : MonoBehaviour
 
         //anims
         detalleAnimator = GameObject.Find("MenuDetalle").GetComponent<Animator>();
-
+        GameManager.instance.interfaz = this;
     }
 
    
@@ -77,7 +77,7 @@ public class InterfazController : MonoBehaviour
         datosPlayer = GameManager.instance.DatosPlayer;
         if (datosPlayer != null)
         {
-            if (EstadosJuego.EstadoActual() == EstadosJuego.Estado.COMBATE)
+            if (GameManager.instance.estadoJuego == EstadosJuego.Estado.COMBATE)
             {
                 if (unidadActiva != null)
                 {
@@ -90,11 +90,8 @@ public class InterfazController : MonoBehaviour
             }
             else
             {
-
                 RefrescarDatosPlayer();
-               
             }
-
         }
 
     }

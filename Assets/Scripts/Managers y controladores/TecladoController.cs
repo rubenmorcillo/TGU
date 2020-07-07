@@ -38,7 +38,7 @@ public class TecladoController : MonoBehaviour
 		}
         if (Input.GetKeyDown(KeyCode.M))
         {
-            InterfazController.instance.detalleAnimator.SetBool("mostrar", !InterfazController.instance.detalleAnimator.GetBool("mostrar"));
+            GameManager.instance.interfaz.detalleAnimator.SetBool("mostrar", !GameManager.instance.interfaz.detalleAnimator.GetBool("mostrar"));
         }
     }
 }

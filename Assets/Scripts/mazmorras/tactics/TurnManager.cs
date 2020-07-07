@@ -1,20 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnManager : MonoBehaviour 
+public class TurnManager 
 {
     static Dictionary<string, List<TacticsMove>> units = new Dictionary<string, List<TacticsMove>>();
     static Queue<string> turnKey = new Queue<string>();
     static Queue<TacticsMove> turnTeam = new Queue<TacticsMove>();
 
-	// Use this for initialization
-	void Start () 
-	{
-        Debug.Log("TurnManager: start...");
-    }
-	
-	// Update is called once per frame
-	void Update () 
+	public void Update () 
 	{
         if (turnTeam.Count == 0)
         {

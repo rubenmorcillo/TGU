@@ -98,18 +98,7 @@ public class Sala : MonoBehaviour
         return enemigos;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (GameManager.instance.combateManager.fase == CombateManager.FaseCombate.COLOCANDO)
-        {
-            encontrarCasillasDisponibles();
-
-        }
-       
-    }
-
-    void encontrarCasillasDisponibles()
+    public void encontrarCasillasDisponibles()
     {
         foreach (Tile t in PuntosInicioPlayer())
         {

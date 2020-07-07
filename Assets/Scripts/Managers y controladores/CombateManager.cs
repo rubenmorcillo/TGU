@@ -5,78 +5,88 @@ using TMPro;
 
 public class CombateManager : MonoBehaviour
 {
-    public TextMeshProUGUI tmp; //esto hay que quitarlo
-
     string modeloUnidadDefault = "UnidadSRC";
     
     GameManager gameManager;
-    //List<NPCMove> enemigos;
-    //List<PlayerMove> unidades;
-    public DatosUnidad unidadActiva;
+    [SerializeField]
+    TurnManager turnManager;
 
     [SerializeField]
+    DatosUnidad unidadActiva;
+   
     GameObject unidadSeleccionada;
    
     
-    public enum FaseCombate {INICIO, COLOCANDO, INICIO_COMBATE, COMBATE, FIN_COMBATE}
+    public enum FaseCombate {PAUSA, INICIO, COLOCANDO, INICIO_COMBATE, COMBATE, FIN_COMBATE}
     public FaseCombate fase;
-    bool playerReady;
-    bool ready;
 
-
-
+	private void Awake()
+	{
+        Debug.Log("CM: Awake...");
+        if (turnManager == null)
+		{
+            turnManager = new TurnManager();
+        }
+        gameManager = GameManager.instance;
+    }
     void Start()
     {
-        gameManager = GameManager.instance;
         Debug.Log("CM: start....");
-        unidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
-        InterfazController.instance.UnidadActiva = unidadActiva;
+        fase = FaseCombate.PAUSA;
     }
+
     public void Combate(Sala sala)
     {
+        fase = FaseCombate.INICIO;
         crearEnemigos(sala);
-        fase = FaseCombate.COLOCANDO;
-
     }
 
     private void Update()
     {
-        if(fase == FaseCombate.COLOCANDO)
+        if (fase == FaseCombate.INICIO)
+		{
+            seleccionarUnidadActiva();
+		}
+        else if (fase == FaseCombate.COLOCANDO)
         {
-            if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() > 0)
-            {
-                InterfazController.instance.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    InterfazController.instance.MostrarTexto("");
-                    Debug.Log("iniciando combate");
-                    playerReady = true;
-                }
-               
-            }
-            else
+            LevelManager.salaActiva.GetComponent<Sala>().encontrarCasillasDisponibles();
+            if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() <= 0)
             {
                 mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
                 checkMouse();
-                playerReady = false;
             }
-            if (playerReady)
+            else
             {
-                fase = FaseCombate.INICIO_COMBATE;
+                gameManager.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    gameManager.MostrarTexto("");
+                    fase = FaseCombate.INICIO_COMBATE;
+                }
             }
-        }else if(fase == FaseCombate.INICIO_COMBATE)
+
+        } else if (fase == FaseCombate.INICIO_COMBATE)
         {
             //desactivamos puerta porque el collider nos jode las casillas
             LevelManager.DesactivarPuerta(LevelManager.salaActiva.GetComponentInChildren<Puerta>());
-            gameObject.AddComponent<TurnManager>();
+
             fase = FaseCombate.COMBATE;
-        }else if (fase == FaseCombate.FIN_COMBATE)
+        } else if (fase == FaseCombate.COMBATE)
         {
-           
+            turnManager.Update();
+
+            //ToDo: decidir las condiciones para que acabe el combate
+            //if (se cumplen las condiciones){
+            //fase = FaseCombate.FIN_COMBATE;
+            //}
+
+        }
+        else if (fase == FaseCombate.FIN_COMBATE)
+        {
+        
         }
 
     }
-
 
 
     private void crearEnemigos(Sala sala)
@@ -91,6 +101,7 @@ public class CombateManager : MonoBehaviour
                 numeroEnemigos = rnd.Next(posicionesDisponibles.Count);
             }
             Debug.Log("creando " + numeroEnemigos + " enemigos ");
+
             foreach (GameObject enemigo in sala.dameEnemigos(numeroEnemigos))
             {
                
@@ -122,6 +133,35 @@ public class CombateManager : MonoBehaviour
 
     }
 
+    private void seleccionarUnidadActiva()
+	{
+        unidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
+        if (unidadActiva != null)
+        {
+            GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadActiva.tipo.nombre);
+            if (modelo == null)
+            {
+                Debug.Log("no hay modelo para " + unidadActiva.tipo.nombre + " ... cargando modelo por defecto");
+                modelo = (GameObject)Resources.Load("Unidades/" + modeloUnidadDefault);
+            }
+            
+            unidadSeleccionada = modelo;
+            //CHAPUZAA -> quizá sea el manager el q deba fijar la unidad activa
+            gameManager.interfaz.UnidadActiva = unidadActiva;
+
+            if (unidadSeleccionada != null)
+			{
+                //Debug.Log("CM: cambiando a fase: " + FaseCombate.COLOCANDO.ToString());
+                fase = FaseCombate.COLOCANDO;
+            }
+
+        }
+        else
+        {
+            Debug.Log("No hay unidades disponibles");
+        }
+    }
+
     //ESTA FUNCION DEBERÍA ESTAR EN EL CHEQUEADOR DE MOUSE
     private void checkMouse()
     {
@@ -130,28 +170,10 @@ public class CombateManager : MonoBehaviour
 
         //LayerMask layerMaskUI = LayerMask.GetMask("UI");
         //DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).ElementAt(3);
-        DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).First();
-        if (unidadSeleccionada == null)
+        //DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).First();
+        if (unidadSeleccionada != null)
         {
-            if (unidadesDisponibles != null)
-			{
-                GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadesDisponibles.tipo.nombre);
-                if(modelo == null)
-				{
-                    Debug.Log("no hay modelo para " + unidadesDisponibles.tipo.nombre + " ... cargando modelo por defecto");
-                    modelo = (GameObject)Resources.Load("Unidades/" + modeloUnidadDefault);
-                }
-                unidadSeleccionada = modelo;
-			}
-			else
-			{
-                Debug.Log("No hay unidades disponibles");
-			}
-           
-        }
-        else
-        {
-            InterfazController.instance.MostrarTexto("Posiciona a tu unidad en una casilla libre");
+            gameManager.interfaz.MostrarTexto("Posiciona a tu unidad en una casilla libre");
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.tag == "Tile")
@@ -173,9 +195,6 @@ public class CombateManager : MonoBehaviour
                 }
             }
         }
-       
-
-       
         
     }
     public GameObject crearUnidad(GameObject modeloUnidad, Tile casilla)

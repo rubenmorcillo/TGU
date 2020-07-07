@@ -41,10 +41,10 @@ public class Localizaciones : MonoBehaviour
 		{
             case Localizacion.CORP:
                 // Debug.Log("nos vamos a las CORPOS");
-                InterfazController.instance.MostrarTexto("CORPORACIONES (pulsa aqui pa jugarrrr \n \n hijoputaaaaa");
+                GameManager.instance.interfaz.MostrarTexto("CORPORACIONES (pulsa aqui pa jugarrrr \n \n hijoputaaaaa");
                 if (Input.GetMouseButton(0))
 				{
-                    InterfazController.instance.MostrarTexto("");
+                    GameManager.instance.interfaz.MostrarTexto("");
                     SceneManager.LoadScene("mazmorra_01");
                     //CHAPUZAAA llamar a funcion(hay q crearla) del GameManager pasándole "thisLozalicacion" debería saber qué escena cargar y todo lo q tiene q hacer
                     // thisLocalizacion -> GameManager -> SceneLoader 
@@ -55,7 +55,7 @@ public class Localizaciones : MonoBehaviour
                // Debug.Log("nos vamos a la SHOP");
                 return;
             case Localizacion.LAB:
-                InterfazController.instance.MostrarTexto("LABORATORIO \n (aquí vas a poder administrar tus pokemon de mierda) \n \n ...bueno, no son pokemon pero tú me entiendes...");
+                GameManager.instance.interfaz.MostrarTexto("LABORATORIO \n (aquí vas a poder administrar tus pokemon de mierda) \n \n ...bueno, no son pokemon pero tú me entiendes...");
                 // Debug.Log("nos vamos al LAB");
                 return;
 		}
@@ -63,7 +63,7 @@ public class Localizaciones : MonoBehaviour
 
 	private void OnMouseExit()
 	{
-        InterfazController.instance.MostrarTexto("");
+        GameManager.instance.interfaz.MostrarTexto("");
         GetComponent<MeshRenderer>().material.color = Color.white;
 	}
 }
