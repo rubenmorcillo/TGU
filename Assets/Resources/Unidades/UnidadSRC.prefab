@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2695606857811973684}
   - component: {fileID: 2695606857811973685}
   - component: {fileID: 2695606857811973686}
-  - component: {fileID: 2695606857811973682}
   m_Layer: 0
   m_Name: UnidadSRC
   m_TagString: Player
@@ -96,52 +95,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2695606857811973682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2695606857811973687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f036352fa80a28740ad2769b4cac47a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turn: 0
-  datosUnidad:
-    id: 0
-    alias: 
-    tipo:
-      id: 0
-      nombre: 
-      hp_base: 0
-      atq_fisico: 0
-      atq_especial: 0
-      def_fisico: 0
-      def_especial: 0
-      salto_base: 0
-      movimiento_base: 0
-      agilidad: 0
-    nivel: 0
-    exp: 0
-    hpMax: 0
-    hpActual: 0
-    modelPrefabName: 
-    iniciativa: 0
-    defensaCerca: 0
-    defensaLejos: 0
-    rangoMovimiento: 3
-    hab1: 1
-    hab2: 0
-    hab3: 0
-    hab4: 0
-    estoyVivo: 1
-  moving: 0
-  jumpHeight: 2
-  moveSpeed: 2
-  jumpVelocity: 4.5
-  actualTargetTile: {fileID: 0}
 --- !u!1001 &2695606857847651828
 PrefabInstance:
   m_ObjectHideFlags: 0

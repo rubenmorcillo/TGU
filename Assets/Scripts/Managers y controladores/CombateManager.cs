@@ -100,7 +100,7 @@ public class CombateManager : MonoBehaviour
             int numeroEnemigos = 0;
             while (numeroEnemigos == 0)
             {
-                numeroEnemigos = Random.Range(0, posicionesDisponibles.Count);
+                numeroEnemigos = Random.Range(1, posicionesDisponibles.Count);
             }
             Debug.Log("creando " + numeroEnemigos + " enemigos ");
 
@@ -110,19 +110,13 @@ public class CombateManager : MonoBehaviour
                 posicionesDisponibles.Remove(disponible);
                 GameObject modeloEnemigo = recuperarModeloUnidad(enemigo);
                 GameObject nuevoEnemigo = crearUnidad(modeloEnemigo, disponible);
-                //CHAPUZAAA
-                Debug.Log(nuevoEnemigo);
-                //FALSEANDO DATOS ENEMIGOS
                 if (nuevoEnemigo.GetComponent<NPCMove>() == null)
 				{
                     nuevoEnemigo.AddComponent<NPCMove>();
-
                 }
                 nuevoEnemigo.GetComponent<NPCMove>().setDatos(enemigo);
                 nuevoEnemigo.tag = "NPC";
-               // nuevoEnemigo.GetComponent<PlayerMove>().enabled = false;
-                Debug.Log(nuevoEnemigo.GetComponent<NPCMove>().datosUnidad.ToString());
-
+                Debug.Log("Creando enemigo: " + nuevoEnemigo.GetComponent<NPCMove>().datosUnidad.ToString());
             }
         }
         else
@@ -160,8 +154,6 @@ public class CombateManager : MonoBehaviour
         if (unidadActiva != null)
         {
             unidadSeleccionada = recuperarModeloUnidad(unidadActiva);
-            
-            //CHAPUZAA -> quizá sea el manager el q deba fijar la unidad activa
             gameManager.interfaz.UnidadActiva = unidadActiva;
 
             if (unidadSeleccionada != null)

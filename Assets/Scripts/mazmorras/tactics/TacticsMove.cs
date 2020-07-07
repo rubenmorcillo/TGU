@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class TacticsMove : MonoBehaviour 
@@ -52,7 +50,6 @@ public class TacticsMove : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         TurnManager.AddUnit(this);
-
        
     }
 

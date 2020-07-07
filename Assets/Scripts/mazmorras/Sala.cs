@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Dynamic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,14 +16,11 @@ public class Sala : MonoBehaviour
     Collection<int> posiblesEnemigosIds = new Collection<int>();
 	List<DatosUnidad> datosEnemigos = new List<DatosUnidad>();
 
-	[SerializeField]
-    List<GameObject> posiblesEnemigos = new List<GameObject>();
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log(name +": iniciandome... ");
         navSur = GetComponent<NavMeshSurface>();
-        GenerarEnemigos();
+        GenerarPosiblesEnemigos();
        // navMeshSuelo = GetComponentsInChildren<NavMeshSurface>();
        //updateNavMesh();
 
@@ -87,17 +85,22 @@ public class Sala : MonoBehaviour
     }
 
 
-    void GenerarEnemigos()
+    void GenerarPosiblesEnemigos()
 	{
-		//CHAPUZAAAA -> falseo los IDS de los posibles enemigos
-		posiblesEnemigosIds.Add(1);
+        //CHAPUZAAAA -> falseo los IDS de los posibles enemigos 
+        //-> en un futuro, según el nivel de dificultad, o el numero de salas q lleves...podemos cargar unos enemigos u otros
+        posiblesEnemigosIds.Add(1);
 		posiblesEnemigosIds.Add(2); //probar con un ID q no exista
+        posiblesEnemigosIds.Add(4);
+        posiblesEnemigosIds.Add(3);
+        posiblesEnemigosIds.Add(5);
 
 
-		for (int i = 0; i < posiblesEnemigosIds.Count; i++)
+        for (int i = 0; i < posiblesEnemigosIds.Count; i++)
 		{
-			//CHAPUZAAA -> el id debería ser un ID local, pero entonces tb debo cambiarlo en las unidades aliadas
-			DatosUnidad uni = new DatosUnidad(999, GameManager.instance.BDlocal.TiposUnidad[posiblesEnemigosIds[i]], "enemigo" + i, 3, 100);
+            //CHAPUZAAA -> el id debería ser un ID local, pero entonces tb debo cambiarlo en las unidades aliadas
+            //-> en un futuro, según el nivel de dificultad....
+            DatosUnidad uni = new DatosUnidad(999, GameManager.instance.BDlocal.TiposUnidad.Where(tu => tu.id == posiblesEnemigosIds[i]).First(), "enemigo" + i, 3, 100);
 			datosEnemigos.Add(uni);
 		}
 
@@ -110,10 +113,9 @@ public class Sala : MonoBehaviour
         System.Random rnd = new System.Random();
         for (int i = 0; i<n; i++)
         {
-           // enemigos.Add(posiblesEnemigos[rnd.Next(posiblesEnemigos.Count)]);
-            enemigos.Add(datosEnemigos[Random.Range(0, datosEnemigos.Count - 1 )]);
+            enemigos.Add(datosEnemigos[Random.Range(0, datosEnemigos.Count )]);
         }
-
+        
         return enemigos;
     }
 
