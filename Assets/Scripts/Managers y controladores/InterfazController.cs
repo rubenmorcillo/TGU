@@ -9,9 +9,11 @@ public class InterfazController : MonoBehaviour
     public Image[] imgUnidades = new Image[5];
 
     public Text textRep, textDinero, textNickname;
-    public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp;
+    public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre;
 
     public Image imgUnidadDetalle;
+
+    public GameObject panelInfo;
 
     public Animator detalleAnimator;
    // public bool detalleUnidadActivo = false;
@@ -29,17 +31,17 @@ public class InterfazController : MonoBehaviour
         }
     }
 
-    public static InterfazController instance;
+    //public static InterfazController instance;
 	private void Awake()
 	{
-		if (instance == null)
-		{
-			instance = this;
-		}
-		else if (instance != this)
-		{
-			Destroy(gameObject);
-		}
+		//	if (instance == null)
+		//	{
+		//		instance = this;
+		//	}
+		//	else if (instance != this)
+		//	{
+		//		Destroy(gameObject);
+		//	}
 		DontDestroyOnLoad(this);
 
 	}
@@ -52,17 +54,21 @@ public class InterfazController : MonoBehaviour
         textNickname = GameObject.Find("jugadorName").GetComponent<Text>();
         imgUnidades = GameObject.Find("jugadorUnidades").GetComponentsInChildren<Image>();
         
-        //info
+        //unidad
         imgUnidadDetalle = GameObject.Find("imgUnidadDetalle").GetComponent<Image>();
+        txtUnidadNombre = GameObject.Find("txtUnidadNombre").GetComponent<Text>();
         txtUnidadHp = GameObject.Find("txtUnidadHp").GetComponent<Text>();
         txtHab1 = GameObject.Find("txtHab1").GetComponent<Text>();
         txtHab2 = GameObject.Find("txtHab2").GetComponent<Text>();
         txtHab3 = GameObject.Find("txtHab3").GetComponent<Text>();
         txtHab4 = GameObject.Find("txtHab4").GetComponent<Text>();
 
+        //info
+        panelInfo = GameObject.Find("panelInfo");
+
         //anims
         detalleAnimator = GameObject.Find("MenuDetalle").GetComponent<Animator>();
-
+        GameManager.instance.interfaz = this;
     }
 
    
@@ -72,7 +78,7 @@ public class InterfazController : MonoBehaviour
         datosPlayer = GameManager.instance.DatosPlayer;
         if (datosPlayer != null)
         {
-            if (EstadosJuego.EstadoActual() == EstadosJuego.Estado.COMBATE)
+            if (GameManager.instance.estadoJuego == EstadosJuego.Estado.COMBATE)
             {
                 if (unidadActiva != null)
                 {
@@ -85,11 +91,8 @@ public class InterfazController : MonoBehaviour
             }
             else
             {
-
                 RefrescarDatosPlayer();
-               
             }
-
         }
 
     }
@@ -114,10 +117,14 @@ public class InterfazController : MonoBehaviour
 
             imgUnidades[i].sprite = img;
             imgUnidades[i].gameObject.GetComponent<ImagenUnidad>().Unidad = datosPlayer.EquipoUnidades[i];
-            //aqui debería incorporar el comportamiento onMouseOver
+            //aqui debería incorporar el comportamiento onMouseOver -> de momento he tenido q crear la clase imagenUnidad
 
         }
     }
+    public void MostrarTexto(string texto)
+	{
+        panelInfo.GetComponentInChildren<Text>().text = texto;
+	}
     public void Mostrar()
 	{
         detalleAnimator.SetBool("mostrar", true);
@@ -133,6 +140,13 @@ public class InterfazController : MonoBehaviour
         //Debug.Log("IC: mostrar detalles de "+unidadActiva.ToString());
         imgUnidadDetalle.sprite = Resources.Load<Sprite>("Kaos/" + unidadActiva.tipo.nombre);
         txtUnidadHp.text = "HP: " + unidadActiva.hpActual + " / " + unidadActiva.hpMax;
+
+        if (string.Compare(unidadActiva.alias, "") == 1)
+        {
+            txtUnidadNombre.text = "\'" + unidadActiva.alias + "\' ";
+        }
+        txtUnidadNombre.text += "[" + unidadActiva.tipo.nombre + "]";
+       
 
         if (unidadActiva.Hab1 != null)
 		{

@@ -414,7 +414,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8371591158269215802}
   - component: {fileID: 1920747910952429888}
-  - component: {fileID: 6303906729735569297}
   - component: {fileID: -1787337924656714025}
   m_Layer: 0
   m_Name: rasek
@@ -458,24 +457,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &6303906729735569297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4789160480136951337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f036352fa80a28740ad2769b4cac47a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turn: 0
-  moving: 0
-  jumpHeight: 2
-  moveSpeed: 2
-  jumpVelocity: 4.5
-  actualTargetTile: {fileID: 0}
 --- !u!136 &-1787337924656714025
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -874,6 +855,7 @@ SkinnedMeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

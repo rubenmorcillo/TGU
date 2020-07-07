@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 [RequireComponent(typeof(TecladoController))]
 public class GameManager : MonoBehaviour
@@ -7,9 +8,10 @@ public class GameManager : MonoBehaviour
     GameObject mazmorra;
     GameObject playerModel;
     DatosPlayer datosPlayer;
-    InterfazController interfaz;
+    public InterfazController interfaz;
     public ServerManager serverManager;
     public BDLocal BDlocal;
+    public EstadosJuego.Estado estadoJuego;
 
     public CombateManager combateManager;
 
@@ -72,11 +74,14 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        estadoJuego = EstadosJuego.Estado.INICIO;
+
         Debug.Log("GameManager: start...");
         EstadosJuego.activarEstado(EstadosJuego.Estado.MENU);
 
         //inico los otros managers
-        combateManager.enabled = false;
+        combateManager.fase = CombateManager.FaseCombate.PAUSA;
+        //combateManager.enabled = false;
         BDlocal.Init();
 
 
@@ -86,14 +91,19 @@ public class GameManager : MonoBehaviour
         //iniciarMazmorra();
     }
 
-    //esta función está un poco mezclada...no puede hacerla directamente en LevelCreator y GameManager ocuparse de activar estado?
+	private void Update()
+	{
+
+	}
+
+	//esta función está un poco mezclada...no puede hacerla directamente en LevelCreator y GameManager ocuparse de activar estado?
 	public void iniciarMazmorra()
     {
+        estadoJuego = EstadosJuego.Estado.EXPLORAR;
         Debug.Log("GM: iniciando mazmorra");
         mazmorra = LevelManager.CrearMazmorra();
         LevelManager.CrearSalaInicial();
         playerModel = LevelManager.posicionarJugador();
-        EstadosJuego.activarEstado(EstadosJuego.Estado.EXPLORAR);
     }
     //SERVIDOR
 
@@ -107,12 +117,20 @@ public class GameManager : MonoBehaviour
 
     public void activarCombate()
     {
-        EstadosJuego.activarEstado(EstadosJuego.Estado.COMBATE);
-     
+        estadoJuego = EstadosJuego.Estado.COMBATE;
+        //EstadosJuego.activarEstado(EstadosJuego.Estado.COMBATE);
+
         //ToDo:hago la animación que tenga que hacer
         //pongo la musica
+        interfaz.detalleAnimator.SetBool("mostrar", true);
         playerModel.SetActive(false); //desactivo a mi avatar
         combateManager.enabled = true;
         combateManager.Combate(LevelManager.salaActiva.GetComponent<Sala>());
     }
+
+    //INTERFAZ
+    public void MostrarTexto(string texto)
+	{
+        interfaz.MostrarTexto(texto);
+	}
 }

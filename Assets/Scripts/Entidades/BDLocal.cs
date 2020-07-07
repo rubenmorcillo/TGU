@@ -40,14 +40,11 @@ public class BDLocal
 		
 	}
 
-	//CHAPUZAAA -> la string de las peticiones debería guardarla en algún sitio
 	void CargarUnidades()
 	{
 		//llamar a la BD para consultar todas las unidades
 		GameManager.instance.serverManager.ObtenerUnidades();
 	}
-
-
 
 	void CargarHabilidades()
 	{

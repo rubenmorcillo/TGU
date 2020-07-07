@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class TacticsMove : MonoBehaviour 
@@ -13,7 +11,7 @@ public class TacticsMove : MonoBehaviour
     Stack<Tile> path = new Stack<Tile>();
     Tile currentTile;
 
-    DatosUnidad datosUnidad;
+    public DatosUnidad datosUnidad;
 
     public bool moving = false;
     //public int move = 5;
@@ -52,7 +50,6 @@ public class TacticsMove : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
 
         TurnManager.AddUnit(this);
-
        
     }
 

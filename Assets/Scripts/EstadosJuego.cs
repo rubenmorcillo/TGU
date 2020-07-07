@@ -3,7 +3,7 @@
     private static bool iniciado;
     private static bool menuActivo;
 
-    public enum Estado {COMBATE , EXPLORAR, TIENDA , MENU};
+    public enum Estado {INICIO, BASE, COMBATE , EXPLORAR, TIENDA , MENU};
     
 
     private static Estado estadoActual;

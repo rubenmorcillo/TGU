@@ -42,7 +42,7 @@ public class LogicaJugadorMouse : MonoBehaviour
             cam = Camera.main;
 		}
        
-        if (EstadosJuego.EstadoActual() == EstadosJuego.Estado.EXPLORAR)
+        if (GameManager.instance.estadoJuego == EstadosJuego.Estado.EXPLORAR)
         {
           
             CheckPuerta();
@@ -67,7 +67,7 @@ public class LogicaJugadorMouse : MonoBehaviour
 
     void CheckMousse()
     {
-        if(EstadosJuego.EstadoActual() == EstadosJuego.Estado.EXPLORAR)
+        if(GameManager.instance.estadoJuego == EstadosJuego.Estado.EXPLORAR)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -125,10 +125,12 @@ public class LogicaJugadorMouse : MonoBehaviour
             if (hit.collider.tag == "Puerta")
             {
                 //tmp.SetText("pulsa espacio para abrir");
+                GameManager.instance.MostrarTexto("pulsa espacio para abrir puerta");
                // Debug.Log("pulsa espacio para continuar");
                 if (Input.GetKey(KeyCode.Space))
                 {
                     //Debug.Log("Estoy abriendo la puerta " + hit.collider.GetComponentInParent<Puerta>());
+                    GameManager.instance.MostrarTexto("");
                     Puerta puerta = hit.collider.GetComponentInParent<Puerta>();
                     puerta.GetComponentInChildren<Animator>().SetBool("open", true);
                     gameManager.abrirPuerta(puerta);
