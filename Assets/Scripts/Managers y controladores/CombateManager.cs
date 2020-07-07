@@ -13,6 +13,9 @@ public class CombateManager : MonoBehaviour
 
     [SerializeField]
     DatosUnidad unidadActiva;
+
+    [SerializeField]
+    List<DatosUnidad> enemigos;
    
     GameObject unidadSeleccionada;
    
@@ -91,27 +94,34 @@ public class CombateManager : MonoBehaviour
 
     private void crearEnemigos(Sala sala)
     {
-        System.Random rnd = new System.Random();
         List<Tile> posicionesDisponibles = sala.PuntosInicioEnemigo();
         if (posicionesDisponibles.Count > 0)
         {
             int numeroEnemigos = 0;
             while (numeroEnemigos == 0)
             {
-                numeroEnemigos = rnd.Next(posicionesDisponibles.Count);
+                numeroEnemigos = Random.Range(0, posicionesDisponibles.Count);
             }
             Debug.Log("creando " + numeroEnemigos + " enemigos ");
 
-            foreach (GameObject enemigo in sala.dameEnemigos(numeroEnemigos))
+            foreach (DatosUnidad enemigo in sala.dameEnemigos(numeroEnemigos))
             {
-               
-                Tile disponible = posicionesDisponibles[0];
+                Tile disponible = posicionesDisponibles[Random.Range(0, posicionesDisponibles.Count()-1)];
                 posicionesDisponibles.Remove(disponible);
-                GameObject nuevoEnemigo = crearUnidad(enemigo, disponible);
+                GameObject modeloEnemigo = recuperarModeloUnidad(enemigo);
+                GameObject nuevoEnemigo = crearUnidad(modeloEnemigo, disponible);
                 //CHAPUZAAA
+                Debug.Log(nuevoEnemigo);
                 //FALSEANDO DATOS ENEMIGOS
-                nuevoEnemigo.GetComponent<NPCMove>().setDatos(new DatosUnidad(0, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "enemigo1", 5,20));
-                Debug.Log(enemigo.GetComponent<NPCMove>());
+                if (nuevoEnemigo.GetComponent<NPCMove>() == null)
+				{
+                    nuevoEnemigo.AddComponent<NPCMove>();
+
+                }
+                nuevoEnemigo.GetComponent<NPCMove>().setDatos(enemigo);
+                nuevoEnemigo.tag = "NPC";
+               // nuevoEnemigo.GetComponent<PlayerMove>().enabled = false;
+                Debug.Log(nuevoEnemigo.GetComponent<NPCMove>().datosUnidad.ToString());
 
             }
         }
@@ -133,25 +143,29 @@ public class CombateManager : MonoBehaviour
 
     }
 
+    GameObject recuperarModeloUnidad(DatosUnidad unidad)
+	{
+        GameObject modeloUnidad = (GameObject)Resources.Load("Unidades/" + unidad.tipo.nombre);
+        if (modeloUnidad == null)
+		{
+            modeloUnidad = (GameObject)Resources.Load("Unidades/" + modeloUnidadDefault);
+
+        }
+        return modeloUnidad;
+	}
+
     private void seleccionarUnidadActiva()
 	{
         unidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
         if (unidadActiva != null)
         {
-            GameObject modelo = (GameObject)Resources.Load("Unidades/" + unidadActiva.tipo.nombre);
-            if (modelo == null)
-            {
-                Debug.Log("no hay modelo para " + unidadActiva.tipo.nombre + " ... cargando modelo por defecto");
-                modelo = (GameObject)Resources.Load("Unidades/" + modeloUnidadDefault);
-            }
+            unidadSeleccionada = recuperarModeloUnidad(unidadActiva);
             
-            unidadSeleccionada = modelo;
             //CHAPUZAA -> quizá sea el manager el q deba fijar la unidad activa
             gameManager.interfaz.UnidadActiva = unidadActiva;
 
             if (unidadSeleccionada != null)
 			{
-                //Debug.Log("CM: cambiando a fase: " + FaseCombate.COLOCANDO.ToString());
                 fase = FaseCombate.COLOCANDO;
             }
 
@@ -168,7 +182,6 @@ public class CombateManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        //LayerMask layerMaskUI = LayerMask.GetMask("UI");
         //DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).ElementAt(3);
         //DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).First();
         if (unidadSeleccionada != null)
@@ -184,10 +197,10 @@ public class CombateManager : MonoBehaviour
                         c.target = true;
                         if (Input.GetMouseButton(0))
                         {
-                            GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
-                            //CHAPUZAAA testeo
-                            nuevaUnidad.GetComponent<PlayerMove>().setDatos(gameManager.DatosPlayer.EquipoUnidades[0]); //TEMPORAL
                             Debug.Log("Colocando el modelo " + unidadSeleccionada + " en " + c);
+                            GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
+                            PlayerMove unidadPlayerMove = nuevaUnidad.AddComponent<PlayerMove>();
+                            unidadPlayerMove.setDatos(unidadActiva);
                             gameManager.DatosPlayer.EquipoUnidades[0].isPlaced = true;
                             unidadSeleccionada = null;
                         }
@@ -199,6 +212,7 @@ public class CombateManager : MonoBehaviour
     }
     public GameObject crearUnidad(GameObject modeloUnidad, Tile casilla)
     {
+        //CHAPUZAAA -> el new Vector es para encajar el modelo NPC, pero me jode otros...
        return  Instantiate(modeloUnidad, casilla.transform.position + new Vector3(0,0.9f,0), Quaternion.identity);
     }
     

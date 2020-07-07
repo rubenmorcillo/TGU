@@ -116,7 +116,7 @@ public class InterfazController : MonoBehaviour
 
             imgUnidades[i].sprite = img;
             imgUnidades[i].gameObject.GetComponent<ImagenUnidad>().Unidad = datosPlayer.EquipoUnidades[i];
-            //aqui debería incorporar el comportamiento onMouseOver
+            //aqui debería incorporar el comportamiento onMouseOver -> de momento he tenido q crear la clase imagenUnidad
 
         }
     }

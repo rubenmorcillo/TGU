@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Dynamic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,20 +12,21 @@ public class Sala : MonoBehaviour
     NavMeshSurface navSur;
     NavMeshSurface[] navMeshSuelo;
 
-    [SerializeField]
-    List<GameObject> posiblesEnemigos;
+    Collection<int> posiblesEnemigosIds = new Collection<int>();
+	List<DatosUnidad> datosEnemigos = new List<DatosUnidad>();
 
-    public int anchoInicio;
-    
+	[SerializeField]
+    List<GameObject> posiblesEnemigos = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log(name +": iniciandome... ");
         navSur = GetComponent<NavMeshSurface>();
+        GenerarEnemigos();
        // navMeshSuelo = GetComponentsInChildren<NavMeshSurface>();
-        //updateNavMesh();
-        
-        
+       //updateNavMesh();
+
+
     }
 
     public void updateNavMesh()
@@ -84,15 +87,31 @@ public class Sala : MonoBehaviour
     }
 
 
+    void GenerarEnemigos()
+	{
+		//CHAPUZAAAA -> falseo los IDS de los posibles enemigos
+		posiblesEnemigosIds.Add(1);
+		posiblesEnemigosIds.Add(2); //probar con un ID q no exista
 
 
-    public List<GameObject> dameEnemigos(int n)
+		for (int i = 0; i < posiblesEnemigosIds.Count; i++)
+		{
+			//CHAPUZAAA -> el id debería ser un ID local, pero entonces tb debo cambiarlo en las unidades aliadas
+			DatosUnidad uni = new DatosUnidad(999, GameManager.instance.BDlocal.TiposUnidad[posiblesEnemigosIds[i]], "enemigo" + i, 3, 100);
+			datosEnemigos.Add(uni);
+		}
+
+	}
+
+
+    public List<DatosUnidad> dameEnemigos(int n)
     {
-        List<GameObject> enemigos = new List<GameObject>();
+        List<DatosUnidad> enemigos = new List<DatosUnidad>();
         System.Random rnd = new System.Random();
         for (int i = 0; i<n; i++)
         {
-            enemigos.Add(posiblesEnemigos[rnd.Next(posiblesEnemigos.Count)]);
+           // enemigos.Add(posiblesEnemigos[rnd.Next(posiblesEnemigos.Count)]);
+            enemigos.Add(datosEnemigos[Random.Range(0, datosEnemigos.Count - 1 )]);
         }
 
         return enemigos;
