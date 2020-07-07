@@ -32,6 +32,7 @@ public class CombateManager : MonoBehaviour
         }
         gameManager = GameManager.instance;
     }
+
     void Start()
     {
         Debug.Log("CM: start....");
@@ -150,8 +151,8 @@ public class CombateManager : MonoBehaviour
 
     private void seleccionarUnidadActiva()
 	{
-        unidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
-        if (unidadActiva != null)
+		unidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
+		if (unidadActiva != null)
         {
             unidadSeleccionada = recuperarModeloUnidad(unidadActiva);
             gameManager.interfaz.UnidadActiva = unidadActiva;
@@ -160,7 +161,6 @@ public class CombateManager : MonoBehaviour
 			{
                 fase = FaseCombate.COLOCANDO;
             }
-
         }
         else
         {

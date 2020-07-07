@@ -9,7 +9,7 @@ public class InterfazController : MonoBehaviour
     public Image[] imgUnidades = new Image[5];
 
     public Text textRep, textDinero, textNickname;
-    public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp;
+    public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre;
 
     public Image imgUnidadDetalle;
 
@@ -56,6 +56,7 @@ public class InterfazController : MonoBehaviour
         
         //unidad
         imgUnidadDetalle = GameObject.Find("imgUnidadDetalle").GetComponent<Image>();
+        txtUnidadNombre = GameObject.Find("txtUnidadNombre").GetComponent<Text>();
         txtUnidadHp = GameObject.Find("txtUnidadHp").GetComponent<Text>();
         txtHab1 = GameObject.Find("txtHab1").GetComponent<Text>();
         txtHab2 = GameObject.Find("txtHab2").GetComponent<Text>();
@@ -139,6 +140,13 @@ public class InterfazController : MonoBehaviour
         //Debug.Log("IC: mostrar detalles de "+unidadActiva.ToString());
         imgUnidadDetalle.sprite = Resources.Load<Sprite>("Kaos/" + unidadActiva.tipo.nombre);
         txtUnidadHp.text = "HP: " + unidadActiva.hpActual + " / " + unidadActiva.hpMax;
+
+        if (string.Compare(unidadActiva.alias, "") == 1)
+        {
+            txtUnidadNombre.text = "\'" + unidadActiva.alias + "\' ";
+        }
+        txtUnidadNombre.text += "[" + unidadActiva.tipo.nombre + "]";
+       
 
         if (unidadActiva.Hab1 != null)
 		{
