@@ -11,6 +11,8 @@ public class Habilidad
 
 	public int potencia;
 
+	public int esfuerzo;
+
 	public TipoHabilidad tipo;
 
 }
