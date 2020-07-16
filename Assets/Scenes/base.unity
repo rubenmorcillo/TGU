@@ -2421,6 +2421,7 @@ MonoBehaviour:
   imgUnidadDetalle: {fileID: 0}
   panelInfo: {fileID: 0}
   detalleAnimator: {fileID: 0}
+  datosPlayerAnimator: {fileID: 0}
 --- !u!1 &1140338668
 GameObject:
   m_ObjectHideFlags: 0

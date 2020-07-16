@@ -5,7 +5,6 @@ using UnityEngine;
 public class NPCMove : TacticsMove 
 {
     GameObject target;
-    
 
 	// Use this for initialization
 	void Start () 
@@ -16,25 +15,30 @@ public class NPCMove : TacticsMove
 	// Update is called once per frame
 	void Update () 
 	{
-        Debug.DrawRay(transform.position, transform.forward);
-        if (!turn)
-        {
-            return;
-        }
+        if (datosUnidad.estoyVivo){
+            //dibujar mi vida
+            Debug.DrawRay(transform.position, transform.forward);
+            if (!turn)
+            {
+                return;
+            }
 
-        if (!moving)
-        {
-            animator.Play("Idle");
-            FindNearestTarget();
-            CalculatePath();
-            FindSelectableTiles();
-            actualTargetTile.target = true;
+            if (!moving)
+            {
+                animator.Play("Idle");
+                FindNearestTarget();
+                CalculatePath();
+                FindSelectableTiles();
+                actualTargetTile.target = true;
+            }
+            else
+            {
+                animator.SetBool("moving", true);
+                Move();
+            }
         }
-        else
-        {
-            animator.SetBool("moving", true);
-            Move();
-        }
+		
+        
 	}
 
     void CalculatePath()
@@ -63,4 +67,12 @@ public class NPCMove : TacticsMove
 
         target = nearest;
     }
+
+	private void OnGUI()
+	{
+        //guardamos la posición del enemigo con respecto a la cámara.
+        Vector2 pos = Camera.main.WorldToScreenPoint(transform.position);
+        int offset = 40;
+        GUI.Box(new Rect(pos.x - offset, Screen.height - (pos.y + offset), 80, 24), datosUnidad.hpActual + "/" + datosUnidad.hpMax);
+	}
 }
