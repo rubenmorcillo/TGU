@@ -100,7 +100,7 @@ public class Sala : MonoBehaviour
 		{
             //CHAPUZAAA -> el id debería ser un ID local, pero entonces tb debo cambiarlo en las unidades aliadas
             //-> en un futuro, según el nivel de dificultad....
-            DatosUnidad uni = new DatosUnidad(999, GameManager.instance.BDlocal.TiposUnidad.Where(tu => tu.id == posiblesEnemigosIds[i]).First(), "enemigo" + i, 3, 100);
+            DatosUnidad uni = new DatosUnidad(999, GameManager.instance.BDlocal.TiposUnidad.Where(tu => tu.id == posiblesEnemigosIds[i]).First(), "enemigo" + i, 3, 100, Random.Range(1,2));
 			datosEnemigos.Add(uni);
 		}
 
@@ -110,7 +110,6 @@ public class Sala : MonoBehaviour
     public List<DatosUnidad> dameEnemigos(int n)
     {
         List<DatosUnidad> enemigos = new List<DatosUnidad>();
-        System.Random rnd = new System.Random();
         for (int i = 0; i<n; i++)
         {
             enemigos.Add(datosEnemigos[Random.Range(0, datosEnemigos.Count )]);

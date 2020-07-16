@@ -55,9 +55,10 @@ public class TurnManager
     public static void AddUnit(TacticsMove unit)
     {
         List<TacticsMove> list;
-
+        Debug.Log("el tag es: "+ unit.tag);
         if (!units.ContainsKey(unit.tag))
         {
+            
             list = new List<TacticsMove>();
             units[unit.tag] = list;
 

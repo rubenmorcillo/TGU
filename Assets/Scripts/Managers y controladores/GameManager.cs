@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
             datosPlayerTest.dinero = 150;
             datosPlayerTest.reputacion = 99;
             datosPlayerTest.nickname = "nicknameTest";
-            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100));
+            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100, 9));
             datosPlayer = datosPlayerTest;
             //datosPlayer = gameObject.AddComponent<DatosPlayer>();
         }
