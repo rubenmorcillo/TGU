@@ -9,7 +9,7 @@ public class CombateManager : MonoBehaviour
     
     GameManager gameManager;
     [SerializeField]
-    TurnManager turnManager;
+    MiTurnManager turnManager;
 
     [SerializeField]
     DatosUnidad unidadActiva;
@@ -28,7 +28,7 @@ public class CombateManager : MonoBehaviour
         Debug.Log("CM: Awake...");
         if (turnManager == null)
 		{
-            turnManager = new TurnManager();
+            turnManager = new MiTurnManager();
         }
         gameManager = GameManager.instance;
     }

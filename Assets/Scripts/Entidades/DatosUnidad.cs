@@ -11,7 +11,7 @@ public class DatosUnidad
     {
         
     }
-	public DatosUnidad(int id, TipoUnidad tipo, string name, int rangoMovimiento, int hp)
+	public DatosUnidad(int id, TipoUnidad tipo, string name, int rangoMovimiento, int hp, int iniciativa)
 	{
 		this.id = id;
 		this.tipo = tipo;
@@ -22,6 +22,7 @@ public class DatosUnidad
 		modelPrefabName = tipo.nombre;
 		exp = 0;
 		nivel = 1;
+		this.iniciativa = iniciativa;
 	}
 
 	public int id;

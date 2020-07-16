@@ -49,7 +49,7 @@ public class TacticsMove : MonoBehaviour
 
         animator = GetComponentInChildren<Animator>();
 
-        TurnManager.AddUnit(this);
+        MiTurnManager.AddUnit(this);
        
     }
 
@@ -170,7 +170,7 @@ public class TacticsMove : MonoBehaviour
             RemoveSelectableTiles();
             moving = false;
 
-            TurnManager.EndTurn();
+            MiTurnManager.EndTurn();
         }
     }
 
