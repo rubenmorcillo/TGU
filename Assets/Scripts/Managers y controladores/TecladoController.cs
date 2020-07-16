@@ -40,5 +40,9 @@ public class TecladoController : MonoBehaviour
         {
             GameManager.instance.interfaz.detalleAnimator.SetBool("mostrar", !GameManager.instance.interfaz.detalleAnimator.GetBool("mostrar"));
         }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            GameManager.instance.interfaz.datosPlayerAnimator.SetBool("mostrar", !GameManager.instance.interfaz.datosPlayerAnimator.GetBool("mostrar"));
+        }
     }
 }

@@ -113,8 +113,6 @@ public class DatosUnidad
 		}
 	}
 
-
-
 	public override string ToString()
 	{
 

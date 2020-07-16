@@ -16,6 +16,7 @@ public class InterfazController : MonoBehaviour
     public GameObject panelInfo;
 
     public Animator detalleAnimator;
+    public Animator datosPlayerAnimator;
    // public bool detalleUnidadActivo = false;
     DatosPlayer datosPlayer;
     DatosUnidad unidadActiva;
@@ -68,6 +69,7 @@ public class InterfazController : MonoBehaviour
 
         //anims
         detalleAnimator = GameObject.Find("MenuDetalle").GetComponent<Animator>();
+        datosPlayerAnimator = GameObject.Find("datosPlayer").GetComponent<Animator>();
         GameManager.instance.interfaz = this;
     }
 
@@ -125,15 +127,15 @@ public class InterfazController : MonoBehaviour
 	{
         panelInfo.GetComponentInChildren<Text>().text = texto;
 	}
-    public void Mostrar()
-	{
-        detalleAnimator.SetBool("mostrar", true);
-	}
+ //   public void Mostrar()
+	//{
+ //       detalleAnimator.SetBool("mostrar", true);
+	//}
 
-    public void Ocultar()
-	{
-        detalleAnimator.SetBool("mostrar", false);
-    }
+ //   public void Ocultar()
+	//{
+ //       detalleAnimator.SetBool("mostrar", false);
+ //   }
 
     private void MostrarDetallesUnidad()
     {

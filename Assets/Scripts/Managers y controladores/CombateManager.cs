@@ -69,15 +69,18 @@ public class CombateManager : MonoBehaviour
                 }
             }
 
-        } else if (fase == FaseCombate.INICIO_COMBATE)
+        } 
+        else if (fase == FaseCombate.INICIO_COMBATE)
         {
             //desactivamos puerta porque el collider nos jode las casillas
             LevelManager.DesactivarPuerta(LevelManager.salaActiva.GetComponentInChildren<Puerta>());
 
             fase = FaseCombate.COMBATE;
-        } else if (fase == FaseCombate.COMBATE)
+        } 
+        else if (fase == FaseCombate.COMBATE)
         {
             turnManager.Update();
+            //mostrar datos enemigos
 
             //ToDo: decidir las condiciones para que acabe el combate
             //if (se cumplen las condiciones){
