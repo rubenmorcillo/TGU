@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviour
         playerModel.SetActive(false); //desactivo a mi avatar
         combateManager.enabled = true;
         combateManager.Combate(LevelManager.salaActiva.GetComponent<Sala>());
+        interfaz.datosPlayerAnimator.SetBool("mostrar", false);
     }
 
     //INTERFAZ
