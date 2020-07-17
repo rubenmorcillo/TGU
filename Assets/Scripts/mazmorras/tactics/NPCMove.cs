@@ -37,6 +37,10 @@ public class NPCMove : TacticsMove
                 Move();
             }
         }
+		else
+		{
+            Destroy(gameObject);
+		}
 		
         
 	}

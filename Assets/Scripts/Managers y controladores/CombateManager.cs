@@ -50,7 +50,12 @@ public class CombateManager : MonoBehaviour
         if (fase == FaseCombate.INICIO)
 		{
             seleccionarUnidadActiva();
-		}
+
+            if (unidadSeleccionada != null)
+            {
+                fase = FaseCombate.COLOCANDO;
+            }
+        }
         else if (fase == FaseCombate.COLOCANDO)
         {
             LevelManager.salaActiva.GetComponent<Sala>().encontrarCasillasDisponibles();
@@ -90,7 +95,8 @@ public class CombateManager : MonoBehaviour
         }
         else if (fase == FaseCombate.FIN_COMBATE)
         {
-        
+            //hacer cosas naziss -> habrá q resetear cosas supongo
+            fase = FaseCombate.PAUSA;
         }
 
     }
@@ -159,11 +165,7 @@ public class CombateManager : MonoBehaviour
         {
             unidadSeleccionada = recuperarModeloUnidad(unidadActiva);
             gameManager.interfaz.UnidadActiva = unidadActiva;
-
-            if (unidadSeleccionada != null)
-			{
-                fase = FaseCombate.COLOCANDO;
-            }
+           
         }
         else
         {
@@ -177,8 +179,6 @@ public class CombateManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        //DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).ElementAt(3);
-        //DatosUnidad unidadesDisponibles = gameManager.DatosPlayer.EquipoUnidades.Where(datos => datos.estoyVivo).First();
         if (unidadSeleccionada != null)
         {
             gameManager.interfaz.MostrarTexto("Posiciona a tu unidad en una casilla libre");

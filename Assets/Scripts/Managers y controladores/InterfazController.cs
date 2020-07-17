@@ -86,7 +86,6 @@ public class InterfazController : MonoBehaviour
 					{
                         MostrarColaTurnos(MiTurnManager.unidadesTurno);
                     }
-                   
                 }
                 else
                 {
