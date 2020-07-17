@@ -6,7 +6,7 @@ using UnityEngine;
 public class MiTurnManager
 {
     static List<TacticsMove> unidadesCombate = new List<TacticsMove>();
-    static Queue<TacticsMove> unidadesTurno = new Queue<TacticsMove>();
+    public static Queue<TacticsMove> unidadesTurno = new Queue<TacticsMove>();
 
 
     public void Update()
@@ -16,6 +16,7 @@ public class MiTurnManager
             IniciarColaTurnos();
         }
     }
+
 
     public static void AddUnit(TacticsMove unidad)
 	{
@@ -30,7 +31,7 @@ public class MiTurnManager
 		{
             unidadesTurno.Enqueue(orderedEnumerables.ElementAt(i));
 		}
-		
+
         StartTurn();
     }
 

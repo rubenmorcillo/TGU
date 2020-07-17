@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.ProBuilder;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
-
 
 public class InterfazController : MonoBehaviour
 {
@@ -11,13 +11,15 @@ public class InterfazController : MonoBehaviour
     public Text textRep, textDinero, textNickname;
     public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre;
 
+    public GameObject panelTurnos;
+
     public Image imgUnidadDetalle;
 
     public GameObject panelInfo;
 
     public Animator detalleAnimator;
     public Animator datosPlayerAnimator;
-   // public bool detalleUnidadActivo = false;
+
     DatosPlayer datosPlayer;
     DatosUnidad unidadActiva;
     public DatosUnidad UnidadActiva
@@ -32,19 +34,9 @@ public class InterfazController : MonoBehaviour
         }
     }
 
-    //public static InterfazController instance;
 	private void Awake()
 	{
-		//	if (instance == null)
-		//	{
-		//		instance = this;
-		//	}
-		//	else if (instance != this)
-		//	{
-		//		Destroy(gameObject);
-		//	}
 		DontDestroyOnLoad(this);
-
 	}
 
 	void Start()
@@ -71,6 +63,11 @@ public class InterfazController : MonoBehaviour
         detalleAnimator = GameObject.Find("MenuDetalle").GetComponent<Animator>();
         datosPlayerAnimator = GameObject.Find("datosPlayer").GetComponent<Animator>();
         GameManager.instance.interfaz = this;
+
+        //panel turnos
+        panelTurnos = GameObject.Find("panelTurnos");
+        panelTurnos.SetActive(false);
+        
     }
 
    
@@ -85,6 +82,10 @@ public class InterfazController : MonoBehaviour
                 if (unidadActiva != null)
                 {
                     MostrarDetallesUnidad();
+                    if (GameManager.instance.combateManager.fase == CombateManager.FaseCombate.COMBATE)
+					{
+                        MostrarColaTurnos(MiTurnManager.unidadesTurno);
+                    }
                 }
                 else
                 {
@@ -127,15 +128,7 @@ public class InterfazController : MonoBehaviour
 	{
         panelInfo.GetComponentInChildren<Text>().text = texto;
 	}
- //   public void Mostrar()
-	//{
- //       detalleAnimator.SetBool("mostrar", true);
-	//}
 
- //   public void Ocultar()
-	//{
- //       detalleAnimator.SetBool("mostrar", false);
- //   }
 
     private void MostrarDetallesUnidad()
     {
@@ -187,4 +180,28 @@ public class InterfazController : MonoBehaviour
         }
         
     }
+
+    public void MostrarColaTurnos(Queue<TacticsMove> colaTurnos)
+	{
+        panelTurnos.SetActive(true);
+        List<Image> imagenesTurnos = panelTurnos.GetComponentsInChildren<Image>().ToList();
+        imagenesTurnos.RemoveAt(0);
+        Queue<DatosUnidad> unidadesTurnos = new Queue<DatosUnidad>();
+
+        foreach (Image img in imagenesTurnos)
+		{
+            if (unidadesTurnos.Count() <= 0)
+			{
+                foreach (TacticsMove tm in colaTurnos)
+				{
+                    unidadesTurnos.Enqueue(tm.datosUnidad);
+				}
+			}
+            DatosUnidad unidadActual = unidadesTurnos.Dequeue();
+            img.sprite = Resources.Load<Sprite>("Kaos/" + unidadActual.tipo.nombre);
+            ImagenUnidad iu = img.gameObject.AddComponent<ImagenUnidad>();
+            iu.Unidad = unidadActual;
+
+        }
+	}
 }
