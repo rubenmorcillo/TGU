@@ -35,8 +35,8 @@ public class Login : MonoBehaviour
             {
                 Debug.Log("LOGIN: No he podido llamar al servidor");
 
-                System.Threading.Thread.Sleep(3000); //esperamos X segundos antes de volver a llamar 
-                validarLogin(); //por qué esta mierda no vuelve a llamar cuando falla????? 
+                //System.Threading.Thread.Sleep(3000); //No se puede usar esto para esperar porque bloquea el programa
+                validarLogin();
             }
             else
             {
