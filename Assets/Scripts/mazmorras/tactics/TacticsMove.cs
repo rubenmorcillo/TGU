@@ -8,7 +8,7 @@ public class TacticsMove : MonoBehaviour
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
-    Stack<Tile> path = new Stack<Tile>();
+    protected Stack<Tile> path = new Stack<Tile>();
     Tile currentTile;
 
     public DatosUnidad datosUnidad;
@@ -129,10 +129,10 @@ public class TacticsMove : MonoBehaviour
             next = next.parent;
 
             //CHAPUZAAAAA -> además le resta 1 punto más de la cuenta....no influye porque los enemigos mueven del tirón, pero vamos...que es una fucking chapuza
-            if (this.CompareTag("NPC"))
-			{
-                datosUnidad.SubstractMovementPoints(1);
-            }
+   //         if (this.CompareTag("NPC"))
+			//{
+   //             datosUnidad.SubstractMovementPoints(1);
+   //         }
 
         }
     }

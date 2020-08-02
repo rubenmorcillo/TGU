@@ -1,11 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 public class NPCMove : TacticsMove 
 {
     GameObject target;
+    bool movementPayed = false;
 
 	// Use this for initialization
 	void Start () 
@@ -36,6 +39,11 @@ public class NPCMove : TacticsMove
             {
                 
                 animator.SetBool("moving", true);
+                if (!movementPayed)
+				{
+                    datosUnidad.SubstractMovementPoints(path.Count - 1);
+                    movementPayed = true;
+				}
                 Move();
             }
         }
@@ -49,6 +57,7 @@ public class NPCMove : TacticsMove
 
     void CalculatePath()
     {
+        movementPayed = false;
         Tile targetTile = GetTargetTile(target);
         FindPath(targetTile);
     }
