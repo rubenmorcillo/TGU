@@ -65,8 +65,8 @@ public class InterfazController : MonoBehaviour
         GameManager.instance.interfaz = this;
 
         //panel turnos
-        panelTurnos = GameObject.Find("panelTurnos");
-        panelTurnos.SetActive(false);
+        //panelTurnos = GameObject.Find("panelTurnos");
+        //panelTurnos.SetActive(false);
         
     }
 

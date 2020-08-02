@@ -26,11 +26,11 @@ public class NPCMove : TacticsMove
             if (!moving)
             {
                 animator.Play("Idle");
-                FindNearestTarget();
-                CalculatePath();
-                FindSelectableTiles();
-                actualTargetTile.target = true;
-            }
+				FindNearestTarget();
+				CalculatePath();
+				FindSelectableTiles();
+				actualTargetTile.target = true;
+			}
             else
             {
                 animator.SetBool("moving", true);
