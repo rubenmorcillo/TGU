@@ -1,24 +1,23 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 
 
 [Serializable]
 public class DatosUnidad
 {
+	public DatosUnidad()
+	{
 
-    
-    public DatosUnidad()
-    {
-        
-    }
-	public DatosUnidad(int id, TipoUnidad tipo, string name, int rangoMovimiento, int hp, int iniciativa)
+	}
+	public DatosUnidad(int id, TipoUnidad tipo, string name, int puntosMovimientoTotal, int hp, int iniciativa)
 	{
 		this.id = id;
 		this.tipo = tipo;
 		alias = name;
 		hpMax = hp;
 		hpActual = hpMax;
-		this.rangoMovimiento = rangoMovimiento;
+		this.puntosMovimientoTotal = puntosMovimientoTotal;
 		modelPrefabName = tipo.nombre;
 		exp = 0;
 		nivel = 1;
@@ -47,7 +46,13 @@ public class DatosUnidad
 
     public int defensaLejos;
 
-    public int rangoMovimiento = 3;
+    public int puntosMovimientoTotal = 3;
+
+	public int puntosMovimientoActual;
+
+	public int puntosEsfuerzoTotal = 0;
+
+	public int puntosEsfuerzoActual;
 
     public int hab1 = 1, hab2, hab3, hab4;
 
@@ -112,6 +117,24 @@ public class DatosUnidad
 				return null;
 			}
 		}
+	}
+
+	public void RestorePoints()
+	{
+		puntosMovimientoActual = puntosMovimientoTotal;
+		puntosEsfuerzoActual = puntosEsfuerzoTotal;
+	}
+
+	public void SubstractMovementPoints(int n)
+	{
+		UnityEngine.Debug.Log("restando " + n + " puntos de movimiento");
+		puntosMovimientoActual -= n;
+	}
+
+	public void SubstractEffortPoints(int n)
+	{
+		UnityEngine.Debug.Log("restando " + n + " puntos de esfuerzo");
+		puntosEsfuerzoActual -= n;
 	}
 
 	public override string ToString()

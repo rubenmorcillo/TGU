@@ -8,13 +8,12 @@ public class TacticsMove : MonoBehaviour
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
-    Stack<Tile> path = new Stack<Tile>();
+    protected Stack<Tile> path = new Stack<Tile>();
     Tile currentTile;
 
     public DatosUnidad datosUnidad;
 
     public bool moving = false;
-    //public int move = 5;
     public float jumpHeight = 2;
     public float moveSpeed = 2;
     public float jumpVelocity = 4.5f;
@@ -100,7 +99,7 @@ public class TacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if (t.distance < datosUnidad.rangoMovimiento)
+            if (t.distance < datosUnidad.puntosMovimientoActual)
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -123,6 +122,7 @@ public class TacticsMove : MonoBehaviour
         moving = true;
 
         Tile next = tile;
+      
         while (next != null)
         {
             path.Push(next);
@@ -169,8 +169,11 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-
-            MiTurnManager.EndTurn();
+            if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
+			{
+                MiTurnManager.EndTurn();
+            }
+           
         }
     }
 
@@ -323,13 +326,13 @@ public class TacticsMove : MonoBehaviour
             next = next.parent;
         }
 
-        if (tempPath.Count <= datosUnidad.rangoMovimiento)
+        if (tempPath.Count <= datosUnidad.puntosMovimientoActual)
         {
             return t.parent;
         }
 
         Tile endTile = null;
-        for (int i = 0; i <= datosUnidad.rangoMovimiento; i++)
+        for (int i = 0; i <= datosUnidad.puntosMovimientoActual; i++)
         {
             endTile = tempPath.Pop();
         }
@@ -392,7 +395,7 @@ public class TacticsMove : MonoBehaviour
                     openList.Add(tile);
                 }
             }
-        }
+        }        
 
         //no hay camino disponible...
         Debug.Log("No hay camino posible");
@@ -401,6 +404,7 @@ public class TacticsMove : MonoBehaviour
     public void BeginTurn()
     {
         Debug.Log("empieza mi turno:" + datosUnidad.ToString());
+        datosUnidad.RestorePoints();
         turn = true;
     }
 
@@ -409,4 +413,6 @@ public class TacticsMove : MonoBehaviour
         turn = false;
         animator.SetBool("moving", false);
     }
+
+    
 }

@@ -69,6 +69,7 @@ public class PlayerMove : TacticsMove
 
                     if (t.selectable)
                     {
+                        datosUnidad.SubstractMovementPoints(t.distance);
                         MoveToTile(t);
                     }
                 }
