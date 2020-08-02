@@ -1,16 +1,15 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 
 
 [Serializable]
 public class DatosUnidad
 {
+	public DatosUnidad()
+	{
 
-    
-    public DatosUnidad()
-    {
-        
-    }
+	}
 	public DatosUnidad(int id, TipoUnidad tipo, string name, int puntosMovimientoTotal, int hp, int iniciativa)
 	{
 		this.id = id;
@@ -51,7 +50,7 @@ public class DatosUnidad
 
 	public int puntosMovimientoActual;
 
-	public int puntosEsfuerzoTotal = 3;
+	public int puntosEsfuerzoTotal = 0;
 
 	public int puntosEsfuerzoActual;
 
@@ -128,11 +127,13 @@ public class DatosUnidad
 
 	public void SubstractMovementPoints(int n)
 	{
+		UnityEngine.Debug.Log("restando " + n + " puntos de movimiento");
 		puntosMovimientoActual -= n;
 	}
 
 	public void SubstractEffortPoints(int n)
 	{
+		UnityEngine.Debug.Log("restando " + n + " puntos de esfuerzo");
 		puntosEsfuerzoActual -= n;
 	}
 

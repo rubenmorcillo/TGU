@@ -99,7 +99,7 @@ public class TacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if (t.distance < datosUnidad.puntosEsfuerzoActual)
+            if (t.distance < datosUnidad.puntosMovimientoActual)
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -122,10 +122,18 @@ public class TacticsMove : MonoBehaviour
         moving = true;
 
         Tile next = tile;
+      
         while (next != null)
         {
             path.Push(next);
             next = next.parent;
+
+            //CHAPUZAAAAA -> además le resta 1 punto más de la cuenta....no influye porque los enemigos mueven del tirón, pero vamos...que es una fucking chapuza
+            if (this.CompareTag("NPC"))
+			{
+                datosUnidad.SubstractMovementPoints(1);
+            }
+
         }
     }
 
@@ -394,7 +402,7 @@ public class TacticsMove : MonoBehaviour
                     openList.Add(tile);
                 }
             }
-        }
+        }        
 
         //no hay camino disponible...
         Debug.Log("No hay camino posible");

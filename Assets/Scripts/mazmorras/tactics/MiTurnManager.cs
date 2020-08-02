@@ -30,7 +30,7 @@ public class MiTurnManager
 		IOrderedEnumerable<TacticsMove> orderedEnumerables = unidadesCombate.Where(u => u.datosUnidad.estoyVivo).OrderByDescending(u => u.datosUnidad.iniciativa);
         for (int i=0; i<orderedEnumerables.Count(); i++)
 		{
-            Debug.Log("TM: metiendo en cola a " + orderedEnumerables.ElementAt(i).datosUnidad.tipo.nombre);
+            Debug.Log("TM: metiendo en cola a " + orderedEnumerables.ElementAt(i).datosUnidad.tipo.nombre +" cuya iniciativa es -> "+orderedEnumerables.ElementAt(i).datosUnidad.iniciativa);
             unidadesTurno.Enqueue(orderedEnumerables.ElementAt(i));
 		}
 

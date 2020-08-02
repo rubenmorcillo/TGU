@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class NPCMove : TacticsMove 
@@ -33,6 +34,7 @@ public class NPCMove : TacticsMove
 			}
             else
             {
+                
                 animator.SetBool("moving", true);
                 Move();
             }
@@ -70,6 +72,7 @@ public class NPCMove : TacticsMove
         }
 
         target = nearest;
+        
     }
 
 	private void OnGUI()
