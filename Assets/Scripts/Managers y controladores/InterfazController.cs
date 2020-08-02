@@ -82,10 +82,10 @@ public class InterfazController : MonoBehaviour
                 if (unidadActiva != null)
                 {
                     MostrarDetallesUnidad();
-                    if (GameManager.instance.combateManager.fase == CombateManager.FaseCombate.COMBATE)
-					{
-                        MostrarColaTurnos(MiTurnManager.unidadesTurno);
-                    }
+     //               if (GameManager.instance.combateManager.fase == CombateManager.FaseCombate.COMBATE)
+					//{
+     //                   MostrarColaTurnos(MiTurnManager.unidadesCombate);
+     //               }
                 }
                 else
                 {
@@ -181,27 +181,28 @@ public class InterfazController : MonoBehaviour
         
     }
 
-    public void MostrarColaTurnos(Queue<TacticsMove> colaTurnos)
-	{
-        panelTurnos.SetActive(true);
-        List<Image> imagenesTurnos = panelTurnos.GetComponentsInChildren<Image>().ToList();
-        imagenesTurnos.RemoveAt(0);
-        Queue<DatosUnidad> unidadesTurnos = new Queue<DatosUnidad>();
+ //   public void MostrarColaTurnos(List<TacticsMove> colaTurnos)
+	//{
+        
+ //       panelTurnos.SetActive(true);
+ //       List<Image> imagenesTurnos = panelTurnos.GetComponentsInChildren<Image>().ToList();
+ //       imagenesTurnos.RemoveAt(0);
+ //       Queue<DatosUnidad> unidadesTurnos = new Queue<DatosUnidad>();
 
-        foreach (Image img in imagenesTurnos)
-		{
-            if (unidadesTurnos.Count() <= 0)
-			{
-                foreach (TacticsMove tm in colaTurnos)
-				{
-                    unidadesTurnos.Enqueue(tm.datosUnidad);
-				}
-			}
-            DatosUnidad unidadActual = unidadesTurnos.Dequeue();
-            img.sprite = Resources.Load<Sprite>("Kaos/" + unidadActual.tipo.nombre);
-            ImagenUnidad iu = img.gameObject.AddComponent<ImagenUnidad>();
-            iu.Unidad = unidadActual;
+ //       foreach (Image img in imagenesTurnos)
+	//	{
+ //           if (unidadesTurnos.Count() <= 0)
+	//		{
+ //               foreach (TacticsMove tm in colaTurnos.OrderByDescending(u => u.datosUnidad.iniciativa))
+	//			{
+ //                   unidadesTurnos.Enqueue(tm.datosUnidad);
+	//			}
+	//		}
+ //           DatosUnidad unidadActual = unidadesTurnos.Dequeue();
+ //           img.sprite = Resources.Load<Sprite>("Kaos/" + unidadActual.tipo.nombre);
+ //           ImagenUnidad iu = img.gameObject.AddComponent<ImagenUnidad>();
+ //           iu.Unidad = unidadActual;
 
-        }
-	}
+ //       }
+	//}
 }
