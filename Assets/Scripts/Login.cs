@@ -34,6 +34,9 @@ public class Login : MonoBehaviour
             if (request.isNetworkError || request.isHttpError)
             {
                 Debug.Log("LOGIN: No he podido llamar al servidor");
+
+                System.Threading.Thread.Sleep(3000); //esperamos X segundos antes de volver a llamar 
+                validarLogin(); //por qué esta mierda no vuelve a llamar cuando falla????? 
             }
             else
             {
@@ -65,7 +68,6 @@ public class Login : MonoBehaviour
                 catch (System.Exception e)
                 {
                     Debug.Log("ERROR CARGANDO DATOS DE USUARIO: " + e);
-                    //Debug.Log("...REINTENTANDO LOGIN...");
                     //validarLogin();
 
                 }

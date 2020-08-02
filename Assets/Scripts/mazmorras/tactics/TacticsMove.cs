@@ -127,13 +127,6 @@ public class TacticsMove : MonoBehaviour
         {
             path.Push(next);
             next = next.parent;
-
-            //CHAPUZAAAAA -> además le resta 1 punto más de la cuenta....no influye porque los enemigos mueven del tirón, pero vamos...que es una fucking chapuza
-   //         if (this.CompareTag("NPC"))
-			//{
-   //             datosUnidad.SubstractMovementPoints(1);
-   //         }
-
         }
     }
 
