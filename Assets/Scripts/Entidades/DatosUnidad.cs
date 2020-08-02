@@ -11,14 +11,14 @@ public class DatosUnidad
     {
         
     }
-	public DatosUnidad(int id, TipoUnidad tipo, string name, int rangoMovimiento, int hp, int iniciativa)
+	public DatosUnidad(int id, TipoUnidad tipo, string name, int puntosEsfuerzoTotal, int hp, int iniciativa)
 	{
 		this.id = id;
 		this.tipo = tipo;
 		alias = name;
 		hpMax = hp;
 		hpActual = hpMax;
-		this.rangoMovimiento = rangoMovimiento;
+		this.puntosEsfuerzoTotal = puntosEsfuerzoTotal;
 		modelPrefabName = tipo.nombre;
 		exp = 0;
 		nivel = 1;
@@ -47,7 +47,9 @@ public class DatosUnidad
 
     public int defensaLejos;
 
-    public int rangoMovimiento = 3;
+    public int puntosEsfuerzoTotal = 3;
+
+	public int puntosEsfuerzoActual;
 
     public int hab1 = 1, hab2, hab3, hab4;
 

@@ -100,7 +100,7 @@ public class TacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if (t.distance < datosUnidad.rangoMovimiento)
+            if (t.distance < datosUnidad.puntosEsfuerzoActual)
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -323,13 +323,13 @@ public class TacticsMove : MonoBehaviour
             next = next.parent;
         }
 
-        if (tempPath.Count <= datosUnidad.rangoMovimiento)
+        if (tempPath.Count <= datosUnidad.puntosEsfuerzoActual)
         {
             return t.parent;
         }
 
         Tile endTile = null;
-        for (int i = 0; i <= datosUnidad.rangoMovimiento; i++)
+        for (int i = 0; i <= datosUnidad.puntosEsfuerzoActual; i++)
         {
             endTile = tempPath.Pop();
         }
@@ -401,6 +401,7 @@ public class TacticsMove : MonoBehaviour
     public void BeginTurn()
     {
         Debug.Log("empieza mi turno:" + datosUnidad.ToString());
+        datosUnidad.puntosEsfuerzoActual = datosUnidad.puntosEsfuerzoTotal;
         turn = true;
     }
 
