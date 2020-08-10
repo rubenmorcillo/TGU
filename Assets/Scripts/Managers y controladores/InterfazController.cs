@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,20 +9,24 @@ public class InterfazController : MonoBehaviour
 
     public Image[] imgUnidades = new Image[5];
 
-    public Text textRep, textDinero, textNickname;
-    public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre, txtPA, txtPM;
+    Text textRep, textDinero, textNickname;
+    Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre, txtPA, txtPM;
 
-    public GameObject panelTurnos;
+    TMP_Text txtDetalle;
 
-    public Image imgUnidadDetalle;
+    GameObject panelTurnos;
 
-    public GameObject panelInfo;
+    Image imgUnidadDetalle;
+
+    GameObject panelInfo;
 
     public Animator detalleAnimator;
     public Animator datosPlayerAnimator;
 
     DatosPlayer datosPlayer;
     DatosUnidad datosUnidadActiva;
+
+    Habilidad habilidadActiva;
     public DatosUnidad DatosUnidadActiva
     {
         get
@@ -60,6 +65,7 @@ public class InterfazController : MonoBehaviour
 
         //info
         panelInfo = GameObject.Find("panelInfo");
+        txtDetalle = GameObject.Find("txtDetalle").GetComponent<TMP_Text>();
 
         //anims
         detalleAnimator = GameObject.Find("MenuDetalle").GetComponent<Animator>();
@@ -88,6 +94,12 @@ public class InterfazController : MonoBehaviour
 					//{
      //                   MostrarColaTurnos(MiTurnManager.unidadesCombate);
      //               }
+                    if (habilidadActiva != null)
+					{
+                        //CHAPUZAAAA
+                        //habría que poner la descripción, de momento no la tengo
+                        txtDetalle.text = habilidadActiva.ToString();
+					}
                 }
                 else
                 {
@@ -184,6 +196,13 @@ public class InterfazController : MonoBehaviour
         }
         
     }
+
+    public void ActivarHabilidad(Text nombre)
+	{
+
+        habilidadActiva = GameManager.instance.BDlocal.Habilidades.Where(h => h.nombre == nombre.text).First();
+        Debug.Log("activando " + nombre.text);
+	}
 
  //   public void MostrarColaTurnos(List<TacticsMove> colaTurnos)
 	//{

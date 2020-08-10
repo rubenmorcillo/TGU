@@ -91,7 +91,7 @@ public class ServerManager : MonoBehaviour
         else
         {
             //List<TipoUnidad> unidades = JsonUtility.FromJson<List<TipoUnidad>>(request.downloadHandler.text);
-            string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"habHardf_1\",\"potencia\":\"10\", \"tipo\":\"0\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"habHardE_2\",\"potencia\":\"20\", \"tipo\":\"1\", \"agilidad\":\"5\"}]}";
+            //string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"habHardf_1\",\"potencia\":\"10\", \"tipo\":\"0\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"habHardE_2\",\"potencia\":\"20\", \"tipo\":\"1\", \"agilidad\":\"5\"}]}";
 
             try
             {

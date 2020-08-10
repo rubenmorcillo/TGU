@@ -15,4 +15,11 @@ public class Habilidad
 
 	public TipoHabilidad tipo;
 
+	public string desc;
+
+	public override string ToString()
+	{
+		return nombre + "\n Tipo " + tipo.ToString() + "\n  Potencia: " + potencia + "\n  Coste: " + esfuerzo;
+	}
+
 }
