@@ -9,7 +9,7 @@ public class InterfazController : MonoBehaviour
     public Image[] imgUnidades = new Image[5];
 
     public Text textRep, textDinero, textNickname;
-    public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre;
+    public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre, txtPA, txtPM;
 
     public GameObject panelTurnos;
 
@@ -55,6 +55,8 @@ public class InterfazController : MonoBehaviour
         txtHab2 = GameObject.Find("txtHab2").GetComponent<Text>();
         txtHab3 = GameObject.Find("txtHab3").GetComponent<Text>();
         txtHab4 = GameObject.Find("txtHab4").GetComponent<Text>();
+        txtPA = GameObject.Find("txtPuntosEsfuerzo").GetComponent<Text>();
+        txtPM = GameObject.Find("txtPuntosMovimiento").GetComponent<Text>();
 
         //info
         panelInfo = GameObject.Find("panelInfo");
@@ -135,6 +137,8 @@ public class InterfazController : MonoBehaviour
         //Debug.Log("IC: mostrar detalles de "+unidadActiva.ToString());
         imgUnidadDetalle.sprite = Resources.Load<Sprite>("Kaos/" + unidadActiva.tipo.nombre);
         txtUnidadHp.text = "HP: " + unidadActiva.hpActual + " / " + unidadActiva.hpMax;
+        txtPM.text = "PM: " + unidadActiva.puntosMovimientoActual + " / " + unidadActiva.puntosMovimientoTotal;
+        txtPA.text = "PA: " + unidadActiva.puntosEsfuerzoActual + " / " + unidadActiva.puntosEsfuerzoTotal;
 
         if (string.Compare(unidadActiva.alias, "") == 1)
         {
