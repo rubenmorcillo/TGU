@@ -21,16 +21,16 @@ public class InterfazController : MonoBehaviour
     public Animator datosPlayerAnimator;
 
     DatosPlayer datosPlayer;
-    DatosUnidad unidadActiva;
-    public DatosUnidad UnidadActiva
+    DatosUnidad datosUnidadActiva;
+    public DatosUnidad DatosUnidadActiva
     {
         get
         {
-            return unidadActiva;
+            return datosUnidadActiva;
         }
         set
         {
-            unidadActiva = value;
+            datosUnidadActiva = value;
         }
     }
 
@@ -81,7 +81,7 @@ public class InterfazController : MonoBehaviour
         {
             if (GameManager.instance.estadoJuego == EstadosJuego.Estado.COMBATE)
             {
-                if (unidadActiva != null)
+                if (datosUnidadActiva != null)
                 {
                     MostrarDetallesUnidad();
      //               if (GameManager.instance.combateManager.fase == CombateManager.FaseCombate.COMBATE)
@@ -135,48 +135,48 @@ public class InterfazController : MonoBehaviour
     private void MostrarDetallesUnidad()
     {
         //Debug.Log("IC: mostrar detalles de "+unidadActiva.ToString());
-        imgUnidadDetalle.sprite = Resources.Load<Sprite>("Kaos/" + unidadActiva.tipo.nombre);
-        txtUnidadHp.text = "HP: " + unidadActiva.hpActual + " / " + unidadActiva.hpMax;
-        txtPM.text = "PM: " + unidadActiva.puntosMovimientoActual + " / " + unidadActiva.puntosMovimientoTotal;
-        txtPA.text = "PA: " + unidadActiva.puntosEsfuerzoActual + " / " + unidadActiva.puntosEsfuerzoTotal;
+        imgUnidadDetalle.sprite = Resources.Load<Sprite>("Kaos/" + datosUnidadActiva.tipo.nombre);
+        txtUnidadHp.text = "HP: " + datosUnidadActiva.hpActual + " / " + datosUnidadActiva.hpMax;
+        txtPM.text = "PM: " + datosUnidadActiva.puntosMovimientoActual + " / " + datosUnidadActiva.puntosMovimientoTotal;
+        txtPA.text = "PA: " + datosUnidadActiva.puntosEsfuerzoActual + " / " + datosUnidadActiva.puntosEsfuerzoTotal;
 
-        if (string.Compare(unidadActiva.alias, "") == 1)
+        if (string.Compare(datosUnidadActiva.alias, "") == 1)
         {
-            txtUnidadNombre.text = "\'" + unidadActiva.alias + "\' ";
+            txtUnidadNombre.text = "\'" + datosUnidadActiva.alias + "\' ";
         }
-        txtUnidadNombre.text += "[" + unidadActiva.tipo.nombre + "]";
+        txtUnidadNombre.text += "[" + datosUnidadActiva.tipo.nombre + "]";
        
 
-        if (unidadActiva.Hab1 != null)
+        if (datosUnidadActiva.Hab1 != null)
 		{
-            txtHab1.text = unidadActiva.Hab1.nombre;
+            txtHab1.text = datosUnidadActiva.Hab1.nombre;
         }
 		else
 		{
             txtHab1.text = "-";
         }
 
-        if (unidadActiva.Hab2 != null)
+        if (datosUnidadActiva.Hab2 != null)
         {
-            txtHab2.text = unidadActiva.Hab2.nombre;
+            txtHab2.text = datosUnidadActiva.Hab2.nombre;
         }
         else
         {
             txtHab2.text = "-";
         }
 
-        if (unidadActiva.Hab3 != null)
+        if (datosUnidadActiva.Hab3 != null)
         {
-            txtHab3.text = unidadActiva.Hab3.nombre;
+            txtHab3.text = datosUnidadActiva.Hab3.nombre;
         }
         else
         {
             txtHab3.text = "-";
         }
 
-        if (unidadActiva.Hab4 != null)
+        if (datosUnidadActiva.Hab4 != null)
         {
-            txtHab4.text = unidadActiva.Hab4.nombre;
+            txtHab4.text = datosUnidadActiva.Hab4.nombre;
         }
         else
         {

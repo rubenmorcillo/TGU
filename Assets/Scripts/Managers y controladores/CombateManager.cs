@@ -12,7 +12,10 @@ public class CombateManager : MonoBehaviour
     MiTurnManager turnManager;
 
     [SerializeField]
-    DatosUnidad unidadActiva;
+    public PlayerMove unidadActiva;
+    [SerializeField]
+    DatosUnidad datosUnidadActiva;
+   
 
     [SerializeField]
     List<DatosUnidad> enemigos;
@@ -160,11 +163,11 @@ public class CombateManager : MonoBehaviour
 
     private void seleccionarUnidadActiva()
 	{
-		unidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
-		if (unidadActiva != null)
+        datosUnidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
+		if (datosUnidadActiva != null)
         {
-            unidadSeleccionada = recuperarModeloUnidad(unidadActiva);
-            gameManager.interfaz.UnidadActiva = unidadActiva;
+            unidadSeleccionada = recuperarModeloUnidad(datosUnidadActiva);
+            gameManager.interfaz.DatosUnidadActiva = datosUnidadActiva;
            
         }
         else
@@ -194,8 +197,8 @@ public class CombateManager : MonoBehaviour
                         {
                             Debug.Log("Colocando el modelo " + unidadSeleccionada + " en " + c);
                             GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
-                            PlayerMove unidadPlayerMove = nuevaUnidad.AddComponent<PlayerMove>();
-                            unidadPlayerMove.setDatos(unidadActiva);
+                            unidadActiva = nuevaUnidad.AddComponent<PlayerMove>();
+                            unidadActiva.setDatos(datosUnidadActiva);
                             gameManager.DatosPlayer.EquipoUnidades[0].isPlaced = true;
                             unidadSeleccionada = null;
                         }
