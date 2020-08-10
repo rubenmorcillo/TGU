@@ -58,7 +58,7 @@ public class ServerManager : MonoBehaviour
         else
         {
             //List<TipoUnidad> unidades = JsonUtility.FromJson<List<TipoUnidad>>(request.downloadHandler.text);
-            string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"}]}";
+            //string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"}]}";
 
             try
             {

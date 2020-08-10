@@ -128,10 +128,17 @@ public class GameManager : MonoBehaviour
         combateManager.Combate(LevelManager.salaActiva.GetComponent<Sala>());
         interfaz.datosPlayerAnimator.SetBool("mostrar", false);
     }
+    public void EndTurn()
+    {
+        Debug.Log("terminando turno de " + combateManager.unidadActiva.datosUnidad.tipo.nombre);
+        MiTurnManager.EndTurn();
+	}
 
     //INTERFAZ
     public void MostrarTexto(string texto)
 	{
         interfaz.MostrarTexto(texto);
 	}
+
+    
 }
