@@ -17,6 +17,7 @@ public class DatosUnidad
 		hpMax = hp;
 		hpActual = hpMax;
 		this.puntosMovimientoTotal = puntosMovimientoTotal;
+		puntosEsfuerzoTotal = 5;
 		modelPrefabName = tipo.nombre;
 		exp = 0;
 		nivel = 1;
