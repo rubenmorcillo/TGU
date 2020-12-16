@@ -14,7 +14,7 @@ public class Sala : MonoBehaviour
     NavMeshSurface[] navMeshSuelo;
 
     Collection<int> posiblesEnemigosIds = new Collection<int>();
-	List<DatosUnidad> datosEnemigos = new List<DatosUnidad>();
+	public List<DatosUnidad> datosEnemigos = new List<DatosUnidad>();
 
     void Start()
     {

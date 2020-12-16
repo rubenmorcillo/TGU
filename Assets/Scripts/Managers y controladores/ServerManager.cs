@@ -58,12 +58,15 @@ public class ServerManager : MonoBehaviour
         else
         {
             //List<TipoUnidad> unidades = JsonUtility.FromJson<List<TipoUnidad>>(request.downloadHandler.text);
-            //string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"}]}";
+            string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"nombre\",\"movimiento_base\":\"3\", \"hp_base\":\"100\", \"atq_fisico\":\"4\",\"atq_especial\":\"10\", \"def_fisico\":\"10\", \"def_especial\":\"45\", \"agilidad\":\"5\"}]}";
 
             try
             {
                 //Debug.Log("SM Éxito recuperando unidades: " + request.downloadHandler.text);
-               // TipoUnidad[] lista = JsonHelper.FromJson<TipoUnidad>(jsonColeccion);
+               //si el servidor está caido tengo q rellenar la lista a mano
+                // TipoUnidad[] lista = JsonHelper.FromJson<TipoUnidad>(jsonColeccion);
+             
+                
                 TipoUnidad[] lista = JsonHelper.FromJson<TipoUnidad>(JsonHelper.fixJson(request.downloadHandler.text));
                 GameManager.instance.BDlocal.TiposUnidad = lista.ToList();
                 Debug.Log("SM Unidades recuperadas: " + JsonHelper.ToJson(GameManager.instance.BDlocal.TiposUnidad.ToArray()));
@@ -91,12 +94,12 @@ public class ServerManager : MonoBehaviour
         else
         {
             //List<TipoUnidad> unidades = JsonUtility.FromJson<List<TipoUnidad>>(request.downloadHandler.text);
-            //string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"habHardf_1\",\"potencia\":\"10\", \"tipo\":\"0\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"habHardE_2\",\"potencia\":\"20\", \"tipo\":\"1\", \"agilidad\":\"5\"}]}";
+           string jsonColeccion = "{\"Items\":[{\"id\":\"1\", \"nombre\":\"habHardf_1\",\"potencia\":\"10\", \"tipo\":\"0\", \"agilidad\":\"5\"},{\"id\":\"2\", \"nombre\":\"habHardE_2\",\"potencia\":\"20\", \"tipo\":\"1\", \"agilidad\":\"5\"}]}";
 
             try
             {
-                //Debug.Log("SM Éxito recuperando unidades: " + request.downloadHandler.text);
-               // Habilidad[] lista = JsonHelper.FromJson<Habilidad>(jsonColeccion);
+                Debug.Log("SM Éxito recuperando habilidades: " + request.downloadHandler.text);
+                //Habilidad[] lista = JsonHelper.FromJson<Habilidad>(jsonColeccion);
                 Habilidad[] lista = JsonHelper.FromJson<Habilidad>(JsonHelper.fixJson(request.downloadHandler.text));
                 GameManager.instance.BDlocal.Habilidades = lista.ToList();
                 Debug.Log("SM Habilidades recuperadas: " + JsonHelper.ToJson(GameManager.instance.BDlocal.Habilidades.ToArray()));

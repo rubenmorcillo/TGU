@@ -26,7 +26,7 @@ public class InterfazController : MonoBehaviour
     DatosPlayer datosPlayer;
     DatosUnidad datosUnidadActiva;
 
-    Habilidad habilidadActiva;
+    Habilidad habilidadSeleccionada;
     public DatosUnidad DatosUnidadActiva
     {
         get
@@ -94,11 +94,11 @@ public class InterfazController : MonoBehaviour
 					//{
      //                   MostrarColaTurnos(MiTurnManager.unidadesCombate);
      //               }
-                    if (habilidadActiva != null)
+                    if (habilidadSeleccionada != null)
 					{
                         //CHAPUZAAAA
                         //habría que poner la descripción, de momento no la tengo
-                        txtDetalle.text = habilidadActiva.ToString();
+                        txtDetalle.text = habilidadSeleccionada.ToString();
 					}
                 }
                 else
@@ -197,10 +197,11 @@ public class InterfazController : MonoBehaviour
         
     }
 
-    public void ActivarHabilidad(Text nombre)
+    public void SeleccionarHabilidad(Text nombre)
 	{
-
-        habilidadActiva = GameManager.instance.BDlocal.Habilidades.Where(h => h.nombre == nombre.text).First();
+        //CHAPUZAAAAAA
+        habilidadSeleccionada = GameManager.instance.BDlocal.Habilidades.Where(h => h.nombre == nombre.text).First();
+        
         Debug.Log("activando " + nombre.text);
 	}
 

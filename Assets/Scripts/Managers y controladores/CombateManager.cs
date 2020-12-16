@@ -50,6 +50,11 @@ public class CombateManager : MonoBehaviour
 
     private void Update()
     {
+        if (fase != FaseCombate.PAUSA)
+		{
+            gameManager.MostrarTexto("");
+        }
+        
         if (fase == FaseCombate.INICIO)
 		{
             seleccionarUnidadActiva();
@@ -72,7 +77,6 @@ public class CombateManager : MonoBehaviour
                 gameManager.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    gameManager.MostrarTexto("");
                     fase = FaseCombate.INICIO_COMBATE;
                 }
             }

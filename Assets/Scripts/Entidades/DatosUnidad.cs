@@ -54,7 +54,7 @@ public class DatosUnidad
 
 	public int puntosEsfuerzoActual;
 
-    public int hab1 = 1, hab2, hab3, hab4;
+    public int hab1, hab2, hab3, hab4;
 
     public bool isPlaced { get; set; }
 
@@ -139,9 +139,9 @@ public class DatosUnidad
 
 	public override string ToString()
 	{
-
+		//return "hola -> "+nivel + "ey -> "+hpActual;
 		return "Soy un "+tipo.nombre + "// level " + nivel + "\n "+
             "hp: "+hpActual+"/" + hpMax + "\n"+
-            "hab1: "+Hab1.nombre + " // hab2: "+hab2 + " // hab3: "+hab3+" // hab4: " +hab4;
+            "hab1: "+Hab1 + " // hab2: "+hab2 + " // hab3: "+hab3+" // hab4: " +hab4;
 	}
 }

@@ -20,7 +20,6 @@ public class NPCMove : TacticsMove
 	void Update () 
 	{
         if (datosUnidad.estoyVivo){
-            //dibujar mi vida
             Debug.DrawRay(transform.position, transform.forward);
             if (!turn)
             {
@@ -39,9 +38,17 @@ public class NPCMove : TacticsMove
             {
                 
                 animator.SetBool("moving", true);
-                if (!movementPayed)
+                if (!movementPayed && datosUnidad.puntosMovimientoActual > 0) 
 				{
-                    datosUnidad.SubstractMovementPoints(path.Count - 1);
+                    //CHAPUZAAAAA pero es bastante efectivo
+                    if (path.Count > 1)
+					{
+                        datosUnidad.SubstractMovementPoints(path.Count - 1);
+					}
+					else
+					{
+                        datosUnidad.SubstractMovementPoints(path.Count);
+                    }
                     movementPayed = true;
 				}
                 Move();
@@ -86,6 +93,7 @@ public class NPCMove : TacticsMove
 
 	private void OnGUI()
 	{
+        //MOSTRAR VIDA DEL ENEMIGO
         //guardamos la posición del enemigo con respecto a la cámara.
         Vector2 pos = Camera.main.WorldToScreenPoint(transform.position);
         int offset = 40;

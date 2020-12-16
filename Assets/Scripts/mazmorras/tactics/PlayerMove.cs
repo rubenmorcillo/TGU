@@ -5,13 +5,11 @@ using UnityEngine;
 public class PlayerMove : TacticsMove 
 {
 
-	// Use this for initialization
 	void Start () 
 	{
         Init();
 	}
 	
-	// Update is called once per frame
 	void Update () 
 	{
         Debug.DrawRay(transform.position, transform.forward);
@@ -46,6 +44,10 @@ public class PlayerMove : TacticsMove
 
                 if (c.selectable)
                 {
+                    if (habilidadSeleccionada != null)
+					{
+                        //TODO: es nuestro turno, tenemos una habilidad seleccionada, debemos mostrar el rango efectivo de la habilidad
+					}
                     //toDo: comprobar qué hay en la casilla target
                     c.target = true;
                 }
@@ -69,10 +71,20 @@ public class PlayerMove : TacticsMove
 
                     if (t.selectable)
                     {
-                        datosUnidad.SubstractMovementPoints(t.distance);
-                        MoveToTile(t);
+                        if (habilidadSeleccionada != null)
+						{
+                            //TODO: debemos aplicar el efecto de la habilidad en la(s) casilla(s) correspondiente(s)
+						}
+						else
+						{
+                            datosUnidad.SubstractMovementPoints(t.distance);
+                            MoveToTile(t);
+                        }
+
+                      
                     }
-                }
+				}
+				
             }
         }
     }
