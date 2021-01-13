@@ -83,6 +83,12 @@ public class TacticsMove : MonoBehaviour
         }
     }
 
+    public void ShowSkillRange()
+	{
+
+        //ComputeAdjacencyLists(jumpHeight, null, habilidadSeleccionada)
+	}
+
     public void FindSelectableTiles()
     {
         ComputeAdjacencyLists(jumpHeight, null);

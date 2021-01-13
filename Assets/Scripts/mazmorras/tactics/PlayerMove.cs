@@ -21,7 +21,15 @@ public class PlayerMove : TacticsMove
 
         if (!moving)
         {
-            FindSelectableTiles();
+            if (habilidadSeleccionada != null)
+			{
+                ShowSkillRange();
+			}
+			else
+			{
+                FindSelectableTiles();
+
+            }
             CheckMousePosition();
             CheckMouse();
         }
@@ -47,6 +55,11 @@ public class PlayerMove : TacticsMove
                     if (habilidadSeleccionada != null)
 					{
                         //TODO: es nuestro turno, tenemos una habilidad seleccionada, debemos mostrar el rango efectivo de la habilidad
+                        if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO)
+						{
+
+						}
+
 					}
                     //toDo: comprobar qué hay en la casilla target
                     c.target = true;
