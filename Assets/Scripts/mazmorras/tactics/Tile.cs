@@ -73,17 +73,44 @@ public class Tile : MonoBehaviour
         f = g = h = 0;
     }
 
-    public void FindNeighbors(float jumpHeight, Tile target)
+    public void FindNeighbors(float jumpHeight, Tile target, Habilidad.TipoRango tipoRango)
     {
         Reset();
+        if (tipoRango == Habilidad.TipoRango.AREA)
+		{
+            CheckTile(Vector3.forward, jumpHeight, target);
+            CheckTile(-Vector3.forward, jumpHeight, target);
+            CheckTile(Vector3.right, jumpHeight, target);
+            CheckTile(-Vector3.right, jumpHeight, target);
+		}
+		else 
+		{
+            if (tipoRango == Habilidad.TipoRango.RECTO)
+			{
+
+			} 
+            else if(tipoRango == Habilidad.TipoRango.RANGO)
+			{
+
+			}
+		}
        
-        CheckTile(Vector3.forward, jumpHeight, target);
-        CheckTile(-Vector3.forward, jumpHeight, target);
-        CheckTile(Vector3.right, jumpHeight, target);
-        CheckTile(-Vector3.right, jumpHeight, target);
 		
        
     }
+
+    public void FindNeighborsRecto()
+	{
+
+	}
+
+    public void FindNeighborsRango()
+	{
+
+	}
+
+
+
 
     public void CheckTile(Vector3 direction, float jumpHeight, Tile target)
     {
@@ -96,7 +123,6 @@ public class Tile : MonoBehaviour
             if (tile != null && tile.walkable)
             {
                 RaycastHit hit;
-
                 if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
                 {
                     adjacencyList.Add(tile);

@@ -21,8 +21,9 @@ public class PlayerMove : TacticsMove
 
         if (!moving)
         {
-            if (habilidadSeleccionada != null)
+            if (habilidadSeleccionada.id != 0)
 			{
+                Debug.Log("Habilidad Seleccionada: "+habilidadSeleccionada.nombre);
                 ShowSkillRange();
 			}
 			else
@@ -52,7 +53,7 @@ public class PlayerMove : TacticsMove
 
                 if (c.selectable)
                 {
-                    if (habilidadSeleccionada != null)
+                    if (habilidadSeleccionada.id != 0)
 					{
                         //TODO: es nuestro turno, tenemos una habilidad seleccionada, debemos mostrar el rango efectivo de la habilidad
                         if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO)
@@ -84,7 +85,7 @@ public class PlayerMove : TacticsMove
 
                     if (t.selectable)
                     {
-                        if (habilidadSeleccionada != null)
+                        if (habilidadSeleccionada.id != 0)
 						{
                             //TODO: debemos aplicar el efecto de la habilidad en la(s) casilla(s) correspondiente(s)
 						}

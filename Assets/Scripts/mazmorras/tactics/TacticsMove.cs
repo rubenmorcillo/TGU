@@ -35,7 +35,7 @@ public class TacticsMove : MonoBehaviour
 
     protected Animator animator;
 
-    public Habilidad habilidadSeleccionada;
+    public Habilidad habilidadSeleccionada = null;
 
     public void setDatos(DatosUnidad du)
     {
@@ -79,14 +79,14 @@ public class TacticsMove : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors(jumpHeight, target);
+            t.FindNeighbors(jumpHeight, target, Habilidad.TipoRango.AREA);
         }
     }
 
     public void ShowSkillRange()
 	{
 
-        //ComputeAdjacencyLists(jumpHeight, null, habilidadSeleccionada)
+       
 	}
 
     public void FindSelectableTiles()
@@ -107,7 +107,7 @@ public class TacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if (t.distance < datosUnidad.puntosMovimientoActual)
+            if ((habilidadSeleccionada.id != 0 && t.distance < habilidadSeleccionada.rango) || (habilidadSeleccionada.id == 0 && t.distance < datosUnidad.puntosMovimientoActual))
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
