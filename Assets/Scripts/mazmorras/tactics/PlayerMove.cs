@@ -21,6 +21,7 @@ public class PlayerMove : TacticsMove
 
         if (!moving)
         {
+            animator.SetBool("moving", false);
             if (habilidadSeleccionada.id != 0)
 			{
                 Debug.Log("Habilidad Seleccionada: "+habilidadSeleccionada.nombre);

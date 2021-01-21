@@ -16,7 +16,7 @@ public class TacticsMove : MonoBehaviour
     public bool moving = false;
     public float jumpHeight = 1;
     public float moveSpeed = 2;
-    public float jumpVelocity = 4.5f;
+    public float jumpVelocity = 5.5f;
 
 
     Vector3 velocity = new Vector3();

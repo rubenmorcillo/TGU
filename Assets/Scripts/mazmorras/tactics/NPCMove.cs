@@ -28,6 +28,7 @@ public class NPCMove : TacticsMove
 
             if (!moving)
             {
+                animator.SetBool("moving", false);
                 animator.Play("Idle");
 				FindNearestTarget();
 				CalculatePath();
