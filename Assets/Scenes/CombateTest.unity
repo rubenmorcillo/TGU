@@ -526,13 +526,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f036352fa80a28740ad2769b4cac47a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turn: 1
+  turn: 0
   datosUnidad:
     id: 0
-    alias: 
+    alias: aliasPlayer
     tipo:
       id: 0
-      nombre: 
+      nombre: nombrePlayer
       hp_base: 0
       atq_fisico: 0
       atq_especial: 0
@@ -546,11 +546,11 @@ MonoBehaviour:
     hpMax: 0
     hpActual: 0
     modelPrefabName: 
-    iniciativa: 0
+    iniciativa: 5
     defensaCerca: 0
     defensaLejos: 0
     puntosMovimientoTotal: 3
-    puntosMovimientoActual: 10
+    puntosMovimientoActual: 5
     puntosEsfuerzoTotal: 0
     puntosEsfuerzoActual: 0
     hab1: 0
@@ -612,6 +612,41 @@ PrefabInstance:
         type: 3}
       propertyPath: jumpVelocity
       value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107753898302182246, guid: 38cd1323093ec7d4888880d441f820db,
+        type: 3}
+      propertyPath: datosUnidad.nivel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107753898302182246, guid: 38cd1323093ec7d4888880d441f820db,
+        type: 3}
+      propertyPath: datosUnidad.alias
+      value: AliasNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107753898302182246, guid: 38cd1323093ec7d4888880d441f820db,
+        type: 3}
+      propertyPath: datosUnidad.hpMax
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107753898302182246, guid: 38cd1323093ec7d4888880d441f820db,
+        type: 3}
+      propertyPath: datosUnidad.hpActual
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107753898302182246, guid: 38cd1323093ec7d4888880d441f820db,
+        type: 3}
+      propertyPath: datosUnidad.iniciativa
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107753898302182246, guid: 38cd1323093ec7d4888880d441f820db,
+        type: 3}
+      propertyPath: datosUnidad.tipo.nombre
+      value: NombreNPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 6107753898302182246, guid: 38cd1323093ec7d4888880d441f820db,
+        type: 3}
+      propertyPath: datosUnidad.hab1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6107753898302182247, guid: 38cd1323093ec7d4888880d441f820db,
         type: 3}
@@ -894,7 +929,7 @@ MonoBehaviour:
     hab2: 0
     hab3: 0
     hab4: 0
-    estoyVivo: 1
+    estoyVivo: 0
   moving: 0
   jumpHeight: 1
   moveSpeed: 2

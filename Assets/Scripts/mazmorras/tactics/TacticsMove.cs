@@ -9,7 +9,7 @@ public class TacticsMove : MonoBehaviour
     GameObject[] tiles;
 
     protected Stack<Tile> path = new Stack<Tile>();
-    Tile currentTile;
+    protected Tile currentTile;
 
     public DatosUnidad datosUnidad;
 
@@ -375,7 +375,6 @@ public class TacticsMove : MonoBehaviour
             if (t == target)
             {
                 actualTargetTile = FindEndTile(t);
-                
                 MoveToTile(actualTargetTile);
                 return;
             }
