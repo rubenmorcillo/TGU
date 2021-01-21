@@ -3,10 +3,10 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 
-public class CombateManager : MonoBehaviour
+public class TestCombateManager : MonoBehaviour
 {
     string modeloUnidadDefault = "UnidadSRC";
-    
+
     GameManager gameManager;
     [SerializeField]
     MiTurnManager turnManager;
@@ -15,22 +15,22 @@ public class CombateManager : MonoBehaviour
     public PlayerMove unidadActiva;
     [SerializeField]
     DatosUnidad datosUnidadActiva;
-   
+
 
     [SerializeField]
     List<DatosUnidad> enemigos;
-   
+
     GameObject unidadSeleccionada;
 
-    
-    public enum FaseCombate {PAUSA, INICIO, COLOCANDO, INICIO_COMBATE, COMBATE, FIN_COMBATE}
+
+    public enum FaseCombate { PAUSA, INICIO, COLOCANDO, INICIO_COMBATE, COMBATE, FIN_COMBATE }
     public FaseCombate fase;
 
-	private void Awake()
-	{
+    private void Awake()
+    {
         Debug.Log("CM: Awake...");
         if (turnManager == null)
-		{
+        {
             turnManager = new MiTurnManager();
         }
         gameManager = GameManager.instance;
@@ -47,53 +47,66 @@ public class CombateManager : MonoBehaviour
         fase = FaseCombate.INICIO;
         //CHAPUZAAA
         // crearEnemigos(sala);
-        foreach(TacticsMove tm in GetComponents<TacticsMove>())
-		{
-            MiTurnManager.AddUnit(tm);
-		}
+
     }
 
     private void Update()
     {
-        if (fase != FaseCombate.PAUSA)
-		{
-            gameManager.MostrarTexto("");
-        }
-        
-        if (fase == FaseCombate.INICIO)
-		{
-            seleccionarUnidadActiva();
 
-            if (unidadSeleccionada != null)
+        //if (fase != FaseCombate.PAUSA)
+        //{
+        //    gameManager.MostrarTexto("");
+        //}
+        
+
+        if (fase == FaseCombate.INICIO)
+        {
+            //CHAPUZAAA ojoooo esto a lo mejor no va aquí
+            foreach (TacticsMove tm in FindObjectsOfType<TacticsMove>())
             {
-                fase = FaseCombate.COLOCANDO;
+                MiTurnManager.AddUnit(tm);
             }
+   //         if (unidadActiva == null)
+			//{
+   //             seleccionarUnidadActiva();
+
+   //         }
+   //         else
+			//{
+               
+   //             if (unidadSeleccionada != null)
+   //             {
+                    fase = FaseCombate.COLOCANDO;
+            //    }
+            //}
+
+          
         }
         else if (fase == FaseCombate.COLOCANDO)
         {
-            LevelManager.salaActiva.GetComponent<Sala>().encontrarCasillasDisponibles();
-            if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() <= 0)
-            {
-                mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
-                checkMouse();
-            }
-            else
-            {
-                gameManager.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
+            //LevelManager.salaActiva.GetComponent<Sala>().encontrarCasillasDisponibles();
+            //if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() <= 0)
+            //{
+            //    mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
+            //    checkMouse();
+            //}
+            //else
+            //{
+            //    gameManager.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
+            //    if (Input.GetKeyDown(KeyCode.Space))
+            //    {
                     fase = FaseCombate.INICIO_COMBATE;
-                }
-            }
+            //    }
+            //}
 
-        } 
+        }
         else if (fase == FaseCombate.INICIO_COMBATE)
         {
             //desactivamos puerta porque el collider nos jode las casillas
-            LevelManager.DesactivarPuerta(LevelManager.salaActiva.GetComponentInChildren<Puerta>());
+            //LevelManager.DesactivarPuerta(LevelManager.salaActiva.GetComponentInChildren<Puerta>());
 
             fase = FaseCombate.COMBATE;
-        } 
+        }
         else if (fase == FaseCombate.COMBATE)
         {
             turnManager.Update();
@@ -128,12 +141,12 @@ public class CombateManager : MonoBehaviour
 
             foreach (DatosUnidad enemigo in sala.dameEnemigos(numeroEnemigos))
             {
-                Tile disponible = posicionesDisponibles[Random.Range(0, posicionesDisponibles.Count()-1)];
+                Tile disponible = posicionesDisponibles[Random.Range(0, posicionesDisponibles.Count() - 1)];
                 posicionesDisponibles.Remove(disponible);
                 GameObject modeloEnemigo = recuperarModeloUnidad(enemigo);
                 GameObject nuevoEnemigo = crearUnidad(modeloEnemigo, disponible);
                 if (nuevoEnemigo.GetComponent<NPCMove>() == null)
-				{
+                {
                     nuevoEnemigo.AddComponent<NPCMove>();
                 }
                 nuevoEnemigo.GetComponent<NPCMove>().setDatos(enemigo);
@@ -145,7 +158,7 @@ public class CombateManager : MonoBehaviour
         {
             Debug.Log("en " + sala + " No hay seteadas casillas de spawn de enemigos");
         }
-           
+
     }
 
     private void mostrarIniciosDisponibles(Sala sala)
@@ -160,24 +173,24 @@ public class CombateManager : MonoBehaviour
     }
 
     GameObject recuperarModeloUnidad(DatosUnidad unidad)
-	{
+    {
         GameObject modeloUnidad = (GameObject)Resources.Load("Unidades/" + unidad.tipo.nombre);
         if (modeloUnidad == null)
-		{
+        {
             modeloUnidad = (GameObject)Resources.Load("Unidades/" + modeloUnidadDefault);
 
         }
         return modeloUnidad;
-	}
+    }
 
     private void seleccionarUnidadActiva()
-	{
+    {
         datosUnidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
-		if (datosUnidadActiva != null)
+        if (datosUnidadActiva != null)
         {
             unidadSeleccionada = recuperarModeloUnidad(datosUnidadActiva);
             gameManager.interfaz.DatosUnidadActiva = datosUnidadActiva;
-           
+
         }
         else
         {
@@ -215,12 +228,12 @@ public class CombateManager : MonoBehaviour
                 }
             }
         }
-        
+
     }
     public GameObject crearUnidad(GameObject modeloUnidad, Tile casilla)
     {
         //CHAPUZAAA -> el new Vector es para encajar el modelo NPC, pero me jode otros...
-       return  Instantiate(modeloUnidad, casilla.transform.position + new Vector3(0,0.9f,0), Quaternion.identity);
+        return Instantiate(modeloUnidad, casilla.transform.position + new Vector3(0, 0.9f, 0), Quaternion.identity);
     }
-    
+
 }
