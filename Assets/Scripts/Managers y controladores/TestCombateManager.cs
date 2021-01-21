@@ -45,8 +45,7 @@ public class TestCombateManager : MonoBehaviour
     public void Combate(Sala sala)
     {
         fase = FaseCombate.INICIO;
-        //CHAPUZAAA
-        // crearEnemigos(sala);
+        
 
     }
 
@@ -61,50 +60,48 @@ public class TestCombateManager : MonoBehaviour
 
         if (fase == FaseCombate.INICIO)
         {
-            //CHAPUZAAA ojoooo esto a lo mejor no va aquí
-            foreach (TacticsMove tm in FindObjectsOfType<TacticsMove>())
-            {
-                MiTurnManager.AddUnit(tm);
-            }
-   //         if (unidadActiva == null)
-			//{
-   //             seleccionarUnidadActiva();
+            
 
-   //         }
-   //         else
-			//{
-               
-   //             if (unidadSeleccionada != null)
-   //             {
-                    fase = FaseCombate.COLOCANDO;
-            //    }
-            //}
+
+            //CHAPUZAAA ojoooo esto a lo mejor no va aquí
+           
+            fase = FaseCombate.COLOCANDO;
 
           
         }
         else if (fase == FaseCombate.COLOCANDO)
         {
-            //LevelManager.salaActiva.GetComponent<Sala>().encontrarCasillasDisponibles();
-            //if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() <= 0)
-            //{
-            //    mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
-            //    checkMouse();
-            //}
-            //else
-            //{
-            //    gameManager.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
-            //    if (Input.GetKeyDown(KeyCode.Space))
-            //    {
-                    fase = FaseCombate.INICIO_COMBATE;
-            //    }
-            //}
 
-        }
+            //TODO ->mejora: Seleccionar en qué casilla empezar?
+
+            TestSala sala = gameObject.GetComponent<TestSala>();
+            sala.mostrarIniciosPlayer(); //mostramos los inicios disponibles (los puntos de Spawn para el player q no están ocupados)
+
+
+
+			//LevelManager.salaActiva.GetComponent<Sala>().encontrarCasillasDisponibles();
+			//if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() <= 0)
+			//{
+			//    mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
+			//    checkMouse();
+			//}
+			//else
+			//{
+			//    gameManager.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
+			if (Input.GetKeyDown(KeyCode.Space))
+			{
+				fase = FaseCombate.INICIO_COMBATE;
+			}
+			//}
+
+		}
         else if (fase == FaseCombate.INICIO_COMBATE)
         {
-            //desactivamos puerta porque el collider nos jode las casillas
-            //LevelManager.DesactivarPuerta(LevelManager.salaActiva.GetComponentInChildren<Puerta>());
 
+            foreach (TacticsMove tm in FindObjectsOfType<TacticsMove>())
+            {
+                MiTurnManager.AddUnit(tm);
+            }
             fase = FaseCombate.COMBATE;
         }
         else if (fase == FaseCombate.COMBATE)
@@ -161,16 +158,7 @@ public class TestCombateManager : MonoBehaviour
 
     }
 
-    private void mostrarIniciosDisponibles(Sala sala)
-    {
-        List<Tile> puntosInicio = sala.PuntosInicioPlayer();
-        foreach (Tile t in puntosInicio)
-        {
-            t.selectable = true;
-            t.target = false;
-        }
-
-    }
+   
 
     GameObject recuperarModeloUnidad(DatosUnidad unidad)
     {
