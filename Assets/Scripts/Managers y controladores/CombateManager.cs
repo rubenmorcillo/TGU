@@ -47,10 +47,11 @@ public class CombateManager : MonoBehaviour
         fase = FaseCombate.INICIO;
         //CHAPUZAAA
         // crearEnemigos(sala);
-        foreach(TacticsMove tm in GetComponents<TacticsMove>())
-		{
-            MiTurnManager.AddUnit(tm);
-		}
+        //Desactivado porque he añadido el TEST
+  //      foreach(TacticsMove tm in GetComponents<TacticsMove>())
+		//{
+  //          MiTurnManager.AddUnit(tm);
+		//}
     }
 
     private void Update()

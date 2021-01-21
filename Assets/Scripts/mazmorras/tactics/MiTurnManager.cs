@@ -7,8 +7,8 @@ using UnityEngine;
 [Serializable]
 public class MiTurnManager
 {
-    public static List<TacticsMove> unidadesCombate = new List<TacticsMove>();
-    public static Queue<TacticsMove> unidadesTurno = new Queue<TacticsMove>();
+    public static List<TestTacticsMove> unidadesCombate = new List<TestTacticsMove>();
+    public static Queue<TestTacticsMove> unidadesTurno = new Queue<TestTacticsMove>();
 
 
     public void Update()
@@ -19,7 +19,7 @@ public class MiTurnManager
         }
     }
 
-    public static void AddUnit(TacticsMove unidad)
+    public static void AddUnit(TestTacticsMove unidad)
 	{
         unidadesCombate.Add(unidad);
 	}
@@ -28,7 +28,7 @@ public class MiTurnManager
     public static void IniciarColaTurnos()
 	{
         Debug.Log("TM: iniciando cola turnos...");
-		IOrderedEnumerable<TacticsMove> orderedEnumerables = unidadesCombate.Where(u => u.datosUnidad.estoyVivo).OrderByDescending(u => u.datosUnidad.iniciativa);
+		IOrderedEnumerable<TestTacticsMove> orderedEnumerables = unidadesCombate.Where(u => u.datosUnidad.estoyVivo).OrderByDescending(u => u.datosUnidad.iniciativa);
         for (int i=0; i<orderedEnumerables.Count(); i++)
 		{
             Debug.Log("TM: metiendo en cola a " + orderedEnumerables.ElementAt(i).datosUnidad.tipo.nombre +" cuya iniciativa es -> "+orderedEnumerables.ElementAt(i).datosUnidad.iniciativa);
@@ -51,7 +51,7 @@ public class MiTurnManager
     public static void EndTurn()
     {
         
-        TacticsMove unit = unidadesTurno.Dequeue();
+        TestTacticsMove unit = unidadesTurno.Dequeue();
         Debug.Log("TM: sacando de la cola a " + unit + " porque ha terminado su turno");
         unit.EndTurn();
 

@@ -49,6 +49,14 @@ public class TestCombateManager : MonoBehaviour
 
     }
 
+    public void limpiarCasillas()
+	{
+        foreach(Tile t in gameObject.GetComponentsInChildren<Tile>())
+		{
+            t.Reset();
+		}
+	}
+
     private void Update()
     {
 
@@ -98,7 +106,7 @@ public class TestCombateManager : MonoBehaviour
         else if (fase == FaseCombate.INICIO_COMBATE)
         {
 
-            foreach (TacticsMove tm in FindObjectsOfType<TacticsMove>())
+            foreach (TestTacticsMove tm in FindObjectsOfType<TestTacticsMove>())
             {
                 MiTurnManager.AddUnit(tm);
             }

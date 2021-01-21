@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b142d1e5b69bf884f904d50be414e67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unidadActiva: {fileID: 1472415113}
+  unidadActiva: {fileID: 0}
   datosUnidadActiva:
     id: 0
     alias: 
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1472415112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f036352fa80a28740ad2769b4cac47a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 20232c40edc98aa48b0626792be65fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   turn: 0
@@ -555,16 +555,16 @@ MonoBehaviour:
       salto_base: 0
       movimiento_base: 0
       agilidad: 0
-    nivel: 0
-    exp: 0
-    hpMax: 0
-    hpActual: 0
+    nivel: 5
+    exp: 95
+    hpMax: 150
+    hpActual: 150
     modelPrefabName: 
     iniciativa: 5
     defensaCerca: 0
     defensaLejos: 0
     puntosMovimientoTotal: 3
-    puntosMovimientoActual: 5
+    puntosMovimientoActual: 0
     puntosEsfuerzoTotal: 0
     puntosEsfuerzoActual: 0
     hab1: 0
@@ -579,7 +579,7 @@ MonoBehaviour:
   actualTargetTile: {fileID: 0}
   habilidadSeleccionada:
     id: 0
-    nombre: HAB_Player1
+    nombre: HabTest1
     potencia: 10
     esfuerzo: 0
     tipo: 0
@@ -752,8 +752,73 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -1.006
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6107753898302182246, guid: 38cd1323093ec7d4888880d441f820db, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 38cd1323093ec7d4888880d441f820db, type: 3}
+--- !u!1 &1586482815 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6107753898302182247, guid: 38cd1323093ec7d4888880d441f820db,
+    type: 3}
+  m_PrefabInstance: {fileID: 1586482814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1586482816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586482815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0633cb179b268488da9db3deec8d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turn: 0
+  datosUnidad:
+    id: 0
+    alias: alisNPC
+    tipo:
+      id: 0
+      nombre: nombreNPC
+      hp_base: 0
+      atq_fisico: 0
+      atq_especial: 0
+      def_fisico: 0
+      def_especial: 0
+      salto_base: 0
+      movimiento_base: 0
+      agilidad: 0
+    nivel: 1
+    exp: 0
+    hpMax: 100
+    hpActual: 90
+    modelPrefabName: 
+    iniciativa: 0
+    defensaCerca: 0
+    defensaLejos: 0
+    puntosMovimientoTotal: 3
+    puntosMovimientoActual: 0
+    puntosEsfuerzoTotal: 0
+    puntosEsfuerzoActual: 0
+    hab1: 0
+    hab2: 0
+    hab3: 0
+    hab4: 0
+    estoyVivo: 1
+  moving: 0
+  jumpHeight: 1
+  moveSpeed: 2
+  jumpVelocity: 5.5
+  actualTargetTile: {fileID: 0}
+  habilidadSeleccionada:
+    id: 0
+    nombre: 
+    potencia: 0
+    esfuerzo: 0
+    tipo: 0
+    desc: 
+    rango: 0
+    tipoRango: 0
 --- !u!1 &1958977382 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: baa0738534f0a8441bc14b45d23c6527,
