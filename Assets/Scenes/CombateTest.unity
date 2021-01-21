@@ -311,10 +311,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 772853608}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2133a063cf6bdaf4b91643bb0d711181, type: 3}
+  m_Script: {fileID: 11500000, guid: b142d1e5b69bf884f904d50be414e67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unidadActiva: {fileID: 0}
+  unidadActiva: {fileID: 1472415113}
   datosUnidadActiva:
     id: 0
     alias: 
@@ -347,7 +347,7 @@ MonoBehaviour:
     hab4: 0
     estoyVivo: 1
   enemigos: []
-  fase: 0
+  fase: 1
 --- !u!1 &1019503195
 GameObject:
   m_ObjectHideFlags: 0

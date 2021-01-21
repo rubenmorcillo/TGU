@@ -50,7 +50,7 @@ public class TacticsMove : MonoBehaviour
 
         animator = GetComponentInChildren<Animator>();
 
-        MiTurnManager.AddUnit(this);
+        //MiTurnManager.AddUnit(this);
        
     }
 
@@ -425,6 +425,7 @@ public class TacticsMove : MonoBehaviour
     public void EndTurn()
     {
         turn = false;
+        //CHAPUZAAAAA
         animator.SetBool("moving", false);
     }
 

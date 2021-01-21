@@ -27,6 +27,7 @@ public class MiTurnManager
 
     public static void IniciarColaTurnos()
 	{
+        Debug.Log("TM: iniciando cola turnos...");
 		IOrderedEnumerable<TacticsMove> orderedEnumerables = unidadesCombate.Where(u => u.datosUnidad.estoyVivo).OrderByDescending(u => u.datosUnidad.iniciativa);
         for (int i=0; i<orderedEnumerables.Count(); i++)
 		{
