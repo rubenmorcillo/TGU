@@ -73,23 +73,32 @@ public class Tile : MonoBehaviour
         f = g = h = 0;
     }
 
-    public void FindNeighbors(float jumpHeight, Tile target, Habilidad.TipoRango tipoRango)
+    public void FindNeighbors(float jumpHeight, Tile target, Habilidad habilidad)
     {
         Reset();
-        if (tipoRango == Habilidad.TipoRango.AREA)
+        if (habilidad == null)
 		{
-            CheckTile(Vector3.forward, jumpHeight, target);
-            CheckTile(-Vector3.forward, jumpHeight, target);
-            CheckTile(Vector3.right, jumpHeight, target);
-            CheckTile(-Vector3.right, jumpHeight, target);
+            Debug.Log("buscar vecinos sin habilidad seleccionada");
+            CheckTile(Vector3.forward, jumpHeight, target, true);
+            CheckTile(-Vector3.forward, jumpHeight, target, true);
+            CheckTile(Vector3.right, jumpHeight, target, true);
+            CheckTile(-Vector3.right, jumpHeight, target, true);
+        }
+		else if (habilidad.tipoRango == Habilidad.TipoRango.AREA)
+		{
+            Debug.Log("buscar vecinos para Habilidad de AREA -> "+habilidad.nombre);
+            CheckTile(Vector3.forward, jumpHeight, target, false);
+            CheckTile(-Vector3.forward, jumpHeight, target, false);
+            CheckTile(Vector3.right, jumpHeight, target, false);
+            CheckTile(-Vector3.right, jumpHeight, target, false);
 		}
 		else 
 		{
-            if (tipoRango == Habilidad.TipoRango.RECTO)
+            if (habilidad.tipoRango == Habilidad.TipoRango.RECTO)
 			{
 
 			} 
-            else if(tipoRango == Habilidad.TipoRango.RANGO)
+            else if(habilidad.tipoRango == Habilidad.TipoRango.RANGO)
 			{
 
 			}
@@ -112,7 +121,7 @@ public class Tile : MonoBehaviour
 
 
 
-    public void CheckTile(Vector3 direction, float jumpHeight, Tile target)
+    public void CheckTile(Vector3 direction, float jumpHeight, Tile target, bool checkEnemies)
     {
         Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2.0f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
@@ -122,11 +131,24 @@ public class Tile : MonoBehaviour
             Tile tile = item.GetComponent<Tile>();
             if (tile != null && tile.walkable)
             {
-                RaycastHit hit;
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
-                {
-                    adjacencyList.Add(tile);
+                if (checkEnemies)
+				{
+                    RaycastHit hit;
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
+                    {
+                        
+                        adjacencyList.Add(tile);
+					}
+					else
+					{
+                        //TODO: si quiero disparar a los obstaculos tengo que ver qué hay encima del Tile
+                    }
                 }
+				else
+				{
+                    adjacencyList.Add(tile);
+				}
+               
             }
         }
     }

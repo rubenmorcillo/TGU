@@ -22,18 +22,18 @@ public class TestPlayerMove : TestTacticsMove
         if (!moving)
         {
             animator.SetBool("moving", false);
-            if (habilidadSeleccionada.id != 0)
-            {
-                Debug.Log("Habilidad Seleccionada: " + habilidadSeleccionada.nombre);
-                LimpiarTiles();
-                ShowSkillRange();
+            //if (habilidadSeleccionada.id != 0)
+            //{
+            //    Debug.Log("Habilidad Seleccionada: " + habilidadSeleccionada.nombre);
+            //    LimpiarTiles();
+            //    ShowSkillRange();
                 
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 FindSelectableTiles();
 
-            }
+            //}
             CheckMousePosition();
             CheckMouse();
         }
@@ -43,6 +43,9 @@ public class TestPlayerMove : TestTacticsMove
             Move();
         }
     }
+
+   
+
     public void CheckMousePosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

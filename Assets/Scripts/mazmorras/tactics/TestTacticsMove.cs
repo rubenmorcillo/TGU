@@ -79,15 +79,18 @@ public class TestTacticsMove : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors(jumpHeight, target, Habilidad.TipoRango.AREA);
+            if (habilidadSeleccionada?.id != 0)
+			{
+                t.FindNeighbors(jumpHeight, target, habilidadSeleccionada);
+            }
+            else
+			{
+                t.FindNeighbors(jumpHeight, target,null);
+            }
         }
     }
 
-    public void ShowSkillRange()
-    {
-
-
-    }
+   
 
     public void LimpiarTiles()
 	{
@@ -129,7 +132,10 @@ public class TestTacticsMove : MonoBehaviour
                     }
                 }
             }
+           
         }
+
+        //procesar otra vez para quitar las casillas de las habilidades que tengan un rango mínimo???
     }
 
     public void MoveToTile(Tile tile)
