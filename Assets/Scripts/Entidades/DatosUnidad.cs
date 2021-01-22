@@ -137,6 +137,15 @@ public class DatosUnidad
 		puntosEsfuerzoActual -= n;
 	}
 
+	public void PerderVida(int cantidad)
+	{
+		hpActual -= cantidad;
+		if (hpActual <= 0)
+		{
+			estoyVivo = false;
+		}
+	}
+
 	public override string ToString()
 	{
 		//return "hola -> "+nivel + "ey -> "+hpActual;

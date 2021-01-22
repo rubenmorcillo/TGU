@@ -443,5 +443,11 @@ public class TestTacticsMove : MonoBehaviour
         animator.SetBool("moving", false);
     }
 
+    public void AplicarDamage(int damage)
+	{
+        //CHAPUZAAA -> habrá que implementar un algoritmo para calcular el daño real
+        datosUnidad.PerderVida(damage);
+	}
+
 
 }

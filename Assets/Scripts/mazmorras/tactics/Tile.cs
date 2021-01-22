@@ -144,11 +144,13 @@ public class Tile : MonoBehaviour
             TestTacticsMove posibleObjetivo = hit.collider.gameObject.GetComponent<TestTacticsMove>();
             if (posibleObjetivo)
 			{
-                Debug.Log("Le han dado a " + posibleObjetivo.datosUnidad.alias);
+                //CHAPUZAAA según la habilidad habrá que aplicar damage o hacer otro efecto
+                posibleObjetivo.AplicarDamage(damage);
+                Debug.Log("Le han dado a " + posibleObjetivo.datosUnidad.alias + " con " + damage);
 			}
 			else
 			{
-                Debug.Log("No le has dado a nada -> ");
+                Debug.Log("No le has dado a nada");
 			}
         }
     }
