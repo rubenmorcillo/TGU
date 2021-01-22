@@ -76,47 +76,48 @@ public class Tile : MonoBehaviour
     public void FindNeighbors(float jumpHeight, Tile target, Habilidad habilidad)
     {
         Reset();
-        bool checkEnemies = false;
-        if (habilidad != null)
-        {
-            if (habilidad.tipoRango == Habilidad.TipoRango.RECTO)
-            {
+       
+        CheckTile(Vector3.forward, jumpHeight, target, habilidad);
+        CheckTile(-Vector3.forward, jumpHeight, target, habilidad);
+        CheckTile(Vector3.right, jumpHeight, target, habilidad);
+        CheckTile(-Vector3.right, jumpHeight, target, habilidad);
+    }
 
-            }
-            else if (habilidad.tipoRango == Habilidad.TipoRango.RANGO)
-            {
-
-            }
+    public Tile GetAbsoluteParent(Tile tile)
+	{
+        Tile parent = tile.parent;
+        if (parent != null)
+		{
+            return GetAbsoluteParent(parent);
+		}
+		else if(tile.selectable)
+		{
+            return tile;
 		}
 		else
 		{
-            checkEnemies = true;
+            return null;
 		}
+	}
 
-        CheckTile(Vector3.forward, jumpHeight, target, checkEnemies);
-        CheckTile(-Vector3.forward, jumpHeight, target, checkEnemies);
-        CheckTile(Vector3.right, jumpHeight, target, checkEnemies);
-        CheckTile(-Vector3.right, jumpHeight, target, checkEnemies);
-    }
-
-    public void CheckTile(Vector3 direction, float jumpHeight, Tile target, bool checkEnemies)
+    public void CheckTile(Vector3 direction, float jumpHeight, Tile target, Habilidad habilidad)
     {
         Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2.0f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
-
         foreach (Collider item in colliders)
         {
+
+           
             Tile tile = item.GetComponent<Tile>();
             if (tile != null && tile.walkable)
             {
-                if (checkEnemies)
+                if (habilidad != null)
 				{
                     RaycastHit hit;
                     if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
                     {
-                        
                         adjacencyList.Add(tile);
-					}
+                    }
 					else
 					{
                         //TODO: si quiero disparar a los obstaculos tengo que ver qué hay encima del Tile

@@ -119,7 +119,7 @@ public class TestTacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if ((habilidadSeleccionada.id != 0 && t.distance < habilidadSeleccionada.rango) || (habilidadSeleccionada.id == 0 && t.distance < datosUnidad.puntosMovimientoActual))
+            if ((habilidadSeleccionada?.id != 0 && t.distance < habilidadSeleccionada.rango) || (habilidadSeleccionada?.id == 0 && t.distance < datosUnidad.puntosMovimientoActual))
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -132,7 +132,39 @@ public class TestTacticsMove : MonoBehaviour
                     }
                 }
             }
+            
            
+           
+        }
+
+        if (habilidadSeleccionada?.id != 0)
+        {
+            float origenX = currentTile.transform.position.x;
+            float origenZ = currentTile.transform.position.z;
+             Debug.Log("el origen es (" + origenX + "," + origenZ + ")");
+            
+            foreach (GameObject tileObjeto in tiles)
+            {
+                Tile tile = tileObjeto.GetComponent<Tile>();
+                if (tile.selectable)
+				{
+                    float difX = Mathf.Abs(origenX - tile.transform.position.x);
+                    float difZ = Mathf.Abs(origenZ - tile.transform.position.z);
+
+
+                    if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO && (difX >= 1f && difZ >= 1f))
+                    {
+                        Debug.Log("SI he eliminado a " + tile.name + " que está en " + tile.transform.position + " difX: "+difX + " / difZ: "+difZ);
+
+                        tile.selectable = false;
+                    }
+                    else
+                    {
+                        Debug.Log("NO he eliminado a " + tile.name + " que está en " + tile.transform.position + " difX: "+difX + " / difZ: "+difZ);
+                    }
+                }
+               
+            }
         }
 
         //procesar otra vez para quitar las casillas de las habilidades que tengan un rango mínimo???
