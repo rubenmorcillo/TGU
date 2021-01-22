@@ -584,8 +584,8 @@ MonoBehaviour:
     esfuerzo: 0
     tipo: 0
     desc: 
-    rango: 0
-    tipoRango: 0
+    rango: 8
+    tipoRango: 2
 --- !u!136 &1472415114
 CapsuleCollider:
   m_ObjectHideFlags: 0

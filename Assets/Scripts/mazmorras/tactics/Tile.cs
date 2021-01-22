@@ -76,50 +76,28 @@ public class Tile : MonoBehaviour
     public void FindNeighbors(float jumpHeight, Tile target, Habilidad habilidad)
     {
         Reset();
-        if (habilidad == null)
-		{
-            Debug.Log("buscar vecinos sin habilidad seleccionada");
-            CheckTile(Vector3.forward, jumpHeight, target, true);
-            CheckTile(-Vector3.forward, jumpHeight, target, true);
-            CheckTile(Vector3.right, jumpHeight, target, true);
-            CheckTile(-Vector3.right, jumpHeight, target, true);
-        }
-		else if (habilidad.tipoRango == Habilidad.TipoRango.AREA)
-		{
-            Debug.Log("buscar vecinos para Habilidad de AREA -> "+habilidad.nombre);
-            CheckTile(Vector3.forward, jumpHeight, target, false);
-            CheckTile(-Vector3.forward, jumpHeight, target, false);
-            CheckTile(Vector3.right, jumpHeight, target, false);
-            CheckTile(-Vector3.right, jumpHeight, target, false);
-		}
-		else 
-		{
+        bool checkEnemies = false;
+        if (habilidad != null)
+        {
             if (habilidad.tipoRango == Habilidad.TipoRango.RECTO)
-			{
+            {
 
-			} 
-            else if(habilidad.tipoRango == Habilidad.TipoRango.RANGO)
-			{
+            }
+            else if (habilidad.tipoRango == Habilidad.TipoRango.RANGO)
+            {
 
-			}
+            }
 		}
-       
-		
-       
+		else
+		{
+            checkEnemies = true;
+		}
+
+        CheckTile(Vector3.forward, jumpHeight, target, checkEnemies);
+        CheckTile(-Vector3.forward, jumpHeight, target, checkEnemies);
+        CheckTile(Vector3.right, jumpHeight, target, checkEnemies);
+        CheckTile(-Vector3.right, jumpHeight, target, checkEnemies);
     }
-
-    public void FindNeighborsRecto()
-	{
-
-	}
-
-    public void FindNeighborsRango()
-	{
-
-	}
-
-
-
 
     public void CheckTile(Vector3 direction, float jumpHeight, Tile target, bool checkEnemies)
     {
@@ -150,6 +128,28 @@ public class Tile : MonoBehaviour
 				}
                
             }
+        }
+    }
+
+    public void DoSkill(Habilidad habilidad)
+	{
+        DoDamage(habilidad.potencia);
+	}
+
+    public void DoDamage(int damage)
+	{
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.up, out hit, 1))
+        {
+            TestTacticsMove posibleObjetivo = hit.collider.gameObject.GetComponent<TestTacticsMove>();
+            if (posibleObjetivo)
+			{
+                Debug.Log("Le han dado a " + posibleObjetivo.datosUnidad.alias);
+			}
+			else
+			{
+                Debug.Log("No le has dado a nada -> ");
+			}
         }
     }
 }

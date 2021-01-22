@@ -22,18 +22,9 @@ public class TestPlayerMove : TestTacticsMove
         if (!moving)
         {
             animator.SetBool("moving", false);
-            //if (habilidadSeleccionada.id != 0)
-            //{
-            //    Debug.Log("Habilidad Seleccionada: " + habilidadSeleccionada.nombre);
-            //    LimpiarTiles();
-            //    ShowSkillRange();
-                
-            //}
-            //else
-            //{
-                FindSelectableTiles();
+           
+            FindSelectableTiles();
 
-            //}
             CheckMousePosition();
             CheckMouse();
         }
@@ -59,14 +50,10 @@ public class TestPlayerMove : TestTacticsMove
 
                 if (c.selectable)
                 {
-                    if (habilidadSeleccionada.id != 0)
+                    if (habilidadSeleccionada?.id != 0)
                     {
-                        //TODO: es nuestro turno, tenemos una habilidad seleccionada, debemos mostrar el rango efectivo de la habilidad
-                        if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO)
-                        {
-
-                        }
-
+                        //TODO: es nuestro turno, tenemos una habilidad seleccionada
+                        //Este sería el onMouseOver
                     }
                     //toDo: comprobar qué hay en la casilla target
                     c.target = true;
@@ -91,9 +78,11 @@ public class TestPlayerMove : TestTacticsMove
 
                     if (t.selectable)
                     {
-                        if (habilidadSeleccionada.id != 0)
+                        if (habilidadSeleccionada?.id != 0)
                         {
-                            //TODO: debemos aplicar el efecto de la habilidad en la(s) casilla(s) correspondiente(s)
+                            //TODO: atacar al tile
+                            Debug.Log(datosUnidad.tipo.nombre + ": atacando a la casilla " + t.name);
+                            t.DoDamage(10);
                         }
                         else
                         {
