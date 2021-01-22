@@ -37,14 +37,18 @@ public class TestNPCMove : TestTacticsMove
                 FindNearestTarget(); //busca al Player más cercano
                 CalculatePath();
                 FindSelectableTiles();
-
                 actualTargetTile.target = true;
 
-
-                Debug.Log("La distancia con el tile real es: " + actualTargetTile.distance);
+                //Debug.Log("La distancia con el tile real es: " + actualTargetTile.distance);
+                //CHAPUZAAAA
                 if (actualTargetTile.distance <= 0)
                 {
                     //TODO: aqui debo hacer las habilidades por lo visto
+                    MiTurnManager.EndTurn();
+                }
+                //este es el verdadero fin del turno
+                if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
+                {
                     MiTurnManager.EndTurn();
                 }
             }
@@ -66,8 +70,7 @@ public class TestNPCMove : TestTacticsMove
                     //	datosUnidad.SubstractMovementPoints(path.Count);
                     //   }
 
-                    datosUnidad.SubstractMovementPoints(actualTargetTile.distance);
-
+                    SubstractMovementPoints(actualTargetTile.distance);
                     movementPayed = true;
                 }
                 Move();

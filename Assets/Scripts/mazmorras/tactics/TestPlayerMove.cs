@@ -13,7 +13,7 @@ public class TestPlayerMove : TestTacticsMove
     void Update()
     {
         Debug.DrawRay(transform.position, transform.forward);
-
+        
         if (!turn)
         {
             return;
@@ -22,9 +22,11 @@ public class TestPlayerMove : TestTacticsMove
         if (!moving)
         {
             animator.SetBool("moving", false);
-           
+            if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
+            {
+                MiTurnManager.EndTurn();
+            }
             FindSelectableTiles();
-
             CheckMousePosition();
             CheckMouse();
         }
@@ -82,11 +84,12 @@ public class TestPlayerMove : TestTacticsMove
                         {
                             //TODO: atacar al tile
                             Debug.Log(datosUnidad.tipo.nombre + ": atacando a la casilla " + t.name);
+                            ShotSkill(habilidadSeleccionada);
                             t.DoSkill(habilidadSeleccionada);
                         }
                         else
                         {
-                            datosUnidad.SubstractMovementPoints(t.distance);
+                            SubstractMovementPoints(t.distance);
                             MoveToTile(t);
                         }
 

@@ -194,11 +194,7 @@ public class TestTacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-            //if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0) si no ponemos esto, los enemigos cuando no atacan intentan moverse dos veces.
-            // {
-            //   MiTurnManager.EndTurn();
-            //}
-            if (datosUnidad.puntosMovimientoActual <= 0)
+            if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
             {
                 MiTurnManager.EndTurn();
             }
@@ -447,6 +443,26 @@ public class TestTacticsMove : MonoBehaviour
 	{
         //CHAPUZAAA -> habrá que implementar un algoritmo para calcular el daño real
         datosUnidad.PerderVida(damage);
+	}
+    
+    public void ShotSkill(Habilidad habilidad)
+	{
+        PaySkillCost(habilidad);
+        //TODO: podría haber efectos al activar una habilidad
+
+	}
+    public void PaySkillCost(Habilidad habilidad)
+	{
+        SubstractEffortPoints(habilidad.esfuerzo);
+	}
+    public void SubstractEffortPoints(int p)
+	{
+        datosUnidad.SubstractEffortPoints(p);
+	}
+
+    public void SubstractMovementPoints(int p)
+	{
+        datosUnidad.SubstractMovementPoints(p);
 	}
 
 

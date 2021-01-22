@@ -565,7 +565,7 @@ MonoBehaviour:
     defensaLejos: 0
     puntosMovimientoTotal: 3
     puntosMovimientoActual: 0
-    puntosEsfuerzoTotal: 0
+    puntosEsfuerzoTotal: 2
     puntosEsfuerzoActual: 0
     hab1: 0
     hab2: 0
@@ -581,7 +581,7 @@ MonoBehaviour:
     id: 0
     nombre: HabTest1
     potencia: 10
-    esfuerzo: 0
+    esfuerzo: 1
     tipo: 0
     desc: 
     rango: 8
