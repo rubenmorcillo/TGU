@@ -94,7 +94,7 @@ public class TestPlayerMove : TestTacticsMove
                         {
                             //TODO: atacar al tile
                             Debug.Log(datosUnidad.tipo.nombre + ": atacando a la casilla " + t.name);
-                            ShotSkill(habilidadSeleccionada, t.transform.position);
+                            ShotSkill(habilidadSeleccionada, t);
                             t.DoSkill(habilidadSeleccionada);
                         }
                         else

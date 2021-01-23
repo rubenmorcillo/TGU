@@ -140,7 +140,7 @@ public class TestCombateManager : MonoBehaviour
             if (enemigos.Count <= 0 ){
                 //victoria
 				fase = FaseCombate.FIN_COMBATE;
-			}else if(aliados.Count == null)
+			}else if(aliados.Count <= 0)
 			{
                 //derrota
                 fase = FaseCombate.FIN_COMBATE;

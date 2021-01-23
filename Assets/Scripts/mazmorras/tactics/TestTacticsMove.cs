@@ -177,9 +177,7 @@ public class TestTacticsMove : MonoBehaviour
     {
         if (path.Count > 0)
         {
-
             Tile t = path.Peek();
-
             Vector3 target = t.transform.position;
             //Calcular la posición de la unidad encima de la casilla (Tile) objetivo
             target.y += halfHeight + t.GetComponent<Collider>().bounds.extents.y;
@@ -464,21 +462,24 @@ public class TestTacticsMove : MonoBehaviour
         datosUnidad.PerderVida(damage);
 	}
     
-    public void ShotSkill(Habilidad habilidad, Vector3 targetTile)
+    public void ShotSkill(Habilidad habilidad, Tile target)
 	{
         PaySkillCost(habilidad);
-        Vector3 offset = Vector3.up;
-        CalculateHeading(targetTile + offset);
+        //OJO! con el halfHeight + 0.5f
+        Vector3 normalizedTarget = new Vector3(target.transform.position.x, halfHeight + 0.5f, target.transform.position.z);
+        CalculateHeading(normalizedTarget);
         transform.forward = heading;
         //TODO: podría haber efectos al activar una habilidad
         if (habilidad.tipo == Habilidad.TipoHabilidad.FISICO)
 		{
             animator.Play("Martelo");
+            //transform.forward = heading;
 
         }
         else if(habilidad.tipo == Habilidad.TipoHabilidad.ESPECIAL)
 		{
             animator.Play("RangeAttack");
+            //transform.forward = heading;
         }
 
     }

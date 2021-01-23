@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public BDLocal BDlocal;
     public EstadosJuego.Estado estadoJuego;
 
-    public CombateManager combateManager;
+    //public CombateManager combateManager;
+    public TestCombateManager combateManager;
 
     private void Awake()
     {
@@ -27,10 +28,17 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
-        combateManager = gameObject.GetComponent<CombateManager>();
+
+        //combateManager = gameObject.GetComponent<CombateManager>();
+        //if (combateManager == null)
+        //{
+        //    combateManager = gameObject.AddComponent<CombateManager>();
+        //}
+        
+        combateManager = gameObject.GetComponent<TestCombateManager>();
         if (combateManager == null)
         {
-            combateManager = gameObject.AddComponent<CombateManager>();
+            combateManager = gameObject.AddComponent<TestCombateManager>();
         }
 
         serverManager = gameObject.GetComponent<ServerManager>();
@@ -80,13 +88,13 @@ public class GameManager : MonoBehaviour
         EstadosJuego.activarEstado(EstadosJuego.Estado.MENU);
 
         //inico los otros managers
-        combateManager.fase = CombateManager.FaseCombate.PAUSA;
+        //combateManager.fase = CombateManager.FaseCombate.PAUSA;
         //combateManager.enabled = false;
         BDlocal.Init();
 
 
         //EL LEVEL MANAGER SOLO LO NECESITO CUANDO VOY A LA MAZMORRA
-        LevelManager.Init();
+        //LevelManager.Init();
 
         //iniciarMazmorra();
     }
@@ -128,11 +136,11 @@ public class GameManager : MonoBehaviour
         combateManager.Combate(LevelManager.salaActiva.GetComponent<Sala>());
         interfaz.datosPlayerAnimator.SetBool("mostrar", false);
     }
-    public void EndTurn()
-    {
-        Debug.Log("terminando turno de " + combateManager.unidadActiva.datosUnidad.tipo.nombre);
-        MiTurnManager.EndTurn();
-	}
+ //   public void EndTurn()
+ //   {
+ //       Debug.Log("terminando turno de " + combateManager.unidadActiva.datosUnidad.tipo.nombre);
+ //       MiTurnManager.EndTurn();
+	//}
 
     //INTERFAZ
     public void MostrarTexto(string texto)
