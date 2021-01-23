@@ -66,7 +66,10 @@ public class DatosUnidad
 		{
 			if (hab1 > 0)
 			{
-				return GameManager.instance.BDlocal.Habilidades.Where(datos => datos.id == hab1).First();
+				//TODO: Revisar si, con el First en lugar de "Where + First", obtengo el mismo resultado
+				Habilidad h = GameManager.instance.BDlocal.Habilidades.First(datos => datos.id == hab1);
+				
+				return h;
 			}
 			else
 			{

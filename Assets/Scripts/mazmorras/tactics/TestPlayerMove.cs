@@ -31,7 +31,7 @@ public class TestPlayerMove : TestTacticsMove
                 FindSelectableTiles();
                 ClearUnSelectableTiles();
                 CheckMousePosition();
-                CheckMouse();
+                CheckClick();
             }
             else
             {
@@ -52,9 +52,8 @@ public class TestPlayerMove : TestTacticsMove
     public void CheckMousePosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray,out hit, Mathf.Infinity, ~(1 << 11)))
         {
             if (hit.collider.tag == "Tile")
             {
@@ -75,14 +74,13 @@ public class TestPlayerMove : TestTacticsMove
     }
 
 
-    void CheckMouse()
+    void CheckClick()
     {
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~(1 << 11)))
             {
                 if (hit.collider.tag == "Tile")
                 {
@@ -102,11 +100,8 @@ public class TestPlayerMove : TestTacticsMove
                             SubstractMovementPoints(t.distance);
                             MoveToTile(t);
                         }
-
-
                     }
                 }
-
             }
         }
     }

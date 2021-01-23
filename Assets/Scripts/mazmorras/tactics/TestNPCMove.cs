@@ -10,9 +10,17 @@ public class TestNPCMove : TestTacticsMove
     GameObject target;
     bool movementPayed = false;
 
+    ComportamientoNPC comportamiento;
+
+    //enum TipoComportamientoEnum { DEFAULT = 0}
+    //TipoComportamientoEnum comportamiento;
+
+
     // Use this for initialization
     void Start()
     {
+        comportamiento = new ComportamientoNPC();
+        //comportamiento = TipoComportamientoEnum.DEFAULT;
         Init();
         animator.Play("Idle");
     }
@@ -29,12 +37,18 @@ public class TestNPCMove : TestTacticsMove
             }
 
 
+            comportamiento.DecidirSiguienteAccion(datosUnidad);
+            habilidadSeleccionada = comportamiento.SeleccionarHabilidad();
+            Debug.Log("Soy " + name + " y me apetece atacar a " + target + " con " + habilidadSeleccionada.nombre);
             if (!moving)
             {
                 animator.SetBool("moving", false);
 
                 //TODO: Comportamiento de selección de ataques, etc
-                FindNearestTarget(); //busca al objetivo(Player) más cercano
+
+                
+                //si no estoy suficientemente cerca
+                FindNearestTarget(); //busca al objetivo(Player) más cercano y lo guarda en target
                 CalculatePath();
                 FindSelectableTiles();
                 actualTargetTile.target = true;
@@ -43,11 +57,11 @@ public class TestNPCMove : TestTacticsMove
 
                 //CHAPUZAAAA
                 //Debug.Log("La distancia con el tile real es: " + actualTargetTile.distance);
-                if (actualTargetTile.distance <= 0)
-                {
-                    //TODO: aqui debo hacer las habilidades por lo visto(???)
-                    MiTurnManager.EndTurn();
-                }
+                //if (actualTargetTile.distance <= 0)
+                //{
+                //    //TODO: aqui debo hacer las habilidades por lo visto(???)
+                //    MiTurnManager.EndTurn();
+                //}
                 //este es el verdadero fin del turno
                 if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
                 {
@@ -70,9 +84,9 @@ public class TestNPCMove : TestTacticsMove
             RemoveMe();
             Destroy(gameObject);
         }
-
-
     }
+
+    
 
     void CalculatePath()
     {

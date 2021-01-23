@@ -12,11 +12,11 @@ public class TestCombateManager : MonoBehaviour
     MiTurnManager turnManager;
 
     [SerializeField]
-    List<TestTacticsMove> unidades;
+    public List<TestTacticsMove> unidades;
     [SerializeField]
-    List<TestTacticsMove> aliados;
+    public List<TestTacticsMove> aliados;
     [SerializeField]
-    List<TestTacticsMove> enemigos;
+    public List<TestTacticsMove> enemigos;
     //[SerializeField]
     //public PlayerMove unidadActiva;
     //[SerializeField]
