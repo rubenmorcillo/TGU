@@ -27,6 +27,7 @@ public class TestPlayerMove : TestTacticsMove
                 MiTurnManager.EndTurn();
             }
             FindSelectableTiles();
+            ClearUnSelectableTiles();
             CheckMousePosition();
             CheckMouse();
         }

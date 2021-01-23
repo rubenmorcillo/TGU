@@ -83,22 +83,6 @@ public class Tile : MonoBehaviour
         CheckTile(-Vector3.right, jumpHeight, target, habilidad);
     }
 
-    public Tile GetAbsoluteParent(Tile tile)
-	{
-        Tile parent = tile.parent;
-        if (parent != null)
-		{
-            return GetAbsoluteParent(parent);
-		}
-		else if(tile.selectable)
-		{
-            return tile;
-		}
-		else
-		{
-            return null;
-		}
-	}
 
     public void CheckTile(Vector3 direction, float jumpHeight, Tile target, Habilidad habilidad)
     {
@@ -106,12 +90,10 @@ public class Tile : MonoBehaviour
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
         foreach (Collider item in colliders)
         {
-
-           
             Tile tile = item.GetComponent<Tile>();
-            if (tile != null && tile.walkable)
+            if ((tile != null && tile.walkable) || (tile != null && habilidad != null) )
             {
-                if (habilidad != null)
+                if (habilidad == null)
 				{
                     RaycastHit hit;
                     if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))

@@ -85,21 +85,38 @@ public class TestTacticsMove : MonoBehaviour
             }
             else
 			{
-                t.FindNeighbors(jumpHeight, target,null);
+                t.FindNeighbors(jumpHeight, target, null);
+            }
+        }
+    }
+
+   public void ClearUnSelectableTiles()
+	{
+        if (habilidadSeleccionada?.id != 0)
+        {
+            float origenX = currentTile.transform.position.x;
+            float origenZ = currentTile.transform.position.z;
+            foreach (GameObject tileObjeto in tiles)
+            {
+                Tile tile = tileObjeto.GetComponent<Tile>();
+                if (!tile.walkable)
+				{
+                    tile.selectable = false;
+				}
+                if (tile.selectable)
+                {
+                    float difX = Mathf.Abs(origenX - tile.transform.position.x);
+                    float difZ = Mathf.Abs(origenZ - tile.transform.position.z);
+                    if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO && (difX >= 1f && difZ >= 1f))
+                    {
+                        tile.selectable = false;
+                    }
+                }
             }
         }
     }
 
    
-
-    public void LimpiarTiles()
-	{
-        foreach(GameObject tile in tiles)
-		{
-            Tile t = tile.GetComponent<Tile>();
-            t.Reset();
-		}
-	}
 
     public void FindSelectableTiles()
     {
@@ -131,43 +148,8 @@ public class TestTacticsMove : MonoBehaviour
                         process.Enqueue(tile);
                     }
                 }
-            }
-            
-           
-           
+            }  
         }
-
-        if (habilidadSeleccionada?.id != 0)
-        {
-            float origenX = currentTile.transform.position.x;
-            float origenZ = currentTile.transform.position.z;
-             Debug.Log("el origen es (" + origenX + "," + origenZ + ")");
-            
-            foreach (GameObject tileObjeto in tiles)
-            {
-                Tile tile = tileObjeto.GetComponent<Tile>();
-                if (tile.selectable)
-				{
-                    float difX = Mathf.Abs(origenX - tile.transform.position.x);
-                    float difZ = Mathf.Abs(origenZ - tile.transform.position.z);
-
-
-                    if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO && (difX >= 1f && difZ >= 1f))
-                    {
-                        Debug.Log("SI he eliminado a " + tile.name + " que está en " + tile.transform.position + " difX: "+difX + " / difZ: "+difZ);
-
-                        tile.selectable = false;
-                    }
-                    else
-                    {
-                        Debug.Log("NO he eliminado a " + tile.name + " que está en " + tile.transform.position + " difX: "+difX + " / difZ: "+difZ);
-                    }
-                }
-               
-            }
-        }
-
-        //procesar otra vez para quitar las casillas de las habilidades que tengan un rango mínimo???
     }
 
     public void MoveToTile(Tile tile)
