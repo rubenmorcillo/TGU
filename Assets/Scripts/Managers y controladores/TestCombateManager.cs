@@ -12,15 +12,20 @@ public class TestCombateManager : MonoBehaviour
     MiTurnManager turnManager;
 
     [SerializeField]
-    public PlayerMove unidadActiva;
+    List<TestTacticsMove> unidades;
     [SerializeField]
-    DatosUnidad datosUnidadActiva;
-
-
+    List<TestTacticsMove> aliados;
     [SerializeField]
-    List<DatosUnidad> enemigos;
+    List<TestTacticsMove> enemigos;
+    //[SerializeField]
+    //public PlayerMove unidadActiva;
+    //[SerializeField]
+    //DatosUnidad datosUnidadActiva;
 
-    GameObject unidadSeleccionada;
+
+
+
+    //GameObject unidadSeleccionada;
 
 
     public enum FaseCombate { PAUSA, INICIO, COLOCANDO, INICIO_COMBATE, COMBATE, FIN_COMBATE }
@@ -49,13 +54,32 @@ public class TestCombateManager : MonoBehaviour
 
     }
 
-    public void limpiarCasillas()
+    public void AddUnitToCombat(TestTacticsMove unidad)
 	{
-        foreach(Tile t in gameObject.GetComponentsInChildren<Tile>())
-		{
-            t.Reset();
-		}
-	}
+        MiTurnManager.AddUnit(unidad);
+        unidades.Add(unidad);
+        if (unidad.GetComponent<TestNPCMove>() == null)
+        {
+            aliados.Add(unidad);
+        }
+        else
+        {
+            enemigos.Add(unidad);
+        }
+    }
+
+    public void RemoveUnitFromCombat(TestTacticsMove unidad)
+	{
+        unidades.Remove(unidad);
+        if (unidad.GetComponent<TestNPCMove>() == null)
+        {
+            aliados.Remove(unidad);
+        }
+        else
+        {
+            enemigos.Remove(unidad);
+        }
+    }
 
     private void Update()
     {
@@ -68,14 +92,8 @@ public class TestCombateManager : MonoBehaviour
 
         if (fase == FaseCombate.INICIO)
         {
-            
 
-
-            //CHAPUZAAA ojoooo esto a lo mejor no va aquí
-           
             fase = FaseCombate.COLOCANDO;
-
-          
         }
         else if (fase == FaseCombate.COLOCANDO)
         {
@@ -105,27 +123,34 @@ public class TestCombateManager : MonoBehaviour
 		}
         else if (fase == FaseCombate.INICIO_COMBATE)
         {
-
+            //controlamos todas las unidades existentes - suponemos que vamos a tener a todas presentes desde el inicio del combate
             foreach (TestTacticsMove tm in FindObjectsOfType<TestTacticsMove>())
             {
-                MiTurnManager.AddUnit(tm);
+                AddUnitToCombat(tm);
             }
             fase = FaseCombate.COMBATE;
         }
         else if (fase == FaseCombate.COMBATE)
         {
             turnManager.Update();
-            //mostrar datos enemigos
+			//mostrar datos enemigos
 
-            //ToDo: decidir las condiciones para que acabe el combate
-            //if (se cumplen las condiciones){
-            //fase = FaseCombate.FIN_COMBATE;
-            //}
+			//ToDo: decidir las condiciones para que acabe el combate
+            
+            if (enemigos.Count <= 0 ){
+                //victoria
+				fase = FaseCombate.FIN_COMBATE;
+			}else if(aliados.Count == null)
+			{
+                //derrota
+                fase = FaseCombate.FIN_COMBATE;
+			}
 
-        }
+		}
         else if (fase == FaseCombate.FIN_COMBATE)
         {
-            //hacer cosas naziss -> habrá q resetear cosas supongo
+            //TODO: resetear cosas (los tiles se quedan seleccionables)
+
             fase = FaseCombate.PAUSA;
         }
 
@@ -179,53 +204,53 @@ public class TestCombateManager : MonoBehaviour
         return modeloUnidad;
     }
 
-    private void seleccionarUnidadActiva()
-    {
-        datosUnidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
-        if (datosUnidadActiva != null)
-        {
-            unidadSeleccionada = recuperarModeloUnidad(datosUnidadActiva);
-            gameManager.interfaz.DatosUnidadActiva = datosUnidadActiva;
+    //private void seleccionarUnidadActiva()
+    //{
+    //    datosUnidadActiva = gameManager.DatosPlayer.EquipoUnidades.Where(u => u.estoyVivo).First();
+    //    if (datosUnidadActiva != null)
+    //    {
+    //        unidadSeleccionada = recuperarModeloUnidad(datosUnidadActiva);
+    //        gameManager.interfaz.DatosUnidadActiva = datosUnidadActiva;
 
-        }
-        else
-        {
-            Debug.Log("No hay unidades disponibles");
-        }
-    }
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("No hay unidades disponibles");
+    //    }
+    //}
 
     //ESTA FUNCION DEBERÍA ESTAR EN EL CHEQUEADOR DE MOUSE
-    private void checkMouse()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+    //private void checkMouse()
+    //{
+    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    RaycastHit hit;
 
-        if (unidadSeleccionada != null)
-        {
-            gameManager.interfaz.MostrarTexto("Posiciona a tu unidad en una casilla libre");
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.tag == "Tile")
-                {
-                    Tile c = hit.collider.GetComponent<Tile>();
-                    if (c.selectable)
-                    {
-                        c.target = true;
-                        if (Input.GetMouseButton(0))
-                        {
-                            Debug.Log("Colocando el modelo " + unidadSeleccionada + " en " + c);
-                            GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
-                            unidadActiva = nuevaUnidad.AddComponent<PlayerMove>();
-                            unidadActiva.setDatos(datosUnidadActiva);
-                            gameManager.DatosPlayer.EquipoUnidades[0].isPlaced = true;
-                            unidadSeleccionada = null;
-                        }
-                    }
-                }
-            }
-        }
+    //    if (unidadSeleccionada != null)
+    //    {
+    //        gameManager.interfaz.MostrarTexto("Posiciona a tu unidad en una casilla libre");
+    //        if (Physics.Raycast(ray, out hit))
+    //        {
+    //            if (hit.collider.tag == "Tile")
+    //            {
+    //                Tile c = hit.collider.GetComponent<Tile>();
+    //                if (c.selectable)
+    //                {
+    //                    c.target = true;
+    //                    if (Input.GetMouseButton(0))
+    //                    {
+    //                        Debug.Log("Colocando el modelo " + unidadSeleccionada + " en " + c);
+    //                        GameObject nuevaUnidad = crearUnidad(unidadSeleccionada, c);
+    //                        unidadActiva = nuevaUnidad.AddComponent<PlayerMove>();
+    //                        unidadActiva.setDatos(datosUnidadActiva);
+    //                        gameManager.DatosPlayer.EquipoUnidades[0].isPlaced = true;
+    //                        unidadSeleccionada = null;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
 
-    }
+    //}
     public GameObject crearUnidad(GameObject modeloUnidad, Tile casilla)
     {
         //CHAPUZAAA -> el new Vector es para encajar el modelo NPC, pero me jode otros...

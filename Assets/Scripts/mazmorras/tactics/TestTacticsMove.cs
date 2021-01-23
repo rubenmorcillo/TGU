@@ -54,6 +54,11 @@ public class TestTacticsMove : MonoBehaviour
 
     }
 
+    public void RemoveMe()
+	{
+        FindObjectOfType<TestCombateManager>().RemoveUnitFromCombat(this);
+	}
+
     public void GetCurrentTile()
     {
         currentTile = GetTargetTile(gameObject);

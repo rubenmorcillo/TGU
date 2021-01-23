@@ -12,30 +12,39 @@ public class TestPlayerMove : TestTacticsMove
 
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward);
-        
-        if (!turn)
-        {
-            return;
-        }
+        if (datosUnidad.estoyVivo)
+		{
+            Debug.DrawRay(transform.position, transform.forward);
 
-        if (!moving)
-        {
-            animator.SetBool("moving", false);
-            if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
+            if (!turn)
             {
-                MiTurnManager.EndTurn();
+                return;
             }
-            FindSelectableTiles();
-            ClearUnSelectableTiles();
-            CheckMousePosition();
-            CheckMouse();
-        }
-        else
-        {
-            animator.SetBool("moving", true);
-            Move();
-        }
+
+            if (!moving)
+            {
+                animator.SetBool("moving", false);
+                if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
+                {
+                    MiTurnManager.EndTurn();
+                }
+                FindSelectableTiles();
+                ClearUnSelectableTiles();
+                CheckMousePosition();
+                CheckMouse();
+            }
+            else
+            {
+                animator.SetBool("moving", true);
+                Move();
+            }
+		}
+		else
+		{
+            RemoveMe();
+            Destroy(gameObject);
+		}
+        
     }
 
    

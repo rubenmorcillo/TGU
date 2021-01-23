@@ -14,6 +14,7 @@ public class TestNPCMove : TestTacticsMove
     void Start()
     {
         Init();
+        animator.Play("Idle");
     }
 
     // Update is called once per frame
@@ -30,20 +31,21 @@ public class TestNPCMove : TestTacticsMove
 
             if (!moving)
             {
-                //if (actualTargetTile.distance > 0 )
                 animator.SetBool("moving", false);
-                animator.Play("Idle");
 
-                FindNearestTarget(); //busca al Player más cercano
+                //TODO: Comportamiento de selección de ataques, etc
+                FindNearestTarget(); //busca al objetivo(Player) más cercano
                 CalculatePath();
                 FindSelectableTiles();
                 actualTargetTile.target = true;
 
-                //Debug.Log("La distancia con el tile real es: " + actualTargetTile.distance);
+
+
                 //CHAPUZAAAA
+                //Debug.Log("La distancia con el tile real es: " + actualTargetTile.distance);
                 if (actualTargetTile.distance <= 0)
                 {
-                    //TODO: aqui debo hacer las habilidades por lo visto
+                    //TODO: aqui debo hacer las habilidades por lo visto(???)
                     MiTurnManager.EndTurn();
                 }
                 //este es el verdadero fin del turno
@@ -54,22 +56,9 @@ public class TestNPCMove : TestTacticsMove
             }
             else
             {
-
                 animator.SetBool("moving", true);
                 if (!movementPayed && datosUnidad.puntosMovimientoActual > 0)
                 {
-
-                    //parece que esta chapuza ya no hace falta
-                    //CHAPUZAAAAA pero es bastante efectivo
-                    //if (path.Count > 1)
-                    //{
-                    //	datosUnidad.SubstractMovementPoints(path.Count - 1);
-                    //}
-                    //else
-                    //{
-                    //	datosUnidad.SubstractMovementPoints(path.Count);
-                    //   }
-
                     SubstractMovementPoints(actualTargetTile.distance);
                     movementPayed = true;
                 }
@@ -78,6 +67,7 @@ public class TestNPCMove : TestTacticsMove
         }
         else
         {
+            RemoveMe();
             Destroy(gameObject);
         }
 
@@ -110,9 +100,6 @@ public class TestNPCMove : TestTacticsMove
         }
 
         target = nearest;
-
-
-
     }
 
     private void OnGUI()
