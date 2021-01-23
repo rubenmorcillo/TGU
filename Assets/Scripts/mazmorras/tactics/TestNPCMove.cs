@@ -36,20 +36,20 @@ public class TestNPCMove : TestTacticsMove
                 return;
             }
 
-
-            comportamiento.DecidirSiguienteAccion(datosUnidad);
-            habilidadSeleccionada = comportamiento.SeleccionarHabilidad();
-            Debug.Log("Soy " + name + " y me apetece atacar a " + target + " con " + habilidadSeleccionada.nombre);
             if (!moving)
             {
                 animator.SetBool("moving", false);
 
                 //TODO: Comportamiento de selección de ataques, etc
-
+                comportamiento.DecidirSiguienteAccion(datosUnidad);
+                habilidadSeleccionada = comportamiento.SeleccionarHabilidad();
+                Debug.Log("Soy " + name + " y me apetece atacar a " + target + " con " + habilidadSeleccionada.nombre);
                 
+
                 //si no estoy suficientemente cerca
                 FindNearestTarget(); //busca al objetivo(Player) más cercano y lo guarda en target
                 CalculatePath();
+                GetCurrentTile();
                 FindSelectableTiles();
                 actualTargetTile.target = true;
 
@@ -70,7 +70,8 @@ public class TestNPCMove : TestTacticsMove
             }
             else
             {
-                animator.SetBool("moving", true);
+               
+                
                 if (!movementPayed && datosUnidad.puntosMovimientoActual > 0)
                 {
                     SubstractMovementPoints(actualTargetTile.distance);
@@ -91,10 +92,41 @@ public class TestNPCMove : TestTacticsMove
     void CalculatePath()
     {
         movementPayed = false;
-        Tile targetTile = GetTargetTile(target);
+        Tile targetTile = null;
+        //TODO: el camino depende de la habilidad seleccionada
+        if (habilidadSeleccionada?.id != 0)
+        {
+            //debo decidir el nuevo target
+            Debug.Log("llevo una habilidad seleccionada");
+            //lo primero es posicionar la habilidad en el target
+            currentTile = GetTargetTile(target);
+            FindSelectableTiles();
+			targetTile = FindNearestTile();
+		}
+		else
+		{
+           targetTile = GetTargetTile(target);
+        }
+        //targetTile = GetTargetTile(target);
         FindPath(targetTile);
     }
+    Tile FindNearestTile()
+	{
+        Tile nearest = null;
+        float distance = Mathf.Infinity;
 
+        foreach (Tile t in selectableTiles)
+        {
+            float d = Vector3.Distance(transform.position, t.transform.position);
+            if (d < distance)
+			{
+                distance = d;
+                nearest = t;
+			}
+        }
+
+        return nearest;
+	}
     void FindNearestTarget()
     {
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Player");

@@ -28,8 +28,8 @@ public class TestPlayerMove : TestTacticsMove
                 {
                     MiTurnManager.EndTurn();
                 }
+                GetCurrentTile();
                 FindSelectableTiles();
-                ClearUnSelectableTiles();
                 CheckMousePosition();
                 CheckClick();
             }

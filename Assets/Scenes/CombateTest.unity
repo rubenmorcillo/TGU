@@ -2418,7 +2418,7 @@ MonoBehaviour:
     defensaLejos: 0
     puntosMovimientoTotal: 3
     puntosMovimientoActual: 0
-    puntosEsfuerzoTotal: 2
+    puntosEsfuerzoTotal: 0
     puntosEsfuerzoActual: 0
     hab1: 1
     hab2: 2
@@ -2431,7 +2431,7 @@ MonoBehaviour:
   jumpVelocity: 5.5
   actualTargetTile: {fileID: 0}
   habilidadSeleccionada:
-    id: 1
+    id: 0
     nombre: HAB_1_eu
     potencia: 10
     esfuerzo: 1

@@ -5,7 +5,7 @@ public class TestTacticsMove : MonoBehaviour
 {
     public bool turn = false;
 
-    List<Tile> selectableTiles = new List<Tile>();
+    protected List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
     protected Stack<Tile> path = new Stack<Tile>();
@@ -125,8 +125,13 @@ public class TestTacticsMove : MonoBehaviour
 
     public void FindSelectableTiles()
     {
+        int rangoHabilidad = habilidadSeleccionada.rango;
+        if (gameObject.CompareTag("NPC"))
+		{
+            rangoHabilidad -= 1;
+		}
         ComputeAdjacencyLists(jumpHeight, null);
-        GetCurrentTile();
+       
 
         Queue<Tile> process = new Queue<Tile>();
 
@@ -141,7 +146,7 @@ public class TestTacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if ((habilidadSeleccionada?.id != 0 && t.distance < habilidadSeleccionada.rango) || (habilidadSeleccionada?.id == 0 && t.distance < datosUnidad.puntosMovimientoActual))
+            if ((habilidadSeleccionada?.id != 0 && t.distance < rangoHabilidad) || (habilidadSeleccionada?.id == 0 && t.distance < datosUnidad.puntosMovimientoActual))
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -155,6 +160,7 @@ public class TestTacticsMove : MonoBehaviour
                 }
             }  
         }
+        ClearUnSelectableTiles();
     }
 
     public void MoveToTile(Tile tile)
@@ -195,7 +201,7 @@ public class TestTacticsMove : MonoBehaviour
                     CalculateHeading(target);
                     SetHorizotalVelocity();
                 }
-
+                animator.SetBool("moving", true);
                 //Movimiento
                 transform.forward = heading;
                 transform.position += velocity * Time.deltaTime;
@@ -359,8 +365,8 @@ public class TestTacticsMove : MonoBehaviour
 
     protected Tile FindEndTile(Tile t)
     {
+        
         Stack<Tile> tempPath = new Stack<Tile>();
-
         Tile next = t.parent;
         while (next != null)
         {
@@ -393,6 +399,9 @@ public class TestTacticsMove : MonoBehaviour
         //currentTile.parent = ??
         currentTile.h = Vector3.Distance(currentTile.transform.position, target.transform.position);
         currentTile.f = currentTile.h;
+
+        
+       
 
         while (openList.Count > 0)
         {
