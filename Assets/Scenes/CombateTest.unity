@@ -979,38 +979,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b142d1e5b69bf884f904d50be414e67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unidadActiva: {fileID: 0}
-  datosUnidadActiva:
-    id: 0
-    alias: 
-    tipo:
-      id: 0
-      nombre: 
-      hp_base: 0
-      atq_fisico: 0
-      atq_especial: 0
-      def_fisico: 0
-      def_especial: 0
-      salto_base: 0
-      movimiento_base: 0
-      agilidad: 0
-    nivel: 0
-    exp: 0
-    hpMax: 0
-    hpActual: 0
-    modelPrefabName: 
-    iniciativa: 0
-    defensaCerca: 0
-    defensaLejos: 0
-    puntosMovimientoTotal: 3
-    puntosMovimientoActual: 0
-    puntosEsfuerzoTotal: 0
-    puntosEsfuerzoActual: 0
-    hab1: 0
-    hab2: 0
-    hab3: 0
-    hab4: 0
-    estoyVivo: 1
+  unidades: []
+  aliados: []
   enemigos: []
   fase: 1
 --- !u!1 &779077754 stripped
@@ -2097,14 +2067,14 @@ MonoBehaviour:
   jumpVelocity: 5.5
   actualTargetTile: {fileID: 0}
   habilidadSeleccionada:
-    id: 0
+    id: 1
     nombre: HabTest1
     potencia: 10
     esfuerzo: 1
-    tipo: 0
+    tipo: 1
     desc: 
-    rango: 3
-    tipoRango: 1
+    rango: 23
+    tipoRango: 2
 --- !u!136 &1472415114
 CapsuleCollider:
   m_ObjectHideFlags: 0

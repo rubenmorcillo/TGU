@@ -237,7 +237,7 @@ public class TestTacticsMove : MonoBehaviour
         selectableTiles.Clear();
     }
 
-    void CalculateHeading(Vector3 target)
+    protected void CalculateHeading(Vector3 target)
     {
         heading = target - transform.position;
         heading.Normalize();
@@ -460,16 +460,28 @@ public class TestTacticsMove : MonoBehaviour
 
     public void AplicarDamage(int damage)
 	{
-        //CHAPUZAAA -> habrá que implementar un algoritmo para calcular el daño real
+        //TODO: implementar un algoritmo para calcular el daño real
         datosUnidad.PerderVida(damage);
 	}
     
-    public void ShotSkill(Habilidad habilidad)
+    public void ShotSkill(Habilidad habilidad, Vector3 targetTile)
 	{
         PaySkillCost(habilidad);
+        Vector3 offset = Vector3.up;
+        CalculateHeading(targetTile + offset);
+        transform.forward = heading;
         //TODO: podría haber efectos al activar una habilidad
+        if (habilidad.tipo == Habilidad.TipoHabilidad.FISICO)
+		{
+            animator.Play("Martelo");
 
-	}
+        }
+        else if(habilidad.tipo == Habilidad.TipoHabilidad.ESPECIAL)
+		{
+            animator.Play("RangeAttack");
+        }
+
+    }
     public void PaySkillCost(Habilidad habilidad)
 	{
         SubstractEffortPoints(habilidad.esfuerzo);
