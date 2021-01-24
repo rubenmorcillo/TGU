@@ -17,6 +17,8 @@ public class TestCombateManager : MonoBehaviour
     public List<TestTacticsMove> aliados;
     [SerializeField]
     public List<TestTacticsMove> enemigos;
+
+    public TestTacticsMove unidadActiva;
     //[SerializeField]
     //public PlayerMove unidadActiva;
     //[SerializeField]
@@ -54,6 +56,10 @@ public class TestCombateManager : MonoBehaviour
 
     }
 
+    public void SetUnidadActiva(TestTacticsMove unidad)
+	{
+        unidadActiva = unidad;
+	}
     public void AddUnitToCombat(TestTacticsMove unidad)
 	{
         MiTurnManager.AddUnit(unidad);
@@ -134,6 +140,7 @@ public class TestCombateManager : MonoBehaviour
         {
             turnManager.Update();
 			//mostrar datos enemigos
+
 
 			//ToDo: decidir las condiciones para que acabe el combate
             

@@ -43,7 +43,7 @@ public class TestNPCMove : TestTacticsMove
                 //TODO: Comportamiento de selección de ataques, etc
                 comportamiento.DecidirSiguienteAccion(datosUnidad);
                 habilidadSeleccionada = comportamiento.SeleccionarHabilidad();
-                Debug.Log("Soy " + name + " y me apetece atacar a " + target + " con " + habilidadSeleccionada.nombre);
+                //Debug.Log("Soy " + name + " y me apetece atacar a " + target + " con " + habilidadSeleccionada.nombre);
                 
 
                 //si no estoy suficientemente cerca
@@ -93,12 +93,9 @@ public class TestNPCMove : TestTacticsMove
     {
         movementPayed = false;
         Tile targetTile = null;
-        //TODO: el camino depende de la habilidad seleccionada
         if (habilidadSeleccionada?.id != 0)
         {
-            //debo decidir el nuevo target
             Debug.Log("llevo una habilidad seleccionada");
-            //lo primero es posicionar la habilidad en el target
             currentTile = GetTargetTile(target);
             FindSelectableTiles();
 			targetTile = FindNearestTile();
@@ -107,7 +104,6 @@ public class TestNPCMove : TestTacticsMove
 		{
            targetTile = GetTargetTile(target);
         }
-        //targetTile = GetTargetTile(target);
         FindPath(targetTile);
     }
     Tile FindNearestTile()

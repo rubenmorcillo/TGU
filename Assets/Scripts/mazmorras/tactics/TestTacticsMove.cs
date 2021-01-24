@@ -115,6 +115,7 @@ public class TestTacticsMove : MonoBehaviour
                     if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO && (difX >= 1f && difZ >= 1f))
                     {
                         tile.selectable = false;
+                        selectableTiles.Remove(tile);
                     }
                 }
             }
@@ -125,14 +126,16 @@ public class TestTacticsMove : MonoBehaviour
 
     public void FindSelectableTiles()
     {
+        ComputeAdjacencyLists(jumpHeight, null);
         int rangoHabilidad = habilidadSeleccionada.rango;
         if (gameObject.CompareTag("NPC"))
 		{
             rangoHabilidad -= 1;
 		}
-        ComputeAdjacencyLists(jumpHeight, null);
-       
-
+		else
+		{
+            GetCurrentTile();
+        }
         Queue<Tile> process = new Queue<Tile>();
 
         process.Enqueue(currentTile);

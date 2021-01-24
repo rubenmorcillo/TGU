@@ -43,8 +43,9 @@ public class MiTurnManager
         if (unidadesTurno.Count > 0)
         {
             Debug.Log("TM: pickeando de la cola a " + unidadesTurno.First().datosUnidad.tipo.nombre);
-            unidadesTurno.Peek().BeginTurn();
-
+			TestTacticsMove unidad = unidadesTurno.Peek();
+            unidad.BeginTurn();
+            GameManager.instance.combateManager.SetUnidadActiva(unidad);
         }
     }
 

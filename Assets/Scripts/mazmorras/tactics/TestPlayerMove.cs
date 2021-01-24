@@ -97,8 +97,11 @@ public class TestPlayerMove : TestTacticsMove
                         }
                         else
                         {
-                            SubstractMovementPoints(t.distance);
-                            MoveToTile(t);
+                            if (t != currentTile)
+							{
+                                SubstractMovementPoints(t.distance);
+                                MoveToTile(t);
+                            }
                         }
                     }
                 }

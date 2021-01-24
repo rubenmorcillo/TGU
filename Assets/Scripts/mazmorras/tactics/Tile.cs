@@ -91,7 +91,7 @@ public class Tile : MonoBehaviour
         foreach (Collider item in colliders)
         {
             Tile tile = item.GetComponent<Tile>();
-            if ((tile != null && tile.walkable) || (tile != null && habilidad != null) )
+            if ((tile != null && tile.walkable) || (tile != null && habilidad != null && GameManager.instance.combateManager.unidadActiva.gameObject.CompareTag("Player")))
             {
                 if (habilidad == null)
 				{
