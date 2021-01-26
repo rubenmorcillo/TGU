@@ -78,7 +78,7 @@ public class TestTacticsMove : MonoBehaviour
         return tile;
     }
 
-    public void ComputeAdjacencyLists(float jumpHeight, Tile target)
+    public void ComputeAdjacencyLists(float jumpHeight, Tile target, bool move)
     {
 
         foreach (GameObject tile in tiles)
@@ -86,11 +86,11 @@ public class TestTacticsMove : MonoBehaviour
             Tile t = tile.GetComponent<Tile>();
             if (habilidadSeleccionada?.id != 0)
 			{
-                t.FindNeighbors(jumpHeight, target, habilidadSeleccionada);
+                t.FindNeighbors(jumpHeight, target, habilidadSeleccionada, move);
             }
             else
 			{
-                t.FindNeighbors(jumpHeight, target, null);
+                t.FindNeighbors(jumpHeight, target, null, move);
             }
         }
     }
@@ -99,21 +99,25 @@ public class TestTacticsMove : MonoBehaviour
 	{
         if (habilidadSeleccionada?.id != 0)
         {
+            
             float origenX = currentTile.transform.position.x;
             float origenZ = currentTile.transform.position.z;
+            Debug.Log("voy a quitar los tiles que sobran desde "+currentTile.name);
             foreach (GameObject tileObjeto in tiles)
             {
                 Tile tile = tileObjeto.GetComponent<Tile>();
-                if (!tile.walkable)
+				if (gameObject.CompareTag("NPC") && !tile.walkable)
 				{
-                    tile.selectable = false;
-				}
-                if (tile.selectable)
+					tile.selectable = false;
+                    selectableTiles.Remove(tile);
+                }
+				if (tile.selectable)
                 {
                     float difX = Mathf.Abs(origenX - tile.transform.position.x);
                     float difZ = Mathf.Abs(origenZ - tile.transform.position.z);
                     if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO && (difX >= 1f && difZ >= 1f))
                     {
+                        
                         tile.selectable = false;
                         selectableTiles.Remove(tile);
                     }
@@ -124,13 +128,14 @@ public class TestTacticsMove : MonoBehaviour
 
    
 
-    public void FindSelectableTiles()
+    public void FindSelectableTiles(bool move)
     {
-        ComputeAdjacencyLists(jumpHeight, null);
+        selectableTiles.Clear();
+        ComputeAdjacencyLists(jumpHeight, null, move);
         int rangoHabilidad = habilidadSeleccionada.rango;
         if (gameObject.CompareTag("NPC"))
 		{
-            rangoHabilidad -= 1;
+			//rangoHabilidad -= 1;
 		}
 		else
 		{
@@ -184,6 +189,7 @@ public class TestTacticsMove : MonoBehaviour
 
     public void Move()
     {
+        Debug.Log("moviendo");
         if (path.Count > 0)
         {
             Tile t = path.Peek();
@@ -370,19 +376,19 @@ public class TestTacticsMove : MonoBehaviour
     {
         
         Stack<Tile> tempPath = new Stack<Tile>();
-        Tile next = t.parent;
+        Tile next = t;
         while (next != null)
         {
             tempPath.Push(next);
             next = next.parent;
         }
 
-        if (tempPath.Count <= datosUnidad.puntosMovimientoActual)
-        {
-            return t.parent;
-        }
+		if (tempPath.Count <= datosUnidad.puntosMovimientoActual)
+		{
+			return t;
+		}
 
-        Tile endTile = null;
+		Tile endTile = null;
         for (int i = 0; i <= datosUnidad.puntosMovimientoActual; i++)
         {
             endTile = tempPath.Pop();
@@ -393,18 +399,16 @@ public class TestTacticsMove : MonoBehaviour
 
     protected void FindPath(Tile target)
     {
-        ComputeAdjacencyLists(jumpHeight, target);
+        ComputeAdjacencyLists(jumpHeight, target, true);
         GetCurrentTile();
 
         List<Tile> openList = new List<Tile>();
         List<Tile> closedList = new List<Tile>();
+        Debug.Log("hola,buscando camino desde " + currentTile);
         openList.Add(currentTile);
         //currentTile.parent = ??
         currentTile.h = Vector3.Distance(currentTile.transform.position, target.transform.position);
         currentTile.f = currentTile.h;
-
-        
-       
 
         while (openList.Count > 0)
         {
@@ -415,10 +419,15 @@ public class TestTacticsMove : MonoBehaviour
             if (t == target)
             {
                 actualTargetTile = FindEndTile(t);
+                //CHAPUZAAA esto no me gusta mucho
+                if (actualTargetTile == null)
+				{
+                    actualTargetTile = currentTile;
+				}
                 MoveToTile(actualTargetTile);
                 return;
-            }
-
+			}
+			
             foreach (Tile tile in t.adjacencyList)
             {
                 if (closedList.Contains(tile))

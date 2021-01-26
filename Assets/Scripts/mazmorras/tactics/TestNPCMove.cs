@@ -48,21 +48,14 @@ public class TestNPCMove : TestTacticsMove
 
                 //si no estoy suficientemente cerca
                 FindNearestTarget(); //busca al objetivo(Player) más cercano y lo guarda en target
-                CalculatePath();
-                GetCurrentTile();
-                FindSelectableTiles();
-                actualTargetTile.target = true;
+                CalculatePath(); //calcula el camino hacia una posición donde poder golpear al target con la habilidad seleccionada
+                //GetCurrentTile();
+                //FindSelectableTiles(true);
+                //actualTargetTile.target = true; //esto no hace ni falta
 
 
 
-                //CHAPUZAAAA
-                //Debug.Log("La distancia con el tile real es: " + actualTargetTile.distance);
-                //if (actualTargetTile.distance <= 0)
-                //{
-                //    //TODO: aqui debo hacer las habilidades por lo visto(???)
-                //    MiTurnManager.EndTurn();
-                //}
-                //este es el verdadero fin del turno
+                //CHAPUZAAAA ???
                 if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
                 {
                     MiTurnManager.EndTurn();
@@ -70,11 +63,12 @@ public class TestNPCMove : TestTacticsMove
             }
             else
             {
-               
-                
                 if (!movementPayed && datosUnidad.puntosMovimientoActual > 0)
                 {
-                    SubstractMovementPoints(actualTargetTile.distance);
+                    if (path.Count > 1) //el path siempre incluye la casilla actual del muñeco
+					{
+                        SubstractMovementPoints(path.Count - 1);
+                    }
                     movementPayed = true;
                 }
                 Move();
@@ -95,25 +89,37 @@ public class TestNPCMove : TestTacticsMove
         Tile targetTile = null;
         if (habilidadSeleccionada?.id != 0)
         {
-            Debug.Log("llevo una habilidad seleccionada");
             currentTile = GetTargetTile(target);
-            FindSelectableTiles();
-			targetTile = FindNearestTile();
+            FindSelectableTiles(false);
+            targetTile = FindNearestTile();
 		}
 		else
 		{
            targetTile = GetTargetTile(target);
         }
-        FindPath(targetTile);
+        Debug.Log("tengo que ir a " + targetTile.name +"que está a una distancia de "+targetTile.distance);
+        if (targetTile.selectable)
+		{
+            FindPath(targetTile);
+
+		}
+		else
+		{
+            Debug.Log("pero esa casilla no es walkable");
+
+		}
     }
     Tile FindNearestTile()
 	{
         Tile nearest = null;
         float distance = Mathf.Infinity;
-
+        Debug.Log("Las casillas desde donde puedo usar mi skill son: (" +selectableTiles.Count+ ")");
+        
         foreach (Tile t in selectableTiles)
         {
+            Debug.Log(t.name);
             float d = Vector3.Distance(transform.position, t.transform.position);
+            //Debug.Log(t.name + " a "+d +" porque origen -> "+transform.position + " // objetivo: "+t.transform.position);
             if (d < distance)
 			{
                 distance = d;

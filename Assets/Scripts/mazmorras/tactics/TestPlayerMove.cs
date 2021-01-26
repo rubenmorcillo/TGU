@@ -29,7 +29,14 @@ public class TestPlayerMove : TestTacticsMove
                     MiTurnManager.EndTurn();
                 }
                 GetCurrentTile();
-                FindSelectableTiles();
+                if (habilidadSeleccionada.id != 0)
+				{
+                    FindSelectableTiles(false);
+				}
+				else
+				{
+                    FindSelectableTiles(true);
+                }
                 CheckMousePosition();
                 CheckClick();
             }

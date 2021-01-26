@@ -982,6 +982,7 @@ MonoBehaviour:
   unidades: []
   aliados: []
   enemigos: []
+  unidadActiva: {fileID: 0}
   fase: 1
 --- !u!114 &772853612
 MonoBehaviour:
@@ -2461,7 +2462,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1472415112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 1.91, z: 3}
+  m_LocalPosition: {x: -0, y: 1.91, z: 4}
   m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_Children:
   - {fileID: 1958977386}
@@ -2564,7 +2565,7 @@ PrefabInstance:
     - target: {fileID: 6107753898302182250, guid: 38cd1323093ec7d4888880d441f820db,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 6107753898302182250, guid: 38cd1323093ec7d4888880d441f820db,
         type: 3}
@@ -2574,7 +2575,7 @@ PrefabInstance:
     - target: {fileID: 6107753898302182250, guid: 38cd1323093ec7d4888880d441f820db,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6107753898302182250, guid: 38cd1323093ec7d4888880d441f820db,
         type: 3}
@@ -3005,11 +3006,11 @@ MonoBehaviour:
     iniciativa: 0
     defensaCerca: 0
     defensaLejos: 0
-    puntosMovimientoTotal: 3
+    puntosMovimientoTotal: 5
     puntosMovimientoActual: 0
-    puntosEsfuerzoTotal: 2
+    puntosEsfuerzoTotal: 10
     puntosEsfuerzoActual: 0
-    hab1: 1
+    hab1: 4
     hab2: 0
     hab3: 0
     hab4: 0
@@ -3026,7 +3027,7 @@ MonoBehaviour:
     esfuerzo: 0
     tipo: 0
     desc: 
-    rango: 0
+    rango: 7
     tipoRango: 0
 --- !u!1 &1611994189 stripped
 GameObject:

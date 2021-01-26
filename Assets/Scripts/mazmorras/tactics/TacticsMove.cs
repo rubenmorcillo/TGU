@@ -79,7 +79,7 @@ public class TacticsMove : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors(jumpHeight, target, habilidadSeleccionada);
+            t.FindNeighbors(jumpHeight, target, habilidadSeleccionada, true);
         }
     }
 
