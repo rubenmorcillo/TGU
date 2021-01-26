@@ -376,7 +376,7 @@ public class TestTacticsMove : MonoBehaviour
     {
         
         Stack<Tile> tempPath = new Stack<Tile>();
-        Tile next = t;
+        Tile next = t.parent;
         while (next != null)
         {
             tempPath.Push(next);
@@ -385,8 +385,15 @@ public class TestTacticsMove : MonoBehaviour
 
 		if (tempPath.Count <= datosUnidad.puntosMovimientoActual)
 		{
-			return t;
-		}
+            if (habilidadSeleccionada?.id != 0)
+            {
+                return t;
+            }
+            else
+            {
+                return t.parent;
+            }
+        }
 
 		Tile endTile = null;
         for (int i = 0; i <= datosUnidad.puntosMovimientoActual; i++)

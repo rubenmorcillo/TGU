@@ -39,7 +39,6 @@ public class ComportamientoNPC
 		switch (tipoComportamiento)
 		{
 			case ComportamientoNPCEnum.DEFAULT:
-				List<Habilidad> habilidadesDisponibles = ObtenerHabilidadesDisponibles();
 
 				return;
 

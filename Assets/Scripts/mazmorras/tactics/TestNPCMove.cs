@@ -12,6 +12,8 @@ public class TestNPCMove : TestTacticsMove
 
     ComportamientoNPC comportamiento;
 
+
+
     //enum TipoComportamientoEnum { DEFAULT = 0}
     //TipoComportamientoEnum comportamiento;
 
@@ -44,7 +46,7 @@ public class TestNPCMove : TestTacticsMove
                 comportamiento.DecidirSiguienteAccion(datosUnidad);
                 habilidadSeleccionada = comportamiento.SeleccionarHabilidad();
                 //Debug.Log("Soy " + name + " y me apetece atacar a " + target + " con " + habilidadSeleccionada.nombre);
-                
+
 
                 //si no estoy suficientemente cerca
                 FindNearestTarget(); //busca al objetivo(Player) más cercano y lo guarda en target
@@ -87,6 +89,8 @@ public class TestNPCMove : TestTacticsMove
     {
         movementPayed = false;
         Tile targetTile = null;
+        
+        
         if (habilidadSeleccionada?.id != 0)
         {
             currentTile = GetTargetTile(target);
@@ -97,27 +101,28 @@ public class TestNPCMove : TestTacticsMove
 		{
            targetTile = GetTargetTile(target);
         }
-        Debug.Log("tengo que ir a " + targetTile.name +"que está a una distancia de "+targetTile.distance);
-        if (targetTile.selectable)
-		{
-            FindPath(targetTile);
+        Debug.Log("tengo que ir a " + targetTile.name + "que está a una distancia de " + targetTile.distance);
 
+        if (GetTargetTile(gameObject) != targetTile)
+		{
+            Debug.Log("yendo desde" + GetTargetTile(gameObject));
+            FindPath(targetTile);
 		}
 		else
 		{
-            Debug.Log("pero esa casilla no es walkable");
-
+            Debug.Log("así que no me tengo que mover");
 		}
+        
     }
     Tile FindNearestTile()
 	{
         Tile nearest = null;
         float distance = Mathf.Infinity;
-        Debug.Log("Las casillas desde donde puedo usar mi skill son: (" +selectableTiles.Count+ ")");
+        //Debug.Log("Las casillas desde donde puedo usar mi skill son: (" +selectableTiles.Count+ ")");
         
         foreach (Tile t in selectableTiles)
         {
-            Debug.Log(t.name);
+            //Debug.Log(t.name);
             float d = Vector3.Distance(transform.position, t.transform.position);
             //Debug.Log(t.name + " a "+d +" porque origen -> "+transform.position + " // objetivo: "+t.transform.position);
             if (d < distance)
