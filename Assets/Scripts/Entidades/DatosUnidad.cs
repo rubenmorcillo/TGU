@@ -38,6 +38,10 @@ public class DatosUnidad
 
     public int hpActual;
 
+	public int atqFisico;
+
+	public int atqEspecial;
+
     public string modelPrefabName;
 
     public int iniciativa;

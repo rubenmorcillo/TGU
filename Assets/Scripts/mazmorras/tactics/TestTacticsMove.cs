@@ -102,7 +102,7 @@ public class TestTacticsMove : MonoBehaviour
             
             float origenX = currentTile.transform.position.x;
             float origenZ = currentTile.transform.position.z;
-            Debug.Log("voy a quitar los tiles que sobran desde "+currentTile.name);
+            //Debug.Log("voy a quitar los tiles que sobran desde "+currentTile.name);
             foreach (GameObject tileObjeto in tiles)
             {
                 Tile tile = tileObjeto.GetComponent<Tile>();
@@ -133,11 +133,7 @@ public class TestTacticsMove : MonoBehaviour
         selectableTiles.Clear();
         ComputeAdjacencyLists(jumpHeight, null, move);
         int rangoHabilidad = habilidadSeleccionada.rango;
-        if (gameObject.CompareTag("NPC"))
-		{
-			//rangoHabilidad -= 1;
-		}
-		else
+        if (gameObject.CompareTag("Player"))
 		{
             GetCurrentTile();
         }
@@ -483,34 +479,90 @@ public class TestTacticsMove : MonoBehaviour
         animator.SetBool("moving", false);
     }
 
-    public void AplicarDamage(int damage)
+    public void AplicarDamage(Damage damage)
 	{
         //TODO: implementar un algoritmo para calcular el daño real
-        datosUnidad.PerderVida(damage);
+        int finalDamage = 0;
+        int n = datosUnidad.nivel;
+        int a = damage.AtaqueOrigen; //atq o atq especial de la unidad que ataca
+        int p = damage.PotenciaAtaque;
+        int d = 1; // defensa de la unidad actual
+		switch (damage.TipoDamage)
+		{
+            case Habilidad.TipoHabilidad.FISICO:
+                d = datosUnidad.defensaCerca;
+                break;
+            case Habilidad.TipoHabilidad.ESPECIAL:
+                d = datosUnidad.defensaLejos;
+                break;
+            case Habilidad.TipoHabilidad.CURA:
+                d = 0;
+                break;
+		}
+        int b = 1; //bonificacion de tipo, de momento no tengo
+        int e = 1;//efectividad, de momento siempre 1
+        int v = Random.Range(86, 100); //variacion
+        finalDamage = (int) (0.01 * b * e * v * (((0.2 * n + 1) * a * p) / (25 * d) + 2 ));
+        Debug.Log("Aplicando un daño final de " + finalDamage);
+        datosUnidad.PerderVida(finalDamage);
 	}
     
     public void ShotSkill(Habilidad habilidad, Tile target)
 	{
         Debug.Log(datosUnidad.tipo.nombre + ": usando habilidad "+ habilidad.nombre +"  a la casilla " + target.name);
-        target.DoSkill(habilidadSeleccionada);
         PaySkillCost(habilidad);
+        //TODO: podría haber efectos al activar una habilidad
+        MirarObjetivoHabilidad(target);
+        AnimarHabilidad(habilidad);
+        target.DoDamage(CreateDamage(habilidad));
+        
+
+
+    }
+
+    private Damage CreateDamage(Habilidad habilidad)
+	{
+        Damage skillDamage = new Damage();
+        skillDamage.PotenciaAtaque = habilidad.potencia;
+        skillDamage.TipoDamage = habilidad.tipo;
+        switch (habilidad.tipo)
+        {
+            case Habilidad.TipoHabilidad.FISICO:
+                skillDamage.AtaqueOrigen = datosUnidad.atqFisico;
+                break;
+            case Habilidad.TipoHabilidad.ESPECIAL:
+                skillDamage.AtaqueOrigen = datosUnidad.atqEspecial;
+                break;
+            case Habilidad.TipoHabilidad.CURA:
+                skillDamage.AtaqueOrigen = datosUnidad.atqEspecial;
+                break;
+        }
+
+        return skillDamage;
+
+    }
+
+    private void MirarObjetivoHabilidad(Tile target)
+	{
         //OJO! con el halfHeight + 0.5f
         Vector3 normalizedTarget = new Vector3(target.transform.position.x, halfHeight + 0.5f, target.transform.position.z);
         CalculateHeading(normalizedTarget);
         transform.forward = heading;
-        //TODO: podría haber efectos al activar una habilidad
+    }
+    private void AnimarHabilidad(Habilidad habilidad)
+	{
+        //CHAPUZAAAA, de momento tiene 2 animaciones por defecto
         if (habilidad.tipo == Habilidad.TipoHabilidad.FISICO)
-		{
+        {
             animator.Play("Martelo");
             //transform.forward = heading;
 
         }
-        else if(habilidad.tipo == Habilidad.TipoHabilidad.ESPECIAL)
-		{
+        else if (habilidad.tipo == Habilidad.TipoHabilidad.ESPECIAL)
+        {
             animator.Play("RangeAttack");
             //transform.forward = heading;
         }
-
     }
 
     protected bool ImDone()
@@ -548,5 +600,12 @@ public class TestTacticsMove : MonoBehaviour
         MiTurnManager.EndTurn();
     }
 
-
+    private void OnGUI()
+    {
+        //MOSTRAR VIDA DEL ENEMIGO
+        //guardamos la posición del enemigo con respecto a la cámara.
+        Vector2 pos = Camera.main.WorldToScreenPoint(transform.position);
+        int offset = 40;
+        GUI.Box(new Rect(pos.x - offset, Screen.height - (pos.y + offset), 80, 24), datosUnidad.hpActual + "/" + datosUnidad.hpMax);
+    }
 }

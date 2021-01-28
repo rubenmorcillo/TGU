@@ -110,13 +110,7 @@ public class Tile : MonoBehaviour
             }
         }
     }
-
-    public void DoSkill(Habilidad habilidad)
-	{
-        DoDamage(habilidad.potencia);
-	}
-
-    public void DoDamage(int damage)
+    public void DoDamage(Damage damage)
 	{
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.up, out hit, 1))

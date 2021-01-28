@@ -157,12 +157,12 @@ public class TestNPCMove : TestTacticsMove
         target = nearest;
     }
 
-    private void OnGUI()
-    {
-        //MOSTRAR VIDA DEL ENEMIGO
-        //guardamos la posición del enemigo con respecto a la cámara.
-        Vector2 pos = Camera.main.WorldToScreenPoint(transform.position);
-        int offset = 40;
-        GUI.Box(new Rect(pos.x - offset, Screen.height - (pos.y + offset), 80, 24), datosUnidad.hpActual + "/" + datosUnidad.hpMax);
-    }
+    //private void OnGUI()
+    //{
+    //    //MOSTRAR VIDA DEL ENEMIGO
+    //    //guardamos la posición del enemigo con respecto a la cámara.
+    //    Vector2 pos = Camera.main.WorldToScreenPoint(transform.position);
+    //    int offset = 40;
+    //    GUI.Box(new Rect(pos.x - offset, Screen.height - (pos.y + offset), 80, 24), datosUnidad.hpActual + "/" + datosUnidad.hpMax);
+    //}
 }

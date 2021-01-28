@@ -3,8 +3,6 @@
 [Serializable]
 public class Habilidad 
 {
-	public enum TipoHabilidad {FISICO, ESPECIAL }
-
 	public int id;
 
 	public string nombre;
@@ -12,6 +10,8 @@ public class Habilidad
 	public int potencia;
 
 	public int esfuerzo;
+
+	public enum TipoHabilidad { FISICO, ESPECIAL, CURA }
 
 	public TipoHabilidad tipo;
 

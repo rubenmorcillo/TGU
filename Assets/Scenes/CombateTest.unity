@@ -2411,15 +2411,17 @@ MonoBehaviour:
       agilidad: 0
     nivel: 5
     exp: 95
-    hpMax: 150
-    hpActual: 150
+    hpMax: 300
+    hpActual: 280
+    atqFisico: 4
+    atqEspecial: 2
     modelPrefabName: 
     iniciativa: 5
-    defensaCerca: 0
-    defensaLejos: 0
+    defensaCerca: 1
+    defensaLejos: 1
     puntosMovimientoTotal: 3
     puntosMovimientoActual: 0
-    puntosEsfuerzoTotal: 0
+    puntosEsfuerzoTotal: 3
     puntosEsfuerzoActual: 0
     hab1: 1
     hab2: 2
@@ -2438,7 +2440,7 @@ MonoBehaviour:
     esfuerzo: 1
     tipo: 1
     desc: 
-    rango: 23
+    rango: 10
     tipoRango: 2
 --- !u!136 &1472415114
 CapsuleCollider:
@@ -2998,14 +3000,16 @@ MonoBehaviour:
       salto_base: 0
       movimiento_base: 0
       agilidad: 0
-    nivel: 1
+    nivel: 2
     exp: 0
     hpMax: 100
     hpActual: 90
+    atqFisico: 1
+    atqEspecial: 2
     modelPrefabName: 
     iniciativa: 0
-    defensaCerca: 0
-    defensaLejos: 0
+    defensaCerca: 1
+    defensaLejos: 1
     puntosMovimientoTotal: 3
     puntosMovimientoActual: 0
     puntosEsfuerzoTotal: 4
@@ -3640,6 +3644,8 @@ MonoBehaviour:
     exp: 0
     hpMax: 0
     hpActual: 0
+    atqFisico: 0
+    atqEspecial: 0
     modelPrefabName: 
     iniciativa: 0
     defensaCerca: 0
