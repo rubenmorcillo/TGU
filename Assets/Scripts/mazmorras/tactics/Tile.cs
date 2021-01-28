@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class Tile : MonoBehaviour 
 {
-
-
     public bool walkable = true;
     public bool current = false;
     public bool target = false;
@@ -25,8 +23,6 @@ public class Tile : MonoBehaviour
     public float f = 0;
     public float g = 0;
     public float h = 0;
-
-   // CombateManager combateManager = CombateManager.instance;
 
 	// Use this for initialization
 	void Start () 

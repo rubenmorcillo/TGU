@@ -14,10 +14,28 @@ public class ComportamientoNPC
 	{
 		tipoComportamiento = ComportamientoNPCEnum.DEFAULT;
 	}
-	
-	public ComportamientoNPC(ComportamientoNPCEnum tipoComportamiento)
+
+	public ComportamientoNPC(DatosUnidad datosUnidad)
 	{
+		this.datosUnidad = datosUnidad;
+	}
+	
+	public ComportamientoNPC(DatosUnidad datosUnidad, ComportamientoNPCEnum tipoComportamiento)
+	{
+		this.datosUnidad = datosUnidad;
 		this.tipoComportamiento = tipoComportamiento;
+	}
+
+	public DatosUnidad DatosUnidad
+	{
+		get
+		{
+			return datosUnidad;
+		}
+		set
+		{
+			datosUnidad = value;
+		}
 	}
 
 	public ComportamientoNPCEnum TipoComportamiento
@@ -49,6 +67,7 @@ public class ComportamientoNPC
 	List<Habilidad> ObtenerHabilidadesDisponibles()
 	{
 		List<Habilidad> habilidades = new List<Habilidad>();
+		Debug.Log("Obtener habilidades disponibles para " + datosUnidad.alias);
 		if (datosUnidad.Hab1 != null)
 		{
 			habilidades.Add(datosUnidad.Hab1);
@@ -69,7 +88,7 @@ public class ComportamientoNPC
 		List<Habilidad> habilidadesDisponibles = new List<Habilidad>();
 		if (habilidades.Count > 0)
 		{
-			habilidadesDisponibles = habilidades.Where(h => h.esfuerzo < datosUnidad.puntosEsfuerzoActual).ToList<Habilidad>();
+			habilidadesDisponibles = habilidades.Where(h => h.esfuerzo <= datosUnidad.puntosEsfuerzoActual).ToList<Habilidad>();
 		}
 
 		return habilidadesDisponibles;

@@ -189,7 +189,7 @@ public class TestTacticsMove : MonoBehaviour
 
     public void Move()
     {
-        Debug.Log("moviendo");
+        //Debug.Log("moviendo");
         if (path.Count > 0)
         {
             Tile t = path.Peek();
@@ -408,10 +408,9 @@ public class TestTacticsMove : MonoBehaviour
     {
         ComputeAdjacencyLists(jumpHeight, target, true);
         GetCurrentTile();
-
+        Debug.Log("me muevo desde " + currentTile.name);
         List<Tile> openList = new List<Tile>();
         List<Tile> closedList = new List<Tile>();
-        Debug.Log("hola,buscando camino desde " + currentTile);
         openList.Add(currentTile);
         //currentTile.parent = ??
         currentTile.h = Vector3.Distance(currentTile.transform.position, target.transform.position);
@@ -492,6 +491,8 @@ public class TestTacticsMove : MonoBehaviour
     
     public void ShotSkill(Habilidad habilidad, Tile target)
 	{
+        Debug.Log(datosUnidad.tipo.nombre + ": usando habilidad "+ habilidad.nombre +"  a la casilla " + target.name);
+        target.DoSkill(habilidadSeleccionada);
         PaySkillCost(habilidad);
         //OJO! con el halfHeight + 0.5f
         Vector3 normalizedTarget = new Vector3(target.transform.position.x, halfHeight + 0.5f, target.transform.position.z);
@@ -511,6 +512,18 @@ public class TestTacticsMove : MonoBehaviour
         }
 
     }
+
+    protected bool ImDone()
+	{
+        bool done = false;
+        if ((datosUnidad.puntosEsfuerzoActual <= 0 || habilidadSeleccionada == null || habilidadSeleccionada.id == 0) && datosUnidad.puntosMovimientoActual <= 0)
+		{
+            done = true;
+		}
+
+        return done;
+	}
+
     public void PaySkillCost(Habilidad habilidad)
 	{
         SubstractEffortPoints(habilidad.esfuerzo);
@@ -524,6 +537,16 @@ public class TestTacticsMove : MonoBehaviour
 	{
         datosUnidad.SubstractMovementPoints(p);
 	}
+
+    public void ForceEndTurn()
+	{
+        
+        currentTile = null;
+        actualTargetTile = null;
+        moving = false;
+        path.Clear();
+        MiTurnManager.EndTurn();
+    }
 
 
 }

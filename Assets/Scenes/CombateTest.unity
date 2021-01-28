@@ -3006,9 +3006,9 @@ MonoBehaviour:
     iniciativa: 0
     defensaCerca: 0
     defensaLejos: 0
-    puntosMovimientoTotal: 5
+    puntosMovimientoTotal: 3
     puntosMovimientoActual: 0
-    puntosEsfuerzoTotal: 10
+    puntosEsfuerzoTotal: 4
     puntosEsfuerzoActual: 0
     hab1: 4
     hab2: 0

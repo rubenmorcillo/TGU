@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TestPlayerMove : TestTacticsMove
 {
-
     void Start()
     {
         Init();
@@ -54,8 +53,6 @@ public class TestPlayerMove : TestTacticsMove
         
     }
 
-   
-
     public void CheckMousePosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -80,7 +77,6 @@ public class TestPlayerMove : TestTacticsMove
         }
     }
 
-
     void CheckClick()
     {
         if (Input.GetMouseButtonUp(0))
@@ -98,9 +94,7 @@ public class TestPlayerMove : TestTacticsMove
                         if (habilidadSeleccionada?.id != 0)
                         {
                             //TODO: atacar al tile
-                            Debug.Log(datosUnidad.tipo.nombre + ": atacando a la casilla " + t.name);
                             ShotSkill(habilidadSeleccionada, t);
-                            t.DoSkill(habilidadSeleccionada);
                         }
                         else
                         {

@@ -26,10 +26,6 @@ public class TestCombateManager : MonoBehaviour
 
 
 
-
-    //GameObject unidadSeleccionada;
-
-
     public enum FaseCombate { PAUSA, INICIO, COLOCANDO, INICIO_COMBATE, COMBATE, FIN_COMBATE }
     public FaseCombate fase;
 

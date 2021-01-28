@@ -12,22 +12,16 @@ public class TestNPCMove : TestTacticsMove
 
     ComportamientoNPC comportamiento;
 
+    bool readyToAttack = false;
 
 
-    //enum TipoComportamientoEnum { DEFAULT = 0}
-    //TipoComportamientoEnum comportamiento;
-
-
-    // Use this for initialization
     void Start()
     {
-        comportamiento = new ComportamientoNPC();
-        //comportamiento = TipoComportamientoEnum.DEFAULT;
+        comportamiento = new ComportamientoNPC(datosUnidad);
         Init();
         animator.Play("Idle");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (datosUnidad.estoyVivo)
@@ -38,33 +32,33 @@ public class TestNPCMove : TestTacticsMove
                 return;
             }
 
+            //CHAPUZAAAA (???) La siguiente comprobación va aquí???
+            if (ImDone())  //Puedo hacer algo o tengo que terminar?
+            {
+                //movementPayed = false; //no sé si es necesario reiniciarlo, solo lo tiene el NPC
+                ForceEndTurn();
+                return;
+            }
+
             if (!moving)
             {
+                readyToAttack = false;
                 animator.SetBool("moving", false);
 
                 //TODO: Comportamiento de selección de ataques, etc
-                comportamiento.DecidirSiguienteAccion(datosUnidad);
-                habilidadSeleccionada = comportamiento.SeleccionarHabilidad();
-                //Debug.Log("Soy " + name + " y me apetece atacar a " + target + " con " + habilidadSeleccionada.nombre);
-
-
-                //si no estoy suficientemente cerca
+                //comportamiento.DecidirSiguienteAccion(datosUnidad);
+                //if (atacar)
+                habilidadSeleccionada = comportamiento.SeleccionarHabilidad(); //decido qué habilidad debería usar
                 FindNearestTarget(); //busca al objetivo(Player) más cercano y lo guarda en target
                 CalculatePath(); //calcula el camino hacia una posición donde poder golpear al target con la habilidad seleccionada
-                //GetCurrentTile();
-                //FindSelectableTiles(true);
-                //actualTargetTile.target = true; //esto no hace ni falta
-
-
-
-                //CHAPUZAAAA ???
-                if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
-                {
-                    MiTurnManager.EndTurn();
-                }
+                if (readyToAttack)
+				{
+                    ShotSkill(habilidadSeleccionada, GetTargetTile(target));
+				}
             }
             else
             {
+                //nos aseguramos de que pagamos los puntos de movimiento
                 if (!movementPayed && datosUnidad.puntosMovimientoActual > 0)
                 {
                     if (path.Count > 1) //el path siempre incluye la casilla actual del muñeco
@@ -83,13 +77,10 @@ public class TestNPCMove : TestTacticsMove
         }
     }
 
-    
-
     void CalculatePath()
     {
         movementPayed = false;
         Tile targetTile = null;
-        
         
         if (habilidadSeleccionada?.id != 0)
         {
@@ -101,19 +92,19 @@ public class TestNPCMove : TestTacticsMove
 		{
            targetTile = GetTargetTile(target);
         }
-        Debug.Log("tengo que ir a " + targetTile.name + "que está a una distancia de " + targetTile.distance);
+ 
 
-        if (GetTargetTile(gameObject) != targetTile)
+        if (targetTile != null && targetTile != GetTargetTile(gameObject))
 		{
-            Debug.Log("yendo desde" + GetTargetTile(gameObject));
             FindPath(targetTile);
 		}
 		else
 		{
-            Debug.Log("así que no me tengo que mover");
+            readyToAttack = true;
+            Debug.Log(datosUnidad.alias+" en posición para usar la "+habilidadSeleccionada.nombre);
 		}
-        
     }
+
     Tile FindNearestTile()
 	{
         Tile nearest = null;
@@ -136,7 +127,9 @@ public class TestNPCMove : TestTacticsMove
 	}
     void FindNearestTarget()
     {
+        //si vamos a atacar buscamos a los players
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Player");
+        //si fuesemos a curar el target sería otro
 
         GameObject nearest = null;
         float distance = Mathf.Infinity;
