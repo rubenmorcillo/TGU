@@ -408,7 +408,7 @@ public class TestTacticsMove : MonoBehaviour
     {
         ComputeAdjacencyLists(jumpHeight, target, true);
         GetCurrentTile();
-        Debug.Log("me muevo desde " + currentTile.name);
+        Debug.Log("me muevo desde " + currentTile.name +" hasta " +target.name);
         List<Tile> openList = new List<Tile>();
         List<Tile> closedList = new List<Tile>();
         openList.Add(currentTile);

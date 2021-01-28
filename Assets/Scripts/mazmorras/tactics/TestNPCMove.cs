@@ -48,6 +48,7 @@ public class TestNPCMove : TestTacticsMove
                 //TODO: Comportamiento de selección de ataques, etc
                 //comportamiento.DecidirSiguienteAccion(datosUnidad);
                 //if (atacar)
+                
                 habilidadSeleccionada = comportamiento.SeleccionarHabilidad(); //decido qué habilidad debería usar
                 FindNearestTarget(); //busca al objetivo(Player) más cercano y lo guarda en target
                 CalculatePath(); //calcula el camino hacia una posición donde poder golpear al target con la habilidad seleccionada
@@ -55,6 +56,14 @@ public class TestNPCMove : TestTacticsMove
 				{
                     ShotSkill(habilidadSeleccionada, GetTargetTile(target));
 				}
+				else
+				{
+                    if (datosUnidad.puntosMovimientoActual <= 0)
+					{
+                       //ha llegado a su objetivo pero no tiene el objetivo en rango
+                        ForceEndTurn();
+                    }
+                }
             }
             else
             {
