@@ -104,7 +104,7 @@ public class TestCombateManager : MonoBehaviour
 
             TestSala sala = gameObject.GetComponent<TestSala>();
             sala.mostrarIniciosPlayer(); //mostramos los inicios disponibles (los puntos de Spawn para el player q no están ocupados)
-
+            ColocarUnidad();
 
 
 			//LevelManager.salaActiva.GetComponent<Sala>().encontrarCasillasDisponibles();
@@ -158,7 +158,32 @@ public class TestCombateManager : MonoBehaviour
         }
 
     }
+    private void ColocarUnidad()
+	{
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.tag == "Tile")
+            {
+                Tile c = hit.collider.GetComponent<Tile>();
+                if (c.selectable)
+                {
+                    c.target = true;
+                    if (Input.GetMouseButton(0))
+                    {
+                        //TODO:: ...antes tiene que estar creada o seleccionada en los Datos del Jugador
+                        //posicionar mi unidad en esta casilla
+                        GameObject unidadProvisional = (GameObject)Resources.Load("Unidades/UnidadSRC"); //ESTO HAY QUE CAMBIARLO!!!
+
+                        crearUnidad(unidadProvisional, c);
+                        Debug.Log("Colocando " + unidadProvisional + " en " + c);
+                    }
+                }
+            }
+        }
+    }
 
     private void crearEnemigos(Sala sala)
     {

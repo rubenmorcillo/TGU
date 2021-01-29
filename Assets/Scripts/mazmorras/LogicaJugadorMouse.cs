@@ -85,32 +85,7 @@ public class LogicaJugadorMouse : MonoBehaviour
 
             }
         }
-        else if (EstadosJuego.EstadoActual() == EstadosJuego.Estado.COMBATE)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (hit.collider.tag == "Tile")
-                {
-                    Tile c = hit.collider.GetComponent<Tile>();
-
-                    if (c.selectable)
-                    {
-                        c.target = true;
-                        if (Input.GetMouseButton(0))
-                        {
-                            //activar unidad para colocarla
-                            GameObject unidadProvisional = (GameObject)Resources.Load("Unidades/UnidadSRC"); //ESTO HAY QUE CAMBIARLO!!!
-                           
-                            GameManager.instance.combateManager.crearUnidad(unidadProvisional, c);
-                            Debug.Log("Colocando " + unidadProvisional + " en " + c);
-                        }
-                    }
-                }
-            }
-        }
+        
 
 
 
