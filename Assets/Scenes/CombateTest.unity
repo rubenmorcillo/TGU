@@ -2654,6 +2654,8 @@ MonoBehaviour:
   btnHab4: {fileID: 673398973}
   txtMovimiento: {fileID: 1640339167}
   txtEsfuerzo: {fileID: 387026944}
+  txtVida: {fileID: 862138007}
+  txtNombre: {fileID: 1346359520}
   txtHab1: {fileID: 152342801}
   txtHab2: {fileID: 1057211229}
   txtHab3: {fileID: 1378538036}
@@ -3986,7 +3988,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -749, y: -25}
+  m_AnchoredPosition: {x: -779, y: -25}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1346359520
@@ -4015,7 +4017,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0

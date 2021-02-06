@@ -15,7 +15,7 @@ public class UIPlayerCombate : MonoBehaviour
     [SerializeField]
     GameObject btnHab1, btnHab2, btnHab3, btnHab4;
     [SerializeField]
-    Text txtMovimiento, txtEsfuerzo;
+    Text txtMovimiento, txtEsfuerzo, txtVida, txtNombre;
     [SerializeField]
     Text txtHab1, txtHab2, txtHab3, txtHab4;
 
@@ -48,6 +48,8 @@ public class UIPlayerCombate : MonoBehaviour
 	{
         txtMovimiento.text = unidadActiva.datosUnidad.puntosMovimientoActual.ToString();
         txtEsfuerzo.text = unidadActiva.datosUnidad.puntosEsfuerzoActual.ToString();
+        txtVida.text = "HP:  " + unidadActiva.datosUnidad.hpActual + " / " + unidadActiva.datosUnidad.hpMax;
+        txtNombre.text = string.IsNullOrEmpty(unidadActiva.datosUnidad.alias.Trim()) ? unidadActiva.datosUnidad.tipo.nombre : unidadActiva.datosUnidad.alias;
 	}
 
     public void MostrarSkills()
