@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public BDLocal BDlocal;
     public EstadosJuego.Estado estadoJuego;
 
+    public bool mostrarDebug;
+
     //public CombateManager combateManager;
     public TestCombateManager combateManager;
 
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this);
-
+        
 
         //combateManager = gameObject.GetComponent<CombateManager>();
         //if (combateManager == null)
@@ -59,7 +61,7 @@ public class GameManager : MonoBehaviour
             datosPlayerTest.dinero = 150;
             datosPlayerTest.reputacion = 99;
             datosPlayerTest.nickname = "nicknameTest";
-            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100, 9));
+            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 6, 5, 3, 5, 3, 5), "rasek", 5, 100, 9));
             datosPlayer = datosPlayerTest;
             //datosPlayer = gameObject.AddComponent<DatosPlayer>();
         }
@@ -82,9 +84,10 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+
         estadoJuego = EstadosJuego.Estado.INICIO;
 
-        Debug.Log("GameManager: start...");
+        if (mostrarDebug) Debug.Log("GameManager: start...");
         EstadosJuego.activarEstado(EstadosJuego.Estado.MENU);
 
         //inico los otros managers
@@ -108,7 +111,7 @@ public class GameManager : MonoBehaviour
 	public void iniciarMazmorra()
     {
         estadoJuego = EstadosJuego.Estado.EXPLORAR;
-        Debug.Log("GM: iniciando mazmorra");
+        if (mostrarDebug) Debug.Log("GM: iniciando mazmorra");
         mazmorra = LevelManager.CrearMazmorra();
         LevelManager.CrearSalaInicial();
         playerModel = LevelManager.posicionarJugador();
@@ -148,5 +151,6 @@ public class GameManager : MonoBehaviour
         interfaz.MostrarTexto(texto);
 	}
 
+	
     
 }

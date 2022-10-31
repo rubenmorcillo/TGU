@@ -1,22 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class TipoUnidad {
 
-	public TipoUnidad(int id, string nombre, int hp_base, int movimiento_base, int atq1, int atq2, int def1, int def2, int agilidad)
+	public TipoUnidad(int id, string nombre, int hp_base, int rangoMovimiento_base, int poder, int defensa, int agilidad, int iniciativa, int velocidad)
 	{
 		this.id = id;
 		this.nombre = nombre;
 		this.hp_base = hp_base;
-		this.atq_fisico = atq1;
-		this.atq_especial = atq2;
-		this.def_fisico = def1;
-		this.def_especial = def2;
-		this.agilidad = agilidad;
-		this.movimiento_base = movimiento_base;
+		this.poder_base = poder;
+		this.defensa_base = defensa;
+		this.agilidad_base = agilidad;
+		this.iniciativa_base = iniciativa;
+		this.velocidad_base = velocidad;
+		this.rangoMovimiento_base = rangoMovimiento_base;
+
 	}
 	public int id;
     public string nombre;
-    public int hp_base, atq_fisico, atq_especial, def_fisico, def_especial, salto_base, movimiento_base, agilidad;
+    public int hp_base, poder_base, defensa_base, salto_base, rangoMovimiento_base, agilidad_base, iniciativa_base, velocidad_base;
+	public float punteria_base;
+	
 
 }

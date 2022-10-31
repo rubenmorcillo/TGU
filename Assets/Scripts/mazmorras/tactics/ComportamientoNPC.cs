@@ -67,7 +67,7 @@ public class ComportamientoNPC
 	List<Habilidad> ObtenerHabilidadesDisponibles()
 	{
 		List<Habilidad> habilidades = new List<Habilidad>();
-		Debug.Log("Obtener habilidades disponibles para " + datosUnidad.alias);
+		if (GameManager.instance.mostrarDebug) Debug.Log("Obtener habilidades disponibles para " + datosUnidad.alias);
 		if (datosUnidad.Hab1 != null)
 		{
 			habilidades.Add(datosUnidad.Hab1);
@@ -86,21 +86,23 @@ public class ComportamientoNPC
 		}
 
 		List<Habilidad> habilidadesDisponibles = new List<Habilidad>();
-		if (habilidades.Count > 0)
-		{
-			habilidadesDisponibles = habilidades.Where(h => h.esfuerzo <= datosUnidad.puntosEsfuerzoActual).ToList<Habilidad>();
-		}
+		habilidadesDisponibles = habilidades;
 
 		return habilidadesDisponibles;
 	}
 
 	public Habilidad SeleccionarHabilidad()
 	{
+		if (GameManager.instance.mostrarDebug) Debug.Log("Voy a seleccionar una habilidad");
 		Habilidad habilidadSeleccionada = new Habilidad();
 		foreach (Habilidad skill in ObtenerHabilidadesDisponibles()){
 			habilidadSeleccionada = skill;
 		}
-
+		if (habilidadSeleccionada.id == 0)
+		{
+			habilidadSeleccionada = GameManager.instance.BDlocal.Habilidades.First();
+		}
+		if (GameManager.instance.mostrarDebug) Debug.Log("he seleccionado la habilidad " + habilidadSeleccionada.id);
 		return habilidadSeleccionada;
 	}
 }

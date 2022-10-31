@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class TestPlayerMove : TestTacticsMove
 {
@@ -14,37 +15,49 @@ public class TestPlayerMove : TestTacticsMove
         if (datosUnidad.estoyVivo)
 		{
             Debug.DrawRay(transform.position, transform.forward);
-
+            UpdateCoveragesDirections();
+            CheckAroundCoverages();
             if (!turn)
             {
                 return;
             }
-
+            if (ImDone())  //Puedo hacer algo o tengo que terminar?
+            {
+                MiTurnManager.EndTurn();
+                return;
+            }
+            if (visibleTargets.Count == 0)
+            {
+                LookForTargets(); //Crea la lista de enemigos visibles
+            }
             if (!moving)
             {
                 animator.SetBool("moving", false);
-                if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
-                {
-                    MiTurnManager.EndTurn();
-                }
+                
                 GetCurrentTile();
-                if (habilidadSeleccionada.id != 0)
-				{
-                    FindSelectableTiles(false);
-				}
-				else
-				{
-                    FindSelectableTiles(true);
-                }
+    //            if (!datosUnidad.movimientoRealizado)
+				//{
+                    
+				//}
+    //            if (habilidadSeleccionada.id != 0)
+				//{
+    //                FindSelectableTiles(false);
+				//}
+				//else
+				//{
+    //                FindSelectableTiles(true);
+    //            }
+                FindSelectableTiles(true);
                 CheckMousePosition();
-                CheckClick();
+                CheckClick(); //TODO: revisar esto porque depende de la acción seleccionada...
             }
             else
             {
                 animator.SetBool("moving", true);
                 Move();
             }
-		}
+            
+        }
 		else
 		{
             RemoveMe();
@@ -52,7 +65,15 @@ public class TestPlayerMove : TestTacticsMove
 		}
         
     }
+    public override void LookForTargets()
+    {
+        //CHAPUZAAA falseado para encontrarlos todos
+        foreach (GameObject playerObject in GameObject.FindGameObjectsWithTag("NPC").ToList())
+        {
+            visibleTargets.Add(playerObject);
+        }
 
+    }
     public void CheckMousePosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -65,13 +86,15 @@ public class TestPlayerMove : TestTacticsMove
 
                 if (c.selectable)
                 {
-                    if (habilidadSeleccionada?.id != 0)
-                    {
-                        //TODO: es nuestro turno, tenemos una habilidad seleccionada
-                        //Este sería el onMouseOver
-                    }
+                    //if (habilidadSeleccionada?.id != 0)
+                    //{
+                    //    //TODO: es nuestro turno, tenemos una habilidad seleccionada
+                    //    //Este sería el onMouseOver
+                    //}
                     //toDo: comprobar qué hay en la casilla target
                     c.target = true;
+                    //TODO: mostrar las coberturas
+                   
                 }
             }
         }
@@ -91,22 +114,45 @@ public class TestPlayerMove : TestTacticsMove
 
                     if (t.selectable)
                     {
-                        if (habilidadSeleccionada?.id != 0)
-                        {
-                            //TODO: atacar al tile
-                            ShotSkill(habilidadSeleccionada, t);
-                        }
-                        else
-                        {
+                        //if (habilidadSeleccionada?.id != 0)
+                        //{
+                        //    //TODO: atacar al tile
+                        //    //ShotSkill(habilidadSeleccionada, t);
+                        //}
+                        //else
+                        //{
                             if (t != currentTile)
 							{
-                                SubstractMovementPoints(t.distance);
+                                //SubstractMovementPoints(t.distance);
                                 MoveToTile(t);
                             }
-                        }
+                        //}
                     }
                 }
             }
         }
+    }
+    protected void UpdateCoveragesDirections()
+    {
+
+        GameObject[] muros = GameObject.FindGameObjectsWithTag("Muro");
+        List<GameObject> coverages = new List<GameObject>();
+
+        foreach (GameObject wall in muros)
+        {
+            if (wall.GetComponent<Coverage>() != null)
+            {
+                coverages.Add(wall);
+            }
+        }
+        //Debug.Log("tenemos " + coverages.Count() + " coberturas");
+        foreach (GameObject cover in coverages)
+        {
+
+            //CHAPUZA, CAMBIAR ENEMIGOS POR ENEMIGOS VISIBLES(???)
+            cover.GetComponent<Coverage>().UpdateOrientationCoverages(gameObject, GameManager.instance.combateManager.enemigos);
+
+        }
+
     }
 }

@@ -25,9 +25,9 @@ public class TestCombateManager : MonoBehaviour
     //DatosUnidad datosUnidadActiva;
 
 
-
     public enum FaseCombate { PAUSA, INICIO, COLOCANDO, INICIO_COMBATE, COMBATE, FIN_COMBATE }
     public FaseCombate fase;
+    public bool esperando;
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class TestCombateManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("CM: start....");
+        if (GameManager.instance.mostrarDebug) Debug.Log("CM: start....");
         fase = FaseCombate.PAUSA;
     }
 
@@ -173,12 +173,13 @@ public class TestCombateManager : MonoBehaviour
                     c.target = true;
                     if (Input.GetMouseButton(0))
                     {
+                        //Ahora mismo se crean como aliados (los enemigos los buscan) pero no tienen turno.
                         //TODO:: ...antes tiene que estar creada o seleccionada en los Datos del Jugador
                         //posicionar mi unidad en esta casilla
                         GameObject unidadProvisional = (GameObject)Resources.Load("Unidades/UnidadSRC"); //ESTO HAY QUE CAMBIARLO!!!
 
                         crearUnidad(unidadProvisional, c);
-                        Debug.Log("Colocando " + unidadProvisional + " en " + c);
+                        if (GameManager.instance.mostrarDebug) Debug.Log("Colocando " + unidadProvisional + " en " + c);
                     }
                 }
             }
@@ -195,7 +196,7 @@ public class TestCombateManager : MonoBehaviour
             {
                 numeroEnemigos = Random.Range(1, posicionesDisponibles.Count);
             }
-            Debug.Log("creando " + numeroEnemigos + " enemigos ");
+            if (GameManager.instance.mostrarDebug) Debug.Log("creando " + numeroEnemigos + " enemigos ");
 
             foreach (DatosUnidad enemigo in sala.dameEnemigos(numeroEnemigos))
             {
@@ -209,12 +210,12 @@ public class TestCombateManager : MonoBehaviour
                 }
                 nuevoEnemigo.GetComponent<NPCMove>().setDatos(enemigo);
                 nuevoEnemigo.tag = "NPC";
-                Debug.Log("Creando enemigo: " + nuevoEnemigo.GetComponent<NPCMove>().datosUnidad.ToString());
+                if (GameManager.instance.mostrarDebug) Debug.Log("Creando enemigo: " + nuevoEnemigo.GetComponent<NPCMove>().datosUnidad.ToString());
             }
         }
         else
         {
-            Debug.Log("en " + sala + " No hay seteadas casillas de spawn de enemigos");
+            if (GameManager.instance.mostrarDebug) Debug.Log("en " + sala + " No hay seteadas casillas de spawn de enemigos");
         }
 
     }
@@ -279,6 +280,38 @@ public class TestCombateManager : MonoBehaviour
     //    }
 
     //}
+
+    public void Shot(DatosUnidad atacante, DatosUnidad objetivo)
+    {
+        Debug.Log("CM: " + atacante.tipo.nombre + " va a atacar a " + objetivo.tipo.nombre);
+        int damageFinal;
+        float probabilidadAcierto = atacante.punteria; //-distancia
+        float probabilidadEsquiva = objetivo.agilidad;
+        int tiradaAcierto = Random.Range(1, 101);
+        //calcular si impacta
+        if (GameManager.instance.mostrarDebug) Debug.Log("tirada acierto " + tiradaAcierto);
+        if ( tiradaAcierto <= probabilidadAcierto)
+		{
+            if (Random.Range(1, 101) > probabilidadEsquiva)
+            {
+                //calculamos damagefinal
+                //CHAPUZAAA 
+                damageFinal = atacante.poder - objetivo.defensa;
+                if (GameManager.instance.mostrarDebug) Debug.Log(atacante.alias + " le inflinge " + damageFinal + " puntos de daño a " + objetivo.alias);
+                objetivo.PerderVida(damageFinal);
+		    }
+		    else
+		    {
+                if (GameManager.instance.mostrarDebug) Debug.Log(objetivo.alias + "ha esquivado el ataque de " + atacante.alias);
+            }
+	    }
+	    else
+	    {
+            if (GameManager.instance.mostrarDebug) Debug.Log(atacante.alias + "No ha acertado MISS");
+	    }
+        return;
+    }
+
     public GameObject crearUnidad(GameObject modeloUnidad, Tile casilla)
     {
         //CHAPUZAAA -> el new Vector es para encajar el modelo NPC, pero me jode otros...

@@ -27,6 +27,7 @@ public class InterfazController : MonoBehaviour
     DatosUnidad datosUnidadActiva;
 
     Habilidad habilidadSeleccionada;
+
     public DatosUnidad DatosUnidadActiva
     {
         get
@@ -103,7 +104,7 @@ public class InterfazController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("no hay unidad activa");
+                    if (GameManager.instance.mostrarDebug) Debug.Log("no hay unidad activa");
                 }
             }
             else
@@ -149,8 +150,8 @@ public class InterfazController : MonoBehaviour
         //Debug.Log("IC: mostrar detalles de "+unidadActiva.ToString());
         imgUnidadDetalle.sprite = Resources.Load<Sprite>("Kaos/" + datosUnidadActiva.tipo.nombre);
         txtUnidadHp.text = "HP: " + datosUnidadActiva.hpActual + " / " + datosUnidadActiva.hpMax;
-        txtPM.text = "PM: " + datosUnidadActiva.puntosMovimientoActual + " / " + datosUnidadActiva.puntosMovimientoTotal;
-        txtPA.text = "PA: " + datosUnidadActiva.puntosEsfuerzoActual + " / " + datosUnidadActiva.puntosEsfuerzoTotal;
+        //txtPM.text = "PM: " + datosUnidadActiva.puntosMovimientoActual + " / " + datosUnidadActiva.puntosMovimientoTotal;
+        //txtPA.text = "PA: " + datosUnidadActiva.puntosEsfuerzoActual + " / " + datosUnidadActiva.puntosEsfuerzoTotal;
 
         if (string.Compare(datosUnidadActiva.alias, "") == 1)
         {
@@ -201,8 +202,8 @@ public class InterfazController : MonoBehaviour
 	{
         //CHAPUZAAAAAA
         habilidadSeleccionada = GameManager.instance.BDlocal.Habilidades.Where(h => h.nombre == nombre.text).First();
-        
-        Debug.Log("activando " + nombre.text);
+
+        if (GameManager.instance.mostrarDebug) Debug.Log("activando " + nombre.text);
 	}
 
  //   public void MostrarColaTurnos(List<TacticsMove> colaTurnos)

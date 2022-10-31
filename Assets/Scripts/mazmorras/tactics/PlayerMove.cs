@@ -41,6 +41,8 @@ public class PlayerMove : TacticsMove
             Move();
         }
 	}
+
+   
     public void CheckMousePosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -65,6 +67,7 @@ public class PlayerMove : TacticsMove
 					}
                     //toDo: comprobar qué hay en la casilla target
                     c.target = true;
+                   
                 }
             }
         }
@@ -92,7 +95,7 @@ public class PlayerMove : TacticsMove
 						}
 						else
 						{
-                            datosUnidad.SubstractMovementPoints(t.distance);
+                            //datosUnidad.SubstractMovementPoints(t.distance);
                             MoveToTile(t);
                         }
 

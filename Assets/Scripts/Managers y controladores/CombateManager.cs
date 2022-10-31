@@ -76,7 +76,7 @@ public class CombateManager : MonoBehaviour
             if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() <= 0)
             {
                 mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
-                checkMouse();
+                CheckMouse();
             }
             else
             {
@@ -187,7 +187,7 @@ public class CombateManager : MonoBehaviour
     }
 
     //ESTA FUNCION DEBERÍA ESTAR EN EL CHEQUEADOR DE MOUSE
-    private void checkMouse()
+    private void CheckMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

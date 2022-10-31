@@ -27,11 +27,11 @@ public class MiTurnManager
 
     public static void IniciarColaTurnos()
 	{
-        Debug.Log("TM: iniciando cola turnos...");
+        if (GameManager.instance.mostrarDebug) Debug.Log("TM: iniciando cola turnos...");
 		IOrderedEnumerable<TestTacticsMove> orderedEnumerables = unidadesCombate.Where(u => u.datosUnidad.estoyVivo).OrderByDescending(u => u.datosUnidad.iniciativa);
         for (int i=0; i<orderedEnumerables.Count(); i++)
 		{
-            Debug.Log("TM: metiendo en cola a " + orderedEnumerables.ElementAt(i).datosUnidad.tipo.nombre +" cuya iniciativa es -> "+orderedEnumerables.ElementAt(i).datosUnidad.iniciativa);
+            if (GameManager.instance.mostrarDebug) Debug.Log("TM: metiendo en cola a " + orderedEnumerables.ElementAt(i).datosUnidad.tipo.nombre +" cuya iniciativa es -> "+orderedEnumerables.ElementAt(i).datosUnidad.iniciativa);
             unidadesTurno.Enqueue(orderedEnumerables.ElementAt(i));
 		}
 
@@ -42,7 +42,7 @@ public class MiTurnManager
     {
         if (unidadesTurno.Count > 0)
         {
-            Debug.Log("TM: pickeando de la cola a " + unidadesTurno.First().datosUnidad.tipo.nombre);
+            if (GameManager.instance.mostrarDebug) Debug.Log("TM: pickeando de la cola a " + unidadesTurno.First().datosUnidad.tipo.nombre);
 			TestTacticsMove unidad = unidadesTurno.Peek();
             unidad.BeginTurn();
             GameManager.instance.combateManager.SetUnidadActiva(unidad);
@@ -53,7 +53,7 @@ public class MiTurnManager
     {
         
         TestTacticsMove unit = unidadesTurno.Dequeue();
-        Debug.Log("TM: sacando de la cola a " + unit + " porque ha terminado su turno");
+        if (GameManager.instance.mostrarDebug) Debug.Log("TM: sacando de la cola a " + unit + " porque ha terminado su turno");
         unit.EndTurn();
 
         if (unidadesTurno.Count > 0)

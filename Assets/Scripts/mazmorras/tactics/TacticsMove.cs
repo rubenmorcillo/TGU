@@ -107,7 +107,7 @@ public class TacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if ((habilidadSeleccionada.id != 0 && t.distance < habilidadSeleccionada.rango) || (habilidadSeleccionada.id == 0 && t.distance < datosUnidad.puntosMovimientoActual))
+            if ((habilidadSeleccionada.id != 0 && t.distance < habilidadSeleccionada.rango) || (habilidadSeleccionada.id == 0 && t.distance < datosUnidad.rangoMovimiento))
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -179,15 +179,6 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-            //if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0) si no ponemos esto, los enemigos cuando no atacan intentan moverse dos veces.
-           // {
-             //   MiTurnManager.EndTurn();
-            //}
-            if (datosUnidad.puntosMovimientoActual <= 0)
-			{
-                MiTurnManager.EndTurn();
-            }
-           
         }
     }
 
@@ -339,18 +330,7 @@ public class TacticsMove : MonoBehaviour
             tempPath.Push(next);
             next = next.parent;
         }
-
-        if (tempPath.Count <= datosUnidad.puntosMovimientoActual)
-        {
-            return t.parent;
-        }
-
         Tile endTile = null;
-        for (int i = 0; i <= datosUnidad.puntosMovimientoActual; i++)
-        {
-            endTile = tempPath.Pop();
-        }
-
         return endTile;
     }
 

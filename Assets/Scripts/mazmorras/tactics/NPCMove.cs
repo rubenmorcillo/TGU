@@ -51,7 +51,7 @@ public class NPCMove : TacticsMove
             {
                 
                 animator.SetBool("moving", true);
-                if (!movementPayed && datosUnidad.puntosMovimientoActual > 0) 
+                if (!movementPayed && datosUnidad.rangoMovimiento > 0) 
 				{
 
                     //parece que esta chapuza ya no hace falta
@@ -65,8 +65,10 @@ public class NPCMove : TacticsMove
 					//	datosUnidad.SubstractMovementPoints(path.Count);
 					//   }
 
-					datosUnidad.SubstractMovementPoints(actualTargetTile.distance);
 
+
+					//datosUnidad.SubstractMovementPoints(actualTargetTile.distance);
+                    //datosUnidad.movimientoRealizado = true;
 					movementPayed = true;
 				}
                 Move();

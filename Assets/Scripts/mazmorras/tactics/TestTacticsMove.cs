@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public class TestTacticsMove : MonoBehaviour
+public abstract class TestTacticsMove : MonoBehaviour
 {
     public bool turn = false;
 
@@ -9,6 +10,7 @@ public class TestTacticsMove : MonoBehaviour
     GameObject[] tiles;
 
     protected Stack<Tile> path = new Stack<Tile>();
+    [SerializeField]
     protected Tile currentTile;
 
     public DatosUnidad datosUnidad;
@@ -35,9 +37,11 @@ public class TestTacticsMove : MonoBehaviour
 
     protected Animator animator;
 
-    public Habilidad habilidadSeleccionada = null;
+    public AccionUnidad accionSeleccionada;
+    public Habilidad habilidadSeleccionada;
+    public List<GameObject> visibleTargets;
 
-    public void setDatos(DatosUnidad du)
+	public void setDatos(DatosUnidad du)
     {
         datosUnidad = du;
     }
@@ -45,16 +49,17 @@ public class TestTacticsMove : MonoBehaviour
     protected void Init()
     {
         tiles = GameObject.FindGameObjectsWithTag("Tile");
+        visibleTargets = new List<GameObject>();
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
-
+        
         animator = GetComponentInChildren<Animator>();
 
         //MiTurnManager.AddUnit(this);
 
     }
 
-    public void RemoveMe()
+	public void RemoveMe()
 	{
         FindObjectOfType<TestCombateManager>().RemoveUnitFromCombat(this);
 	}
@@ -69,7 +74,6 @@ public class TestTacticsMove : MonoBehaviour
     {
         RaycastHit hit;
         Tile tile = null;
-
         if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 2))
         {
             tile = hit.collider.GetComponent<Tile>();
@@ -84,47 +88,50 @@ public class TestTacticsMove : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            if (habilidadSeleccionada?.id != 0)
-			{
-                t.FindNeighbors(jumpHeight, target, habilidadSeleccionada, move);
-            }
-            else
-			{
-                t.FindNeighbors(jumpHeight, target, null, move);
-            }
-        }
+			//         if (habilidadSeleccionada?.id != 0)
+			//{
+			//             t.FindNeighbors(jumpHeight, target, habilidadSeleccionada, move);
+			//         }
+			//         else
+			//{
+			//             t.FindNeighbors(jumpHeight, target, null, move);
+			//         }
+
+			t.FindNeighbors(jumpHeight, target, null, move);
+            t.ValidateCoveragesDirections();
+		}
     }
 
-   public void ClearUnSelectableTiles()
-	{
-        if (habilidadSeleccionada?.id != 0)
-        {
+ //  public void ClearUnSelectableTiles()
+	//{
+ //       if (habilidadSeleccionada?.id != 0)
+ //       {
             
-            float origenX = currentTile.transform.position.x;
-            float origenZ = currentTile.transform.position.z;
-            //Debug.Log("voy a quitar los tiles que sobran desde "+currentTile.name);
-            foreach (GameObject tileObjeto in tiles)
-            {
-                Tile tile = tileObjeto.GetComponent<Tile>();
-				if (gameObject.CompareTag("NPC") && !tile.walkable)
-				{
-					tile.selectable = false;
-                    selectableTiles.Remove(tile);
-                }
-				if (tile.selectable)
-                {
-                    float difX = Mathf.Abs(origenX - tile.transform.position.x);
-                    float difZ = Mathf.Abs(origenZ - tile.transform.position.z);
-                    if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO && (difX >= 1f && difZ >= 1f))
-                    {
+ //           float origenX = currentTile.transform.position.x;
+ //           float origenZ = currentTile.transform.position.z;
+ //           //Debug.Log("voy a quitar los tiles que sobran desde "+currentTile.name);
+ //           foreach (GameObject tileObjeto in tiles)
+ //           {
+ //               Tile tile = tileObjeto.GetComponent<Tile>();
+	//			if (gameObject.CompareTag("NPC") && !tile.walkable)
+	//			{
+	//				tile.selectable = false;
+ //                   selectableTiles.Remove(tile);
+ //               }
+	//			if (tile.selectable)
+ //               {
+ //                   float difX = Mathf.Abs(origenX - tile.transform.position.x);
+ //                   float difZ = Mathf.Abs(origenZ - tile.transform.position.z);
+ //                   if (habilidadSeleccionada.tipoRango == Habilidad.TipoRango.RECTO && (difX >= 1f && difZ >= 1f))
+ //                   {
                         
-                        tile.selectable = false;
-                        selectableTiles.Remove(tile);
-                    }
-                }
-            }
-        }
-    }
+ //                       tile.selectable = false;
+ //                       selectableTiles.Remove(tile);
+ //                   }
+ //               }
+ //           }
+ //       }
+ //   }
 
    
 
@@ -132,7 +139,8 @@ public class TestTacticsMove : MonoBehaviour
     {
         selectableTiles.Clear();
         ComputeAdjacencyLists(jumpHeight, null, move);
-        int rangoHabilidad = habilidadSeleccionada.rango;
+        //int rangoHabilidad = habilidadSeleccionada.rango;
+        //int rangoHabilidad = 10;
         if (gameObject.CompareTag("Player"))
 		{
             GetCurrentTile();
@@ -150,7 +158,7 @@ public class TestTacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if ((habilidadSeleccionada?.id != 0 && t.distance < rangoHabilidad) || (habilidadSeleccionada?.id == 0 && t.distance < datosUnidad.puntosMovimientoActual))
+            if ( t.distance < datosUnidad.rangoMovimiento)
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -164,7 +172,7 @@ public class TestTacticsMove : MonoBehaviour
                 }
             }  
         }
-        ClearUnSelectableTiles();
+        //ClearUnSelectableTiles();
     }
 
     public void MoveToTile(Tile tile)
@@ -185,6 +193,7 @@ public class TestTacticsMove : MonoBehaviour
 
     public void Move()
     {
+        ClearAllCoverages();
         //Debug.Log("moviendo");
         if (path.Count > 0)
         {
@@ -222,12 +231,9 @@ public class TestTacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-            if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
-            {
-                MiTurnManager.EndTurn();
-            }
-
+            
         }
+        datosUnidad.movimientoRealizado = true;
     }
 
     protected void RemoveSelectableTiles()
@@ -379,20 +385,23 @@ public class TestTacticsMove : MonoBehaviour
             next = next.parent;
         }
 
-		if (tempPath.Count <= datosUnidad.puntosMovimientoActual)
+		if (tempPath.Count <= datosUnidad.rangoMovimiento)
 		{
-            if (habilidadSeleccionada?.id != 0)
-            {
-                return t;
-            }
-            else
-            {
-                return t.parent;
-            }
+            //if (habilidadSeleccionada?.id != 0)
+            //{
+            //    return t;
+            //}
+            //else
+            //{
+            //    return t.parent;
+            //}
+            //TODO: si el objetivo es player tengo q devolver t.parent
+            return t;
+            //return t.parent;
         }
 
 		Tile endTile = null;
-        for (int i = 0; i <= datosUnidad.puntosMovimientoActual; i++)
+        for (int i = 0; i <= datosUnidad.rangoMovimiento; i++)
         {
             endTile = tempPath.Pop();
         }
@@ -404,7 +413,7 @@ public class TestTacticsMove : MonoBehaviour
     {
         ComputeAdjacencyLists(jumpHeight, target, true);
         GetCurrentTile();
-        Debug.Log("me muevo desde " + currentTile.name +" hasta " +target.name);
+        if (GameManager.instance.mostrarDebug) Debug.Log("me muevo desde " + currentTile.name +" hasta " +target.name);
         List<Tile> openList = new List<Tile>();
         List<Tile> closedList = new List<Tile>();
         openList.Add(currentTile);
@@ -416,16 +425,22 @@ public class TestTacticsMove : MonoBehaviour
         {
             Tile t = FindLowestF(openList);
 
+
             closedList.Add(t);
 
             if (t == target)
             {
-                actualTargetTile = FindEndTile(t);
-                //CHAPUZAAA esto no me gusta mucho
-                if (actualTargetTile == null)
+                if (accionSeleccionada.type == AccionUnidad.AccionUnidadType.MOVER)
 				{
-                    actualTargetTile = currentTile;
+                    //actualTargetTile = t;
+                    actualTargetTile = FindEndTile(t); //a veces no funciona bien y se queda pillao andando en el sitio al lado del player.
+
 				}
+                //CHAPUZAAA esto no me gusta mucho
+    //            if (actualTargetTile == null)
+				//{
+    //                actualTargetTile = currentTile;
+				//}
                 MoveToTile(actualTargetTile);
                 return;
 			}
@@ -455,19 +470,18 @@ public class TestTacticsMove : MonoBehaviour
                     tile.g = t.g + Vector3.Distance(tile.transform.position, t.transform.position);
                     tile.h = Vector3.Distance(tile.transform.position, target.transform.position);
                     tile.f = tile.g + tile.h;
-
                     openList.Add(tile);
                 }
             }
         }
 
         //no hay camino disponible...
-        Debug.Log("No hay camino posible");
+        if (GameManager.instance.mostrarDebug) Debug.Log("No hay camino posible");
     }
 
     public void BeginTurn()
     {
-        Debug.Log("empieza mi turno:" + datosUnidad.ToString());
+        if (GameManager.instance.mostrarDebug) Debug.Log("empieza mi turno:" + datosUnidad.ToString());
         datosUnidad.RestorePoints();
         turn = true;
     }
@@ -486,37 +500,24 @@ public class TestTacticsMove : MonoBehaviour
         int n = datosUnidad.nivel;
         int a = damage.AtaqueOrigen; //atq o atq especial de la unidad que ataca
         int p = damage.PotenciaAtaque;
-        int d = 1; // defensa de la unidad actual
-		switch (damage.TipoDamage)
-		{
-            case Habilidad.TipoHabilidad.FISICO:
-                d = datosUnidad.defensaCerca;
-                break;
-            case Habilidad.TipoHabilidad.ESPECIAL:
-                d = datosUnidad.defensaLejos;
-                break;
-            case Habilidad.TipoHabilidad.CURA:
-                d = 0;
-                break;
-		}
+        int d = datosUnidad.defensa; // defensa de la unidad actual
         int b = 1; //bonificacion de tipo, de momento no tengo
         int e = 1;//efectividad, de momento siempre 1
         int v = Random.Range(86, 100); //variacion
+        //TODO: implementar puntería en función de la distancia
         finalDamage = (int) (0.01 * b * e * v * (((0.2 * n + 1) * a * p) / (25 * d) + 2 ));
-        Debug.Log("Aplicando un daño final de " + finalDamage);
+        if (GameManager.instance.mostrarDebug) Debug.Log("Aplicando un daño final de " + finalDamage);
         datosUnidad.PerderVida(finalDamage);
 	}
     
     public void ShotSkill(Habilidad habilidad, Tile target)
 	{
-        Debug.Log(datosUnidad.tipo.nombre + ": usando habilidad "+ habilidad.nombre +"  a la casilla " + target.name);
-        PaySkillCost(habilidad);
+        if (GameManager.instance.mostrarDebug) Debug.Log(datosUnidad.tipo.nombre + ": usando habilidad "+ habilidad.nombre +"  a la casilla " + target.name);
         //TODO: podría haber efectos al activar una habilidad
         MirarObjetivoHabilidad(target);
         AnimarHabilidad(habilidad);
         target.DoDamage(CreateDamage(habilidad));
-        
-
+        datosUnidad.accionRealizada = true;
 
     }
 
@@ -525,18 +526,7 @@ public class TestTacticsMove : MonoBehaviour
         Damage skillDamage = new Damage();
         skillDamage.PotenciaAtaque = habilidad.potencia;
         skillDamage.TipoDamage = habilidad.tipo;
-        switch (habilidad.tipo)
-        {
-            case Habilidad.TipoHabilidad.FISICO:
-                skillDamage.AtaqueOrigen = datosUnidad.atqFisico;
-                break;
-            case Habilidad.TipoHabilidad.ESPECIAL:
-                skillDamage.AtaqueOrigen = datosUnidad.atqEspecial;
-                break;
-            case Habilidad.TipoHabilidad.CURA:
-                skillDamage.AtaqueOrigen = datosUnidad.atqEspecial;
-                break;
-        }
+        skillDamage.AtaqueOrigen = datosUnidad.poder;
 
         return skillDamage;
 
@@ -564,41 +554,93 @@ public class TestTacticsMove : MonoBehaviour
             //transform.forward = heading;
         }
     }
+    protected bool CanAttack(List<GameObject> visibleTargets)
+    {
+        bool canAttack = false; //pensar e implementar el rango del ataque/ habilidades.
 
+        //CHAPUZAAA de momento disparamos sí o sí
+        canAttack = true;
+        //      if (datosUnidad.accionRealizada)
+        //{
+        //          canAttack = false;
+        //}
+        return canAttack;
+    }
     protected bool ImDone()
 	{
+        
         bool done = false;
-        if ((datosUnidad.puntosEsfuerzoActual <= 0 || habilidadSeleccionada == null || habilidadSeleccionada.id == 0) && datosUnidad.puntosMovimientoActual <= 0)
+        if (datosUnidad.accionRealizada)
 		{
             done = true;
 		}
 
         return done;
 	}
-
-    public void PaySkillCost(Habilidad habilidad)
-	{
-        SubstractEffortPoints(habilidad.esfuerzo);
-	}
-    public void SubstractEffortPoints(int p)
-	{
-        datosUnidad.SubstractEffortPoints(p);
-	}
-
-    public void SubstractMovementPoints(int p)
-	{
-        datosUnidad.SubstractMovementPoints(p);
-	}
-
+	public abstract void LookForTargets();
     public void ForceEndTurn()
 	{
-        
+        //a veces no se limpian las casillas
         currentTile = null;
         actualTargetTile = null;
         moving = false;
         path.Clear();
+        visibleTargets.Clear();
+
         MiTurnManager.EndTurn();
     }
+    protected void ClearAllCoverages()
+	{
+        foreach(DatosUnidad.CoverageUnidad c in datosUnidad.coberturas)
+		{
+            c.type = DatosUnidad.CoverageUnidad.CoverageType.NADA;
+        }
+    }
+
+    void ClearCoverage(Vector3 direction)
+	{
+        foreach(DatosUnidad.CoverageUnidad c in datosUnidad.coberturas)
+		{
+            if (c.direction == direction)
+			{
+                c.type = DatosUnidad.CoverageUnidad.CoverageType.NADA;
+			}
+		}
+	}
+
+    protected void CheckAroundCoverages()
+    {
+        CheckBesideCoverage(Vector3.forward);
+        CheckBesideCoverage(-Vector3.forward);
+        CheckBesideCoverage(Vector3.right);
+        CheckBesideCoverage(-Vector3.right);
+    }
+
+    protected void CheckBesideCoverage(Vector3 direction)
+    {
+        bool wall = false;
+        Vector3 halfExtents = new Vector3(0.25f, 0.25f, 0.25f);
+        
+        //Debug.DrawRay(transform.position + direction/2, Vector3.up, Color.green);
+        Collider[] colliders = Physics.OverlapBox(gameObject.transform.position + new Vector3(0, 0.5f, 0) + direction / 2, halfExtents);
+        foreach (Collider item in colliders)
+        {
+            if (item.CompareTag("Muro"))
+            {
+                wall = true;
+                if (item.GetComponent<Coverage>() != null)
+                {
+                    //if (GameManager.instance.mostrarDebug) Debug.Log("tenemos covertura en la dirección " + direction);
+                    datosUnidad.coberturas.Where(c => c.direction == direction).First().type = datosUnidad.TraducirCobertura(item.GetComponent<Coverage>().type);
+                }
+            }
+        }
+        //if (!wall)
+        //{
+        //    datosUnidad.coberturas.Where(c => c.direction == direction).First().type = DatosUnidad.CoverageUnidad.CoverageType.NADA;
+        //}
+    }
+   
 
     private void OnGUI()
     {
