@@ -7,8 +7,8 @@ using UnityEngine;
 [Serializable]
 public class MiTurnManager
 {
-    public static List<TacticsMove> unidadesCombate = new List<TacticsMove>();
-    public static Queue<TacticsMove> unidadesTurno = new Queue<TacticsMove>();
+    public static List<TestTacticsMove> unidadesCombate = new List<TestTacticsMove>();
+    public static Queue<TestTacticsMove> unidadesTurno = new Queue<TestTacticsMove>();
 
 
     public void Update()
@@ -19,7 +19,7 @@ public class MiTurnManager
         }
     }
 
-    public static void AddUnit(TacticsMove unidad)
+    public static void AddUnit(TestTacticsMove unidad)
 	{
         unidadesCombate.Add(unidad);
 	}
@@ -27,10 +27,11 @@ public class MiTurnManager
 
     public static void IniciarColaTurnos()
 	{
-		IOrderedEnumerable<TacticsMove> orderedEnumerables = unidadesCombate.Where(u => u.datosUnidad.estoyVivo).OrderByDescending(u => u.datosUnidad.iniciativa);
+        if (GameManager.instance.mostrarDebug) Debug.Log("TM: iniciando cola turnos...");
+		IOrderedEnumerable<TestTacticsMove> orderedEnumerables = unidadesCombate.Where(u => u.datosUnidad.estoyVivo).OrderByDescending(u => u.datosUnidad.iniciativa);
         for (int i=0; i<orderedEnumerables.Count(); i++)
 		{
-            Debug.Log("TM: metiendo en cola a " + orderedEnumerables.ElementAt(i).datosUnidad.tipo.nombre +" cuya iniciativa es -> "+orderedEnumerables.ElementAt(i).datosUnidad.iniciativa);
+            if (GameManager.instance.mostrarDebug) Debug.Log("TM: metiendo en cola a " + orderedEnumerables.ElementAt(i).datosUnidad.tipo.nombre +" cuya iniciativa es -> "+orderedEnumerables.ElementAt(i).datosUnidad.iniciativa);
             unidadesTurno.Enqueue(orderedEnumerables.ElementAt(i));
 		}
 
@@ -41,17 +42,18 @@ public class MiTurnManager
     {
         if (unidadesTurno.Count > 0)
         {
-            Debug.Log("TM: pickeando de la cola a " + unidadesTurno.First().datosUnidad.tipo.nombre);
-            unidadesTurno.Peek().BeginTurn();
-
+            if (GameManager.instance.mostrarDebug) Debug.Log("TM: pickeando de la cola a " + unidadesTurno.First().datosUnidad.tipo.nombre);
+			TestTacticsMove unidad = unidadesTurno.Peek();
+            unidad.BeginTurn();
+            GameManager.instance.combateManager.SetUnidadActiva(unidad);
         }
     }
 
     public static void EndTurn()
     {
         
-        TacticsMove unit = unidadesTurno.Dequeue();
-        Debug.Log("TM: sacando de la cola a " + unit + " porque ha terminado su turno");
+        TestTacticsMove unit = unidadesTurno.Dequeue();
+        if (GameManager.instance.mostrarDebug) Debug.Log("TM: sacando de la cola a " + unit + " porque ha terminado su turno");
         unit.EndTurn();
 
         if (unidadesTurno.Count > 0)

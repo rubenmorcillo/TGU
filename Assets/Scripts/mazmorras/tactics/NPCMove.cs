@@ -20,29 +20,56 @@ public class NPCMove : TacticsMove
 	void Update () 
 	{
         if (datosUnidad.estoyVivo){
-            //dibujar mi vida
             Debug.DrawRay(transform.position, transform.forward);
             if (!turn)
             {
                 return;
             }
 
+           
             if (!moving)
             {
+                //if (actualTargetTile.distance > 0 )
+                animator.SetBool("moving", false);
                 animator.Play("Idle");
-				FindNearestTarget();
+
+				FindNearestTarget(); //busca al Player más cercano
 				CalculatePath();
 				FindSelectableTiles();
+               
 				actualTargetTile.target = true;
-			}
+              
+
+                Debug.Log("La distancia con el tile real es: " + actualTargetTile.distance);
+                if (actualTargetTile.distance <= 0)
+				{
+                    //TODO: aqui debo hacer las habilidades por lo visto
+                    MiTurnManager.EndTurn();
+				}
+            }
             else
             {
                 
                 animator.SetBool("moving", true);
-                if (!movementPayed)
+                if (!movementPayed && datosUnidad.rangoMovimiento > 0) 
 				{
-                    datosUnidad.SubstractMovementPoints(path.Count - 1);
-                    movementPayed = true;
+
+                    //parece que esta chapuza ya no hace falta
+					//CHAPUZAAAAA pero es bastante efectivo
+					//if (path.Count > 1)
+					//{
+					//	datosUnidad.SubstractMovementPoints(path.Count - 1);
+					//}
+					//else
+					//{
+					//	datosUnidad.SubstractMovementPoints(path.Count);
+					//   }
+
+
+
+					//datosUnidad.SubstractMovementPoints(actualTargetTile.distance);
+                    //datosUnidad.movimientoRealizado = true;
+					movementPayed = true;
 				}
                 Move();
             }
@@ -56,7 +83,7 @@ public class NPCMove : TacticsMove
 	}
 
     void CalculatePath()
-    {
+    {    
         movementPayed = false;
         Tile targetTile = GetTargetTile(target);
         FindPath(targetTile);
@@ -82,10 +109,13 @@ public class NPCMove : TacticsMove
 
         target = nearest;
         
+        
+        
     }
 
 	private void OnGUI()
 	{
+        //MOSTRAR VIDA DEL ENEMIGO
         //guardamos la posición del enemigo con respecto a la cámara.
         Vector2 pos = Camera.main.WorldToScreenPoint(transform.position);
         int offset = 40;

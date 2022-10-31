@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6107753898302182248}
   - component: {fileID: 6107753898302182249}
   - component: {fileID: 6107753898302182246}
+  - component: {fileID: 6198992357086911581}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -57,6 +58,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -108,12 +110,81 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turn: 0
+  datosUnidad:
+    id: 0
+    alias: 
+    tipo:
+      id: 0
+      nombre: 
+      hp_base: 0
+      poder_base: 0
+      defensa_base: 0
+      salto_base: 0
+      rangoMovimiento_base: 0
+      agilidad_base: 0
+      iniciativa_base: 0
+      velocidad_base: 0
+      punteria_base: 0
+    nivel: 0
+    exp: 0
+    hpMax: 0
+    hpActual: 0
+    poder: 0
+    modelPrefabName: 
+    iniciativa: 0
+    agilidad: 0
+    punteria: 0
+    velocidad: 0
+    defensa: 0
+    rangoMovimiento: 0
+    movimientoRealizado: 0
+    accionRealizada: 0
+    hab1: 0
+    hab2: 0
+    hab3: 0
+    hab4: 0
+    estoyVivo: 1
+    coberturas: []
+    estados_alterados: []
   moving: 0
-  move: 5
   jumpHeight: 2
   moveSpeed: 2
   jumpVelocity: 4.5
   actualTargetTile: {fileID: 0}
+  habilidadSeleccionada:
+    id: 0
+    nombre: 
+    potencia: 0
+    esfuerzo: 0
+    tipo: 0
+    desc: 
+    rango: 0
+    tipoRango: 0
+--- !u!114 &6198992357086911581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6107753898302182247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a360a6a32c8a64428aca03dfaad60a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRadius: 10
+  viewAngle: 360
+  unitsMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  coveragesMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  tilesMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  visibleUnits: []
+  visibleTiles: []
 --- !u!1001 &6107753896644444446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -121,11 +192,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6107753898302182250}
     m_Modifications:
-    - target: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939,
+    - target: {fileID: 2836004473841745626, guid: f432554f564e69242897607d34218939,
         type: 3}
-      propertyPath: m_Name
-      value: PBRCharacter
-      objectReference: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 983abae3a9d23284f82ebc8b4ca57544, type: 2}
     - target: {fileID: 2836004475591197023, guid: f432554f564e69242897607d34218939,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -196,11 +267,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.65
       objectReference: {fileID: 0}
-    - target: {fileID: 2836004473841745626, guid: f432554f564e69242897607d34218939,
+    - target: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939,
         type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 983abae3a9d23284f82ebc8b4ca57544, type: 2}
+      propertyPath: m_Name
+      value: PBRCharacter
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f432554f564e69242897607d34218939, type: 3}
 --- !u!4 &8329577679506899009 stripped

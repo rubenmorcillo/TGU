@@ -9,14 +9,14 @@ public class TacticsMove : MonoBehaviour
     GameObject[] tiles;
 
     protected Stack<Tile> path = new Stack<Tile>();
-    Tile currentTile;
+    protected Tile currentTile;
 
     public DatosUnidad datosUnidad;
 
     public bool moving = false;
-    public float jumpHeight = 2;
+    public float jumpHeight = 1;
     public float moveSpeed = 2;
-    public float jumpVelocity = 4.5f;
+    public float jumpVelocity = 5.5f;
 
 
     Vector3 velocity = new Vector3();
@@ -35,6 +35,8 @@ public class TacticsMove : MonoBehaviour
 
     protected Animator animator;
 
+    public Habilidad habilidadSeleccionada = null;
+
     public void setDatos(DatosUnidad du)
     {
         datosUnidad = du;
@@ -48,7 +50,7 @@ public class TacticsMove : MonoBehaviour
 
         animator = GetComponentInChildren<Animator>();
 
-        MiTurnManager.AddUnit(this);
+        //MiTurnManager.AddUnit(this);
        
     }
 
@@ -77,9 +79,15 @@ public class TacticsMove : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors(jumpHeight, target);
+            t.FindNeighbors(jumpHeight, target, habilidadSeleccionada, true);
         }
     }
+
+    public void ShowSkillRange()
+	{
+
+       
+	}
 
     public void FindSelectableTiles()
     {
@@ -90,7 +98,7 @@ public class TacticsMove : MonoBehaviour
 
         process.Enqueue(currentTile);
         currentTile.visited = true;
-        //currentTile.parent = ??  leave as null 
+        //currentTile.parent = ?? la casilla de origen tiene el padre NULL
 
         while (process.Count > 0)
         {
@@ -99,7 +107,7 @@ public class TacticsMove : MonoBehaviour
             selectableTiles.Add(t);
             t.selectable = true;
 
-            if (t.distance < datosUnidad.puntosMovimientoActual)
+            if ((habilidadSeleccionada.id != 0 && t.distance < habilidadSeleccionada.rango) || (habilidadSeleccionada.id == 0 && t.distance < datosUnidad.rangoMovimiento))
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
@@ -119,6 +127,7 @@ public class TacticsMove : MonoBehaviour
     {
         path.Clear();
         tile.target = true;
+       
         moving = true;
 
         Tile next = tile;
@@ -136,6 +145,7 @@ public class TacticsMove : MonoBehaviour
         {
             
             Tile t = path.Peek();
+           
             Vector3 target = t.transform.position;
             //Calcular la posición de la unidad encima de la casilla (Tile) objetivo
             target.y += halfHeight + t.GetComponent<Collider>().bounds.extents.y;
@@ -169,11 +179,6 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-            if (datosUnidad.puntosMovimientoActual <= 0 && datosUnidad.puntosEsfuerzoActual <= 0)
-			{
-                MiTurnManager.EndTurn();
-            }
-           
         }
     }
 
@@ -325,18 +330,7 @@ public class TacticsMove : MonoBehaviour
             tempPath.Push(next);
             next = next.parent;
         }
-
-        if (tempPath.Count <= datosUnidad.puntosMovimientoActual)
-        {
-            return t.parent;
-        }
-
         Tile endTile = null;
-        for (int i = 0; i <= datosUnidad.puntosMovimientoActual; i++)
-        {
-            endTile = tempPath.Pop();
-        }
-
         return endTile;
     }
 
@@ -347,7 +341,6 @@ public class TacticsMove : MonoBehaviour
 
         List<Tile> openList = new List<Tile>();
         List<Tile> closedList = new List<Tile>();
-
         openList.Add(currentTile);
         //currentTile.parent = ??
         currentTile.h = Vector3.Distance(currentTile.transform.position, target.transform.position);
@@ -356,7 +349,7 @@ public class TacticsMove : MonoBehaviour
         while (openList.Count > 0)
         {
             Tile t = FindLowestF(openList);
-
+            
             closedList.Add(t);
 
             if (t == target)
@@ -411,6 +404,7 @@ public class TacticsMove : MonoBehaviour
     public void EndTurn()
     {
         turn = false;
+        //CHAPUZAAAAA
         animator.SetBool("moving", false);
     }
 

@@ -21,7 +21,7 @@ public class CombateManager : MonoBehaviour
     List<DatosUnidad> enemigos;
    
     GameObject unidadSeleccionada;
-   
+
     
     public enum FaseCombate {PAUSA, INICIO, COLOCANDO, INICIO_COMBATE, COMBATE, FIN_COMBATE}
     public FaseCombate fase;
@@ -45,11 +45,22 @@ public class CombateManager : MonoBehaviour
     public void Combate(Sala sala)
     {
         fase = FaseCombate.INICIO;
-        crearEnemigos(sala);
+        //CHAPUZAAA
+        // crearEnemigos(sala);
+        //Desactivado porque he añadido el TEST
+  //      foreach(TacticsMove tm in GetComponents<TacticsMove>())
+		//{
+  //          MiTurnManager.AddUnit(tm);
+		//}
     }
 
     private void Update()
     {
+        if (fase != FaseCombate.PAUSA)
+		{
+            gameManager.MostrarTexto("");
+        }
+        
         if (fase == FaseCombate.INICIO)
 		{
             seleccionarUnidadActiva();
@@ -65,14 +76,13 @@ public class CombateManager : MonoBehaviour
             if (gameManager.DatosPlayer.EquipoUnidades.Where(unidad => unidad.isPlaced).Count() <= 0)
             {
                 mostrarIniciosDisponibles(LevelManager.salaActiva.GetComponent<Sala>());
-                checkMouse();
+                CheckMouse();
             }
             else
             {
                 gameManager.MostrarTexto("PULSA ESPACIO PARA COMENZAR EL COMBATE");
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    gameManager.MostrarTexto("");
                     fase = FaseCombate.INICIO_COMBATE;
                 }
             }
@@ -177,7 +187,7 @@ public class CombateManager : MonoBehaviour
     }
 
     //ESTA FUNCION DEBERÍA ESTAR EN EL CHEQUEADOR DE MOUSE
-    private void checkMouse()
+    private void CheckMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;

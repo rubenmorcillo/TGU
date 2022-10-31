@@ -44,6 +44,7 @@ public class BDLocal
 	{
 		//llamar a la BD para consultar todas las unidades
 		GameManager.instance.serverManager.ObtenerUnidades();
+
 	}
 
 	void CargarHabilidades()

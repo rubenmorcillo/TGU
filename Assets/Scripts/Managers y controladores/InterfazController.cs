@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,20 +9,25 @@ public class InterfazController : MonoBehaviour
 
     public Image[] imgUnidades = new Image[5];
 
-    public Text textRep, textDinero, textNickname;
-    public Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre, txtPA, txtPM;
+    Text textRep, textDinero, textNickname;
+    Text txtHab1, txtHab2, txtHab3, txtHab4, txtUnidadHp, txtUnidadNombre, txtPA, txtPM;
 
-    public GameObject panelTurnos;
+    TMP_Text txtDetalle;
 
-    public Image imgUnidadDetalle;
+    GameObject panelTurnos;
 
-    public GameObject panelInfo;
+    Image imgUnidadDetalle;
+
+    GameObject panelInfo;
 
     public Animator detalleAnimator;
     public Animator datosPlayerAnimator;
 
     DatosPlayer datosPlayer;
     DatosUnidad datosUnidadActiva;
+
+    Habilidad habilidadSeleccionada;
+
     public DatosUnidad DatosUnidadActiva
     {
         get
@@ -60,6 +66,7 @@ public class InterfazController : MonoBehaviour
 
         //info
         panelInfo = GameObject.Find("panelInfo");
+        txtDetalle = GameObject.Find("txtDetalle").GetComponent<TMP_Text>();
 
         //anims
         detalleAnimator = GameObject.Find("MenuDetalle").GetComponent<Animator>();
@@ -88,10 +95,16 @@ public class InterfazController : MonoBehaviour
 					//{
      //                   MostrarColaTurnos(MiTurnManager.unidadesCombate);
      //               }
+                    if (habilidadSeleccionada != null)
+					{
+                        //CHAPUZAAAA
+                        //habría que poner la descripción, de momento no la tengo
+                        txtDetalle.text = habilidadSeleccionada.ToString();
+					}
                 }
                 else
                 {
-                    Debug.Log("no hay unidad activa");
+                    if (GameManager.instance.mostrarDebug) Debug.Log("no hay unidad activa");
                 }
             }
             else
@@ -137,8 +150,8 @@ public class InterfazController : MonoBehaviour
         //Debug.Log("IC: mostrar detalles de "+unidadActiva.ToString());
         imgUnidadDetalle.sprite = Resources.Load<Sprite>("Kaos/" + datosUnidadActiva.tipo.nombre);
         txtUnidadHp.text = "HP: " + datosUnidadActiva.hpActual + " / " + datosUnidadActiva.hpMax;
-        txtPM.text = "PM: " + datosUnidadActiva.puntosMovimientoActual + " / " + datosUnidadActiva.puntosMovimientoTotal;
-        txtPA.text = "PA: " + datosUnidadActiva.puntosEsfuerzoActual + " / " + datosUnidadActiva.puntosEsfuerzoTotal;
+        //txtPM.text = "PM: " + datosUnidadActiva.puntosMovimientoActual + " / " + datosUnidadActiva.puntosMovimientoTotal;
+        //txtPA.text = "PA: " + datosUnidadActiva.puntosEsfuerzoActual + " / " + datosUnidadActiva.puntosEsfuerzoTotal;
 
         if (string.Compare(datosUnidadActiva.alias, "") == 1)
         {
@@ -184,6 +197,14 @@ public class InterfazController : MonoBehaviour
         }
         
     }
+
+    public void SeleccionarHabilidad(Text nombre)
+	{
+        //CHAPUZAAAAAA
+        habilidadSeleccionada = GameManager.instance.BDlocal.Habilidades.Where(h => h.nombre == nombre.text).First();
+
+        if (GameManager.instance.mostrarDebug) Debug.Log("activando " + nombre.text);
+	}
 
  //   public void MostrarColaTurnos(List<TacticsMove> colaTurnos)
 	//{

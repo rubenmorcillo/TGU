@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
     public BDLocal BDlocal;
     public EstadosJuego.Estado estadoJuego;
 
-    public CombateManager combateManager;
+    public bool mostrarDebug;
+
+    //public CombateManager combateManager;
+    public TestCombateManager combateManager;
 
     private void Awake()
     {
@@ -26,11 +29,18 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this);
+        
 
-        combateManager = gameObject.GetComponent<CombateManager>();
+        //combateManager = gameObject.GetComponent<CombateManager>();
+        //if (combateManager == null)
+        //{
+        //    combateManager = gameObject.AddComponent<CombateManager>();
+        //}
+        
+        combateManager = gameObject.GetComponent<TestCombateManager>();
         if (combateManager == null)
         {
-            combateManager = gameObject.AddComponent<CombateManager>();
+            combateManager = gameObject.AddComponent<TestCombateManager>();
         }
 
         serverManager = gameObject.GetComponent<ServerManager>();
@@ -51,7 +61,7 @@ public class GameManager : MonoBehaviour
             datosPlayerTest.dinero = 150;
             datosPlayerTest.reputacion = 99;
             datosPlayerTest.nickname = "nicknameTest";
-            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 3, 6, 23, 46, 0, 12), "rasek", 5, 100, 9));
+            datosPlayerTest.addUnidadEquipo(new DatosUnidad(1, new TipoUnidad(1, "rasek", 50, 6, 5, 3, 5, 3, 5), "rasek", 5, 100, 9));
             datosPlayer = datosPlayerTest;
             //datosPlayer = gameObject.AddComponent<DatosPlayer>();
         }
@@ -74,19 +84,20 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+
         estadoJuego = EstadosJuego.Estado.INICIO;
 
-        Debug.Log("GameManager: start...");
+        if (mostrarDebug) Debug.Log("GameManager: start...");
         EstadosJuego.activarEstado(EstadosJuego.Estado.MENU);
 
         //inico los otros managers
-        combateManager.fase = CombateManager.FaseCombate.PAUSA;
+        //combateManager.fase = CombateManager.FaseCombate.PAUSA;
         //combateManager.enabled = false;
         BDlocal.Init();
 
 
         //EL LEVEL MANAGER SOLO LO NECESITO CUANDO VOY A LA MAZMORRA
-        LevelManager.Init();
+        //LevelManager.Init();
 
         //iniciarMazmorra();
     }
@@ -100,7 +111,7 @@ public class GameManager : MonoBehaviour
 	public void iniciarMazmorra()
     {
         estadoJuego = EstadosJuego.Estado.EXPLORAR;
-        Debug.Log("GM: iniciando mazmorra");
+        if (mostrarDebug) Debug.Log("GM: iniciando mazmorra");
         mazmorra = LevelManager.CrearMazmorra();
         LevelManager.CrearSalaInicial();
         playerModel = LevelManager.posicionarJugador();
@@ -128,11 +139,11 @@ public class GameManager : MonoBehaviour
         combateManager.Combate(LevelManager.salaActiva.GetComponent<Sala>());
         interfaz.datosPlayerAnimator.SetBool("mostrar", false);
     }
-    public void EndTurn()
-    {
-        Debug.Log("terminando turno de " + combateManager.unidadActiva.datosUnidad.tipo.nombre);
-        MiTurnManager.EndTurn();
-	}
+ //   public void EndTurn()
+ //   {
+ //       Debug.Log("terminando turno de " + combateManager.unidadActiva.datosUnidad.tipo.nombre);
+ //       MiTurnManager.EndTurn();
+	//}
 
     //INTERFAZ
     public void MostrarTexto(string texto)
@@ -140,5 +151,6 @@ public class GameManager : MonoBehaviour
         interfaz.MostrarTexto(texto);
 	}
 
+	
     
 }
