@@ -14,12 +14,14 @@ public class FieldOfView : MonoBehaviour
     public LayerMask tilesMask;
 
     public List<Transform> visibleUnits = new List<Transform>();
+    public List<Transform> visibleEnemies = new List<Transform>();
     public List<Transform> visibleTiles = new List<Transform>();
 
 	private void Start()
 	{
         StartCoroutine("FindUnitsWithDelay", .2f);
-	}
+        StartCoroutine("FindEnemiesWithDelay", .2f);
+    }
 
     IEnumerator FindUnitsWithDelay(float delay)
 	{
@@ -29,7 +31,16 @@ public class FieldOfView : MonoBehaviour
             FindVisibleUnits();
 		}
 	}
-	void FindVisibleUnits()
+    IEnumerator FindEnemiesWithDelay(float delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delay);
+            FindVisibleEnemies();
+        }
+    }
+
+    void FindVisibleUnits()
 	{
         visibleUnits.Clear();
         visibleTiles.Clear();
@@ -76,5 +87,18 @@ public class FieldOfView : MonoBehaviour
 		}
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
 	}
+
+	void FindVisibleEnemies()
+	{
+        visibleEnemies.Clear();
+        foreach (Transform visibleUnit in visibleUnits)
+		{
+            if (!visibleUnit.CompareTag(tag))
+			{
+                visibleEnemies.Add(visibleUnit);
+            }
+		}
+    }
+    
 
 }

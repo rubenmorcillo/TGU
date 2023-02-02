@@ -26,10 +26,7 @@ public class TestPlayerMove : TestTacticsMove
                 MiTurnManager.EndTurn();
                 return;
             }
-            if (visibleTargets.Count == 0)
-            {
-                LookForTargets(); //Crea la lista de enemigos visibles
-            }
+            
             if (!moving)
             {
                 animator.SetBool("moving", false);
@@ -65,15 +62,7 @@ public class TestPlayerMove : TestTacticsMove
 		}
         
     }
-    public override void LookForTargets()
-    {
-        //CHAPUZAAA falseado para encontrarlos todos
-        foreach (GameObject playerObject in GameObject.FindGameObjectsWithTag("NPC").ToList())
-        {
-            visibleTargets.Add(playerObject);
-        }
 
-    }
     public void CheckMousePosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

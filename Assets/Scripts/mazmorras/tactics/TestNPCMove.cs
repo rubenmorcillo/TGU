@@ -16,12 +16,13 @@ public class TestNPCMove : TestTacticsMove
 
     //public List<TestTacticsMove> visiblePlayers;
 	public DatosUnidad playerObjetivo;
-
+    FieldOfView fieldOfView;
 
 	void Start()
     {
         //visiblePlayers = new List<TestTacticsMove>();
         comportamiento = new ComportamientoNPC(datosUnidad);
+        fieldOfView = GetComponent<FieldOfView>();
         Init();
         animator.Play("Idle");
     }
@@ -44,11 +45,11 @@ public class TestNPCMove : TestTacticsMove
                 playerObjetivo = null;
                 return;
             }
-            if (visibleTargets.Count == 0)
+          /*  if (visibleTargets.Count == 0)
 			{
                 LookForTargets(); //Crea la lista de enemigos visibles
             }
-
+          */
             if (!moving)
             {
                 readyToAttack = false;
@@ -61,6 +62,7 @@ public class TestNPCMove : TestTacticsMove
                 //compruebo que tengo alguna cobertura. Debería comprobar si estoy flanqueado
                 if (!Covered())
 				{
+                    Debug.Log("no estoy a cubierto");
                     if (!datosUnidad.movimientoRealizado)
                     {
 						FindNearestValidCoverage();
@@ -69,27 +71,36 @@ public class TestNPCMove : TestTacticsMove
 					}
 					else
 					{
-                        if (CanAttack(visibleTargets))
+                        if (CanAttack(fieldOfView.visibleEnemies))
 						{
-                            
-                            playerObjetivo = visibleTargets.First().GetComponentInChildren<TestTacticsMove>().datosUnidad;
+                            //TODOO: de momento cojo el primer enemigo de los posibles y ya
+                            playerObjetivo = fieldOfView.visibleEnemies.First().GetComponentInChildren<TestTacticsMove>().datosUnidad;
                             Debug.Log("voy a atacar");
                             Shot();
+						}
+						else
+						{
+                            //TODOOO: CHAPUZAAAA De momento voy a terminar turno
+                            Debug.Log("no he podido atacar");
+                            ForceEndTurn();
+
+
                         }
 					}
 				}
 				else
 				{
-                    Debug.Log("quiero atacar");
-                    if (CanAttack(visibleTargets))
+                    Debug.Log("Estoy cubierto. Quiero atacar");
+                    if (CanAttack(fieldOfView.visibleEnemies))
                     {
                         //buscarPlayerObjetivo
-                        playerObjetivo = visibleTargets.First().GetComponentInChildren<TestTacticsMove>().datosUnidad;
-                        Debug.Log("voy a atacar");
+                        playerObjetivo = fieldOfView.visibleEnemies.First().GetComponentInChildren<TestTacticsMove>().datosUnidad;
+                        Debug.Log("tengo a la vista a "+ playerObjetivo +" .Voy a atacarle");
                         Shot();
 					}
 					else
 					{
+                        Debug.Log("no he podido atacar");
                         ForceEndTurn();
 					}
                 }
@@ -142,8 +153,9 @@ public class TestNPCMove : TestTacticsMove
     void Shot()
 	{
         //le disparamos al objetivo seleccionado
+        GameManager.instance.combateManager.Shot(datosUnidad, playerObjetivo);
         datosUnidad.accionRealizada = true;
-        GameManager.instance.combateManager.Shot(datosUnidad, playerObjetivo); 
+         
 	}
     bool Covered()
 	{
@@ -159,14 +171,6 @@ public class TestNPCMove : TestTacticsMove
         return covered;
 	}
     
-    public override void LookForTargets()
-	{
-        //CHAPUZAAA falseado para encontrarlos todos
-        foreach(GameObject playerObject in GameObject.FindGameObjectsWithTag("Player").ToList())
-		{
-            visibleTargets.Add(playerObject);
-		}
-	}
 
     void CalculatePath()
     {

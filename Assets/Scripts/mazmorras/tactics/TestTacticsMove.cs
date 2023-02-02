@@ -39,7 +39,7 @@ public abstract class TestTacticsMove : MonoBehaviour
 
     public AccionUnidad accionSeleccionada;
     public Habilidad habilidadSeleccionada;
-    public List<GameObject> visibleTargets;
+   // public List<GameObject> visibleTargets;
 
 	public void setDatos(DatosUnidad du)
     {
@@ -49,7 +49,6 @@ public abstract class TestTacticsMove : MonoBehaviour
     protected void Init()
     {
         tiles = GameObject.FindGameObjectsWithTag("Tile");
-        visibleTargets = new List<GameObject>();
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         
@@ -554,12 +553,16 @@ public abstract class TestTacticsMove : MonoBehaviour
             //transform.forward = heading;
         }
     }
-    protected bool CanAttack(List<GameObject> visibleTargets)
+    protected bool CanAttack(List<Transform> visibleTargets)
     {
+       
         bool canAttack = false; //pensar e implementar el rango del ataque/ habilidades.
 
-        //CHAPUZAAA de momento disparamos sí o sí
-        canAttack = true;
+        //TODOO: CHAPUZAAA de momento disparamos sí o sí. Mientras haya algún enemigo
+        if (visibleTargets.Count > 0)
+		{
+            canAttack = true;
+        }
         //      if (datosUnidad.accionRealizada)
         //{
         //          canAttack = false;
@@ -577,7 +580,6 @@ public abstract class TestTacticsMove : MonoBehaviour
 
         return done;
 	}
-	public abstract void LookForTargets();
     public void ForceEndTurn()
 	{
         //a veces no se limpian las casillas
@@ -585,7 +587,6 @@ public abstract class TestTacticsMove : MonoBehaviour
         actualTargetTile = null;
         moving = false;
         path.Clear();
-        visibleTargets.Clear();
 
         MiTurnManager.EndTurn();
     }
